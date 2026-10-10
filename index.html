@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API fără frontiere — stație de recepție</title>
+<meta name="description" content="Un singur fișier HTML, zeci de semnale din lumea largă: API-uri publice, fără cont, fără telemetrie, fără server propriu.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0B0F14">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:title" content="API fără frontiere — stație de recepție">
+<meta property="og:description" content="Un singur fișier HTML, 47 de widgeturi peste API-uri publice, fără cont, fără telemetrie proprie, fără server propriu.">
+<meta property="og:url" content="https://chiuta.github.io/API-fara-frontiere/">
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'none';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  base-uri 'none';
+  form-action 'none';
+  object-src 'none';
+  manifest-src 'none';
+  img-src 'self' data:
+    https://cataas.com
+    https://images.dog.ceo
+    https://www.artic.edu
+    https://covers.openlibrary.org
+    https://images.openfoodfacts.org
+    https://static.openfoodfacts.org
+    https://raw.githubusercontent.com
+    https://avatars.githubusercontent.com
+    https://api.qrserver.com
+    https://ghibliapi.vercel.app
+    https://image.tmdb.org
+    https://randomfox.ca
+    https://archive.org https://*.archive.org
+    https://rickandmortyapi.com
+    https://*.mzstatic.com
+    https://static.tvmaze.com
+    https://upload.wikimedia.org
+    https://apod.nasa.gov
+    https://images-assets.nasa.gov
+    https://flagcdn.com
+    https://randomuser.me
+    https://www.themealdb.com
+    https://www.thecocktaildb.com
+    https://deckofcardsapi.com
+    https://images.metmuseum.org;
+  connect-src 'self'
+    https://api.open-meteo.com https://geocoding-api.open-meteo.com https://air-quality-api.open-meteo.com
+    https://api.sunrise-sunset.org
+    https://api.nasa.gov
+    https://api.wheretheiss.at
+    https://api.open-notify.org
+    https://api.spacexdata.com
+    https://dog.ceo
+    https://catfact.ninja
+    https://randomfox.ca
+    https://api.artic.edu
+    https://collectionapi.metmuseum.org
+    https://openlibrary.org
+    https://ghibliapi.vercel.app
+    https://api.tvmaze.com
+    https://rickandmortyapi.com
+    https://pokeapi.co
+    https://deckofcardsapi.com
+    https://itunes.apple.com
+    https://www.themealdb.com
+    https://www.thecocktaildb.com
+    https://world.openfoodfacts.org
+    https://api.frankfurter.dev
+    https://api.coingecko.com
+    https://api.vatcomply.com
+    https://restcountries.com
+    https://date.nager.at
+    https://api.dictionaryapi.dev
+    https://ro.wikipedia.org https://en.wikipedia.org
+    https://numbersapi.com
+    https://opentdb.com
+    https://v2.jokeapi.dev
+    https://api.chucknorris.io
+    https://api.adviceslip.com
+    https://api.pwnedpasswords.com
+    https://api.fda.gov
+    https://disease.sh
+    https://api.genderize.io https://api.agify.io https://api.nationalize.io
+    https://randomuser.me
+    https://api.github.com
+    https://hacker-news.firebaseio.com
+    https://vpic.nhtsa.dot.gov
+    https://universities.hipolabs.com
+    https://ipapi.co;
+">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230B0F14'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23E8A23D' stroke-width='6'/%3E%3Ccircle cx='50' cy='20' r='7' fill='%2346D1C6'/%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   API FĂRĂ FRONTIERE — design "stație de recepție de semnal"
+   Token system, vezi /Despre din aplicație pentru rationale.
+   ============================================================ */
+:root{
+  --bg:#0B0F14; --bg-alt:#0E141B; --panel:#131A22; --panel-2:#1A2430;
+  --border:#26323F; --border-soft:#1D2732;
+  --text:#E7ECF2; --text-muted:#8FA0AF; --text-faint:#8695A4;
+  --amber:#E8A23D; --amber-soft:#F2C27A; --amber-dim:#7A5A28;
+  --cyan:#46D1C6; --red:#E8604C; --green:#6FCF97; --gray-dot:#4B5866;
+  --amber-text:#F2C27A;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, "Roboto Mono", monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+  --radius: 7px;
+  --shadow: 0 4px 18px rgba(0,0,0,.35);
+}
+:root[data-theme="light"]{
+  --bg:#EEF1F4; --bg-alt:#E7EBEF; --panel:#FFFFFF; --panel-2:#F3F5F7;
+  --border:#D3DAE1; --border-soft:#E1E6EA;
+  --text:#151B22; --text-muted:#54626F; --text-faint:#566370;
+  --amber-dim:#F2DDB6; --amber-text:#7A4A00;
+  --cyan:#0A766F; --red:#A8321D; --green:#17703E;
+  --shadow: 0 4px 18px rgba(20,30,40,.08);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ color-scheme: dark; }
+html[data-theme="light"]{ color-scheme: light; }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family: var(--font-sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{ margin:0; font-weight:600; }
+p{ margin:0; }
+button{ font-family:inherit; }
+input, select{ font-family:inherit; }
+a{ color:var(--amber-text); }
+::selection{ background:var(--amber); color:#0B0F14; }
+
+/* focus */
+:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; border-radius:4px; }
+
+/* scrollbar, subtle */
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--border); border-radius:6px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--text-faint); }
+
+/* ---------- header ---------- */
+.topbar{
+  position:sticky; top:0; z-index:40;
+  background:linear-gradient(var(--bg-alt), var(--bg-alt) 85%, transparent);
+  border-bottom:1px solid var(--border-soft);
+  backdrop-filter: blur(6px);
+  padding:10px 16px 8px;
+}
+.topbar-row{
+  display:flex; align-items:center; gap:14px; max-width:1400px; margin:0 auto;
+}
+.brand{
+  display:flex; align-items:baseline; gap:8px; white-space:nowrap;
+}
+.brand-mark{
+  font-family:var(--font-mono); font-weight:700; letter-spacing:.09em;
+  font-size:1.05rem; text-transform:uppercase; color:var(--text);
+}
+.brand-mark small{ color:var(--amber-text); }
+.brand-sub{
+  font-family:var(--font-mono); font-size:.72rem; color:var(--text-faint);
+  letter-spacing:.03em; display:none;
+}
+@media(min-width:760px){ .brand-sub{ display:inline; } }
+.topbar-row{ flex-wrap:wrap; }
+@media(max-width:639px){
+  .wave-wrap{ display:none; }
+  .topbar-actions{ flex:1 1 100%; }
+  .search-box{ flex:1 1 auto; }
+  .search-box input{ width:100%; max-width:none; }
+}
+
+.wave-wrap{ flex:1 1 auto; min-width:40px; height:34px; opacity:.9; }
+#waveform{ width:100%; height:100%; display:block; }
+
+.topbar-actions{ display:flex; align-items:center; gap:8px; }
+.search-box{
+  display:flex; align-items:center; gap:6px;
+  background:var(--panel); border:1px solid var(--border-soft); border-radius:var(--radius);
+  padding:6px 10px; min-width:0;
+}
+.search-box input{
+  background:none; border:none; color:var(--text); font-size:.85rem; width:120px; max-width:34vw;
+}
+@media(min-width:640px){ .search-box input{ width:190px; max-width:none; } }
+.search-box:focus-within{ outline:2px solid var(--cyan); outline-offset:2px; }
+.search-box input:focus{ outline:none; }
+.search-box svg{ flex:none; opacity:.6; }
+
+.icon-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:40px; height:40px; border-radius:var(--radius);
+  background:var(--panel); border:1px solid var(--border-soft); color:var(--text-muted);
+  cursor:pointer; transition:.15s;
+}
+.icon-btn:hover{ color:var(--text); border-color:var(--text-faint); }
+
+/* category chips */
+.chipbar{
+  display:flex; gap:6px; overflow-x:auto; padding:10px 2px 12px; max-width:1400px; margin:0 auto;
+  scrollbar-width:thin;
+}
+.chip{
+  flex:none; font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em;
+  padding:7px 12px; border-radius:100px; border:1px solid var(--border-soft); background:var(--panel);
+  color:var(--text-muted); cursor:pointer; transition:.15s; white-space:nowrap;
+}
+.chip:hover{ border-color:var(--text-faint); color:var(--text); }
+.chip[aria-pressed="true"]{ background:var(--amber); border-color:var(--amber); color:#1a1204; font-weight:700; }
+.chip .count{ opacity:.65; margin-left:5px; }
+
+/* ---------- main / grid ---------- */
+main{ max-width:1400px; margin:0 auto; padding:6px 16px 60px; }
+.cat-heading{
+  font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.1em; font-size:.72rem;
+  color:var(--text-faint); margin:26px 2px 10px; display:flex; align-items:center; gap:8px;
+}
+.cat-heading::after{ content:""; flex:1; height:1px; background:var(--border-soft); }
+.cat-heading:first-child{ margin-top:6px; }
+
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:14px;
+}
+
+/* ---------- station card ---------- */
+.station{
+  background:var(--panel); border:1px solid var(--border-soft); border-radius:var(--radius);
+  padding:14px; display:flex; flex-direction:column; gap:10px;
+  transition:border-color .15s, transform .15s;
+}
+.station:hover{ border-color:var(--text-faint); }
+.station.is-hero{ border-color:var(--amber-dim); }
+.station-head{ display:flex; align-items:center; gap:8px; }
+.station-dot{
+  width:8px; height:8px; border-radius:50%; background:var(--gray-dot); flex:none;
+}
+.station-dot[data-state="loading"]{ background:var(--cyan); animation:pulse 1s ease-in-out infinite; }
+.station-dot[data-state="ok"]{ background:var(--green); }
+.station-dot[data-state="error"]{ background:var(--red); }
+@keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.35; transform:scale(1.4);} }
+.station-icon{ font-size:1.05rem; line-height:1; }
+.station-title{ font-family:var(--font-mono); font-size:.92rem; font-weight:600; flex:1; }
+.fav-btn{
+  background:none; border:none; color:var(--text-faint); cursor:pointer; font-size:1.1rem; padding:6px 8px; margin:-6px -4px; flex:none; min-width:32px; min-height:32px;
+}
+.fav-btn[aria-pressed="true"]{ color:var(--amber-text); }
+.station-desc{ color:var(--text-muted); font-size:.8rem; }
+.station-body{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.station-body .inp, .station-body select{
+  background:var(--panel-2); border:1px solid var(--border-soft); color:var(--text);
+  border-radius:5px; padding:7px 9px; font-size:.82rem; min-width:0; flex:1 1 100px;
+}
+.station-body .inp:focus, .station-body select:focus{ outline:2px solid var(--cyan); outline-offset:1px; border-color:var(--cyan); }
+.btn{
+  font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; font-weight:700;
+  background:var(--amber); color:#1a1204; border:none; border-radius:5px; padding:8px 12px; cursor:pointer;
+  transition:.15s; flex:none;
+}
+.btn:hover{ background:#F2C27A; }
+.btn:disabled{ opacity:.5; cursor:progress; }
+.btn.ghost{
+  background:var(--panel-2); color:var(--text-muted); border:1px solid var(--border-soft);
+}
+.btn.ghost:hover{ color:var(--text); }
+.btn.small{ padding:7px 10px; font-size:.72rem; }
+
+.station-screen{
+  background:var(--bg-alt); border:1px solid var(--border-soft); border-radius:5px;
+  padding:10px; font-size:.83rem; color:var(--text);
+}
+.station-screen[hidden]{ display:none; }
+.station-screen .mono{ font-family:var(--font-mono); }
+.station-screen .big{ font-family:var(--font-mono); font-size:1.5rem; font-weight:700; color:var(--amber-text); }
+.station-screen .row{ display:flex; justify-content:space-between; gap:10px; padding:2px 0; }
+.station-screen .label{ color:var(--text-faint); }
+.station-screen .err{ color:var(--red); }
+.station-screen img.result-img{ max-width:100%; border-radius:5px; display:block; margin-top:6px; }
+.station-screen .img-fail{ color:var(--text-faint); font-size:.75rem; margin-top:6px; }
+.station-screen a{ word-break:break-all; }
+.skeleton{
+  height:14px; border-radius:4px; background:linear-gradient(90deg,var(--panel-2),var(--border-soft),var(--panel-2));
+  background-size:200% 100%; animation:shimmer 1.3s linear infinite; margin:4px 0;
+}
+@keyframes shimmer{ 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+
+/* ---------- modal ---------- */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(5,7,10,.6); z-index:100;
+  display:flex; align-items:flex-start; justify-content:center; padding:8vh 16px;
+}
+.modal-backdrop[hidden]{ display:none; }
+.modal{
+  background:var(--panel); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow);
+  max-width:520px; width:100%; padding:20px; max-height:80vh; overflow-y:auto;
+}
+.modal h2{ font-family:var(--font-mono); font-size:1rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px; }
+.modal p{ color:var(--text-muted); font-size:.85rem; margin-bottom:10px; }
+.modal label{ display:block; font-size:.75rem; color:var(--text-faint); margin-bottom:4px; font-family:var(--font-mono); }
+.modal .inp{
+  width:100%; background:var(--panel-2); border:1px solid var(--border-soft); color:var(--text);
+  border-radius:5px; padding:9px 10px; font-size:.85rem; margin-bottom:12px;
+}
+.modal-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:6px; }
+.modal-close{
+  position:absolute; top:14px; right:14px; background:none; border:none; color:var(--text-faint); font-size:1.2rem; cursor:pointer;
+}
+.modal{ position:relative; }
+
+/* ---------- footer ---------- */
+footer{
+  max-width:1400px; margin:20px auto 0; padding:20px 16px 40px; color:var(--text-faint); font-size:.78rem;
+  border-top:1px solid var(--border-soft);
+}
+footer .manifest{ font-family:var(--font-mono); line-height:1.8; }
+footer a{ color:var(--text-muted); }
+
+/* empty state */
+.empty-state{
+  text-align:center; padding:50px 20px; color:var(--text-faint); font-family:var(--font-mono); font-size:.85rem;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .station-dot[data-state="loading"]{ animation:none; }
+  .skeleton{ animation:none; }
+  *{ scroll-behavior:auto !important; }
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:16px;font-family:sans-serif;">Această aplicație are nevoie de JavaScript activat pentru a funcționa.</p></noscript>
+
+<header class="topbar">
+  <div class="topbar-row">
+    <div class="brand">
+      <span class="brand-mark">API <small>fără frontiere</small></span>
+      <span class="brand-sub">// stație de recepție</span>
+    </div>
+    <div class="wave-wrap" aria-hidden="true"><canvas id="waveform"></canvas></div>
+    <div class="topbar-actions">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="search" placeholder="caută un semnal…" autocomplete="off" aria-label="Caută un semnal">
+      </div>
+      <button class="icon-btn" id="themeBtn" title="Comută tema" aria-label="Comută tema">◐</button>
+      <button class="icon-btn" id="settingsBtn" title="Setări / chei API" aria-label="Setări">⚙</button>
+      <button class="icon-btn" id="aboutBtn" title="Despre proiect" aria-label="Despre">?</button>
+    </div>
+  </div>
+  <nav class="chipbar" id="chipbar" aria-label="Filtrează după categorie"></nav>
+</header>
+
+<main id="mainGrid" aria-label="Stații"></main>
+
+<footer>
+  <div class="manifest" id="manifest">Se încarcă manifestul stațiilor…</div>
+  <p style="margin-top:14px;">Inspirat de <a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener noreferrer">public-apis/public-apis</a>. Fiecare card apelează direct API-ul original din browser-ul tău — nimic nu trece prin vreun server intermediar de-al meu. Fără cont, fără reclame, fără telemetrie proprie. Sursele terțe își pot schimba sau opri serviciul oricând, iar ele văd adresa ta IP când le interoghezi.</p>
+  <p style="margin-top:10px;"><strong>Ce se contactează și când:</strong> la deschiderea paginii se încarcă singure doar trei stații — <em>Vremea acum</em> (Open-Meteo, pentru orașul tastat în card, implicit București), <em>Poza zilei</em> (NASA) și <em>ISS</em> (wheretheiss.at). Dezactivează asta din Setări ⚙. Toate celelalte stații contactează sursa doar după ce apeși butonul din card. Cardurile cu text liber trimit sursei ce ai tastat (oraș, nume, cod TVA, VIN, text pentru codul QR etc.).</p>
+  <p style="margin-top:10px;"><a href="#" id="attrLink">Surse și atribuiri</a> · <a href="https://github.com/chiuta/API-fara-frontiere" target="_blank" rel="noopener noreferrer">cod sursă</a></p>
+</footer>
+
+<!-- ===== Settings modal ===== -->
+<div class="modal-backdrop" id="settingsModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <button class="modal-close" data-close-modal aria-label="Închide">✕</button>
+    <h2 id="settingsTitle">Setări &amp; chei API</h2>
+    <p>Cheia se salvează <strong>doar local</strong>, în acest browser (localStorage). Este trimisă doar către api.nasa.gov, ca parametru în adresa cererii — inclusiv la încărcarea automată a cardului „Poza zilei”, dacă acea încărcare este activă.</p>
+    <label for="nasaKeyInput">Cheie NASA API (opțional)</label>
+    <input class="inp" id="nasaKeyInput" type="text" placeholder="implicit: DEMO_KEY (limită mică de cereri)" autocomplete="off" spellcheck="false">
+    <p style="margin-top:-6px;">Cheie gratuită, instant, de la <a href="https://api.nasa.gov" target="_blank" rel="noopener">api.nasa.gov</a> — ridică limita de la 30/oră la 1000/oră.</p>
+    <label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0 12px;font-size:.8rem;color:var(--text-muted);font-family:var(--font-sans);">
+      <input type="checkbox" id="autoHeroInput" style="margin-top:3px;">
+      <span>Încarcă automat la deschidere cele 3 stații principale (vreme, poza NASA, ISS). Dacă o dezactivezi, nu se contactează nicio sursă până nu apeși un buton. Se aplică la următoarea deschidere.</span>
+    </label>
+    <div class="modal-actions">
+      <button class="btn ghost small" id="clearKeysBtn">Șterge cheile</button>
+      <button class="btn small" id="saveKeysBtn">Salvează</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== About modal ===== -->
+<div class="modal-backdrop" id="aboutModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <button class="modal-close" data-close-modal aria-label="Închide">✕</button>
+    <h2 id="aboutTitle">Despre stație</h2>
+    <p><strong>API fără frontiere</strong> e un singur fișier HTML — fără build, fără dependențe, fără CDN — care vorbește direct, din browser-ul tău, cu zeci de API-uri publice reale.</p>
+    <p><strong>De ce nu „toate” API-urile din repo?</strong> Marea majoritate a intrărilor din lista public-apis cer chei plătite, autentificare OAuth server-side sau nu permit CORS (adică nu pot fi apelate direct dintr-un browser fără server intermediar). Aici sunt doar API-uri care, după documentația lor, nu cer cont (sau cer cel mult o cheie gratuită) și permit apeluri din browser. Disponibilitatea și condițiile lor pot însă să se schimbe oricând; unele pot fi întrerupte, limitate sau neactualizate.</p>
+    <p><strong>Ce înseamnă „fără frontiere” aici:</strong> zero telemetrie de-a mea, zero reclame, zero cont. Cererile tale merg direct la sursă (care îți vede adresa IP), iar fișierul nu folosește cookie-uri sau analitice. Sursele terțe pot totuși pica, se pot schimba sau își pot limita traficul — asta nu mai stă în puterea acestui fișier.</p>
+    <p><strong>Extindere:</strong> fiecare stație e o intrare într-un registry JS (<code>widget({...})</code>). Adaugi o intrare nouă + domeniile ei (API și imagini) în CSP din &lt;head&gt; și apare automat în interfață, cu căutare și filtrare incluse.</p>
+    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0</p>
+  </div>
+</div>
+
+<!-- ===== Attributions modal ===== -->
+<div class="modal-backdrop" id="attrModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="attrTitle">
+    <button class="modal-close" data-close-modal aria-label="Închide">✕</button>
+    <h2 id="attrTitle">Surse și atribuiri</h2>
+    <p>Datele afișate aparțin furnizorilor lor și sunt supuse condițiilor acestora; citește-le înainte de orice utilizare dincolo de simpla consultare. Lista nu este exhaustivă, iar licențele indicate sunt cele declarate public de furnizori, nu au fost verificate de autor la zi.</p>
+    <p>Open-Meteo (meteo, calitatea aerului, geocodare; CC BY 4.0, gratuit pentru uz necomercial) · NASA APOD (imaginile pot avea drepturi de autor ale creatorilor — cardul afișează creditul când e furnizat) · wheretheiss.at · Open Notify · SpaceX-API (proiect comunitar, date posibil neactualizate) · Dog CEO · catfact.ninja · cataas.com · randomfox.ca · Art Institute of Chicago (domeniu public) · The Met Open Access · Open Library · Studio Ghibli API · TVmaze (CC BY-SA 4.0) · Rick and Morty API · PokéAPI · Deck of Cards API · iTunes Search API (Apple) · TheMealDB și TheCocktailDB (cheie de test publică) · Open Food Facts (ODbL / CC BY-SA) · Frankfurter (date BCE) · CoinGecko · VATComply / VIES · REST Countries · Nager.Date · dictionaryapi.dev · Wikipedia (CC BY-SA) · NumbersAPI · Open Trivia DB (CC BY-SA 4.0) · JokeAPI · chucknorris.io · Advice Slip · Have I Been Pwned — Pwned Passwords (CC BY 4.0) · openFDA · disease.sh · Genderize / Agify / Nationalize · RandomUser.me · GitHub API · Hacker News API · QR Server · NHTSA vPIC · Hipo Universities · ipapi.co.</p>
+  </div>
+</div>
+
+<script>
+'use strict';
+/* ============================================================
+   CONSTANTE & STARE
+   ============================================================ */
+const LS = {
+  nasaKey: 'aff_nasa_key',
+  theme: 'aff_theme',
+  favs: 'aff_favs',
+  autoHero: 'aff_auto_hero',
+};
+// localStorage poate lipsi sau arunca (mod privat, cookie-uri blocate) — aplicația merge și fără el
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k, v){ try{ localStorage.setItem(k, v); return true; }catch(e){ return false; } }
+function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+function loadFavs(){
+  try{
+    const a = JSON.parse(lsGet(LS.favs) || '[]');
+    return new Set(Array.isArray(a) ? a.filter(x => typeof x === 'string') : []);
+  }catch(e){ return new Set(); }
+}
+const state = {
+  query: '',
+  activeCat: 'toate',
+  favs: loadFavs(),
+};
+
+/* ============================================================
+   UTILITARE DOM & FORMAT
+   ============================================================ */
+function $(sel, root){ return (root||document).querySelector(sel); }
+function $all(sel, root){ return Array.from((root||document).querySelectorAll(sel)); }
+function esc(str){
+  return String(str==null?'':str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function ce(tag, attrs, children){
+  const e = document.createElement(tag);
+  attrs = attrs || {};
+  for(const k in attrs){
+    if(k === 'class') e.className = attrs[k];
+    else if(k === 'html') e.innerHTML = attrs[k];
+    else if(k.startsWith('on') && typeof attrs[k]==='function') e.addEventListener(k.slice(2), attrs[k]);
+    else e.setAttribute(k, attrs[k]);
+  }
+  (children||[]).forEach(c => e.append(c));
+  return e;
+}
+function fmtNum(n, digits){
+  if(typeof n !== 'number' || Number.isNaN(n)) return '—';
+  return n.toLocaleString('ro-RO', {maximumFractionDigits: digits==null?2:digits});
+}
+// Acceptă doar adrese http(s); orice altceva (javascript:, data:, ...) devine '#'
+function safeUrl(u){
+  try{
+    const x = new URL(String(u == null ? '' : u), 'https://invalid.invalid/');
+    return (x.protocol === 'https:' || x.protocol === 'http:') && x.hostname !== 'invalid.invalid' ? x.href : '#';
+  }catch(e){ return '#'; }
+}
+// Normalizare pentru căutare: fără diacritice, litere mici
+function norm(s){
+  return String(s == null ? '' : s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function debounce(fn, ms){
+  let t; return (...a) => { clearTimeout(t); t = setTimeout(()=>fn(...a), ms); };
+}
+
+/* ============================================================
+   REȚEA — fetch cu timeout, semnal activ pentru waveform
+   ============================================================ */
+let ACTIVE = 0;
+function reqStart(){ ACTIVE++; }
+function reqEnd(){ ACTIVE = Math.max(0, ACTIVE-1); }
+
+function netError(e){
+  if(e && e.name === 'AbortError') return new Error('timp de așteptare depășit');
+  if(e instanceof TypeError) return new Error(navigator.onLine === false ? 'ești offline' : 'rețea indisponibilă sau sursă blocată');
+  return e;
+}
+async function fetchRaw(url, opts, kind){
+  opts = opts || {};
+  const ctrl = new AbortController();
+  const timer = setTimeout(()=>ctrl.abort(), opts.timeout || 12000);
+  reqStart();
+  try{
+    const res = await fetch(url, {signal: ctrl.signal, headers: opts.headers || {}, referrerPolicy: 'no-referrer', credentials: 'omit'});
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    return kind === 'json' ? await res.json() : await res.text();
+  }catch(e){
+    if(e instanceof SyntaxError) throw new Error('răspuns invalid de la sursă');
+    throw netError(e);
+  }finally{ clearTimeout(timer); reqEnd(); }
+}
+function fetchJSON(url, opts){ return fetchRaw(url, opts, 'json'); }
+function fetchText(url, opts){ return fetchRaw(url, opts, 'text'); }
+function nasaKey(){
+  return (lsGet(LS.nasaKey) || '').trim() || 'DEMO_KEY';
+}
+async function sha1Hex(str){
+  const bytes = new TextEncoder().encode(str);
+  if(window.crypto && window.crypto.subtle){
+    try{
+      const buf = await crypto.subtle.digest('SHA-1', bytes);
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }catch(e){ /* cade pe fallback mai jos */ }
+  }
+  return sha1Fallback(str);
+}
+// Fallback SHA-1 pur JS (pentru contexte fără crypto.subtle, ex. file:// nesecurizat)
+function sha1Fallback(str){
+  function rol(n,s){ return (n<<s)|(n>>>(32-s)); }
+  const utf8 = unescape(encodeURIComponent(str));
+  const bytes = [];
+  for(let i=0;i<utf8.length;i++) bytes.push(utf8.charCodeAt(i));
+  const bitLen = bytes.length*8;
+  bytes.push(0x80);
+  while(bytes.length % 64 !== 56) bytes.push(0);
+  for(let i=7;i>=0;i--) bytes.push((bitLen / Math.pow(2,8*i)) & 0xff);
+  let h0=0x67452301,h1=0xEFCDAB89,h2=0x98BADCFE,h3=0x10325476,h4=0xC3D2E1F0;
+  for(let chunk=0; chunk<bytes.length; chunk+=64){
+    const w = new Array(80).fill(0);
+    for(let i=0;i<16;i++){
+      w[i] = (bytes[chunk+i*4]<<24)|(bytes[chunk+i*4+1]<<16)|(bytes[chunk+i*4+2]<<8)|(bytes[chunk+i*4+3]);
+    }
+    for(let i=16;i<80;i++) w[i] = rol(w[i-3]^w[i-8]^w[i-14]^w[i-16],1);
+    let a=h0,b=h1,c=h2,d=h3,e=h4;
+    for(let i=0;i<80;i++){
+      let f,k;
+      if(i<20){ f=(b&c)|((~b)&d); k=0x5A827999; }
+      else if(i<40){ f=b^c^d; k=0x6ED9EBA1; }
+      else if(i<60){ f=(b&c)|(b&d)|(c&d); k=0x8F1BBCDC; }
+      else { f=b^c^d; k=0xCA62C1D6; }
+      const temp = (rol(a,5) + f + e + k + w[i]) >>> 0;
+      e=d; d=c; c=rol(b,30); b=a; a=temp;
+    }
+    h0=(h0+a)>>>0; h1=(h1+b)>>>0; h2=(h2+c)>>>0; h3=(h3+d)>>>0; h4=(h4+e)>>>0;
+  }
+  return [h0,h1,h2,h3,h4].map(x=>x.toString(16).padStart(8,'0')).join('');
+}
+
+/* ============================================================
+   STARE VIZUALĂ CARD (dot + ecran)
+   ============================================================ */
+function setDot(card, s){
+  const d = $('.station-dot', card); if(d) d.dataset.state = s;
+  // blocăm butoanele de cerere cât timp o cerere e în curs (evită răspunsuri suprapuse)
+  $all('.station-body [data-role=go], .station-body [data-role=shuffle]', card).forEach(b => { b.disabled = (s === 'loading'); });
+}
+function showScreen(card, html){
+  const s = $('.station-screen', card);
+  s.innerHTML = html; s.hidden = false;
+  // imagine blocată de CSP sau indisponibilă -> mesaj în loc de pictogramă ruptă
+  $all('img.result-img', s).forEach(img => img.addEventListener('error', () => {
+    const m = ce('div', {class:'img-fail'});
+    m.textContent = 'imaginea nu a putut fi încărcată';
+    img.replaceWith(m);
+  }, {once:true}));
+}
+function showLoading(card, label){
+  setDot(card, 'loading');
+  showScreen(card, '<div class="skeleton" style="width:70%"></div><div class="skeleton" style="width:45%"></div>' + (label ? '<div style="color:var(--text-faint);font-family:var(--font-mono);font-size:.72rem;margin-top:6px;">'+esc(label)+'</div>' : ''));
+}
+function showError(card, msg){
+  setDot(card, 'error');
+  showScreen(card, '<div class="err">Semnal pierdut — ' + esc(msg||'sursa nu răspunde acum') + '. <button class="btn ghost small" data-retry>Reîncearcă</button></div>');
+}
+function showOk(card, html){
+  setDot(card, 'ok');
+  showScreen(card, html);
+}
+
+/* ============================================================
+   CATEGORII
+   ============================================================ */
+const CATEGORIES = [
+  {id:'vreme',    label:'Vreme & Mediu',        icon:'🌦'},
+  {id:'spatiu',   label:'Spațiu',               icon:'🛰'},
+  {id:'animale',  label:'Animale',              icon:'🐾'},
+  {id:'arta',     label:'Artă & Cultură',       icon:'🖼'},
+  {id:'divertisment', label:'Divertisment',     icon:'🎬'},
+  {id:'muzica',   label:'Muzică',               icon:'🎵'},
+  {id:'mancare',  label:'Mâncare & Băutură',    icon:'🍲'},
+  {id:'finante',  label:'Finanțe & Cripto',     icon:'💱'},
+  {id:'geo',      label:'Țări & Geografie',     icon:'🌍'},
+  {id:'cuvinte',  label:'Cuvinte & Cunoaștere', icon:'📖'},
+  {id:'umor',     label:'Umor & Inspirație',    icon:'😄'},
+  {id:'securitate', label:'Securitate',         icon:'🔒'},
+  {id:'sanatate', label:'Sănătate',             icon:'⚕'},
+  {id:'identitate', label:'Identitate & Test Data', icon:'🧬'},
+  {id:'dev',      label:'Dezvoltare & Utilitare', icon:'🛠'},
+];
+
+/* ============================================================
+   REGISTRY DE WIDGET-URI
+   Fiecare widget: {id, cat, icon, title, desc, hero?, init(card,body,screen)}
+   ============================================================ */
+const WIDGETS = [];
+function widget(def){ WIDGETS.push(def); }
+
+// Încărcarea automată (doar cele 3 stații „hero”) poate fi dezactivată din Setări
+function heroAuto(go){ if(lsGet(LS.autoHero) !== '0') go(); }
+
+/* ---------- ajutoare comune: geocodare & coduri meteo ---------- */
+async function geocodeCity(name){
+  const data = await fetchJSON('https://geocoding-api.open-meteo.com/v1/search?name=' + encodeURIComponent(name) + '&count=1&language=ro&format=json');
+  if(!data.results || !data.results.length) throw new Error('oraș necunoscut');
+  const r = data.results[0];
+  return {lat:r.latitude, lon:r.longitude, label: r.name + (r.country ? ', ' + r.country : '')};
+}
+function wmoDesc(code){
+  const map = {
+    0:['☀️','cer senin'],1:['🌤️','mai ales senin'],2:['⛅','parțial înnorat'],3:['☁️','înnorat'],
+    45:['🌫️','ceață'],48:['🌫️','ceață cu chiciură'],
+    51:['🌦️','burniță slabă'],53:['🌦️','burniță'],55:['🌦️','burniță densă'],
+    56:['🌧️','burniță înghețată'],57:['🌧️','burniță înghețată densă'],
+    61:['🌧️','ploaie slabă'],63:['🌧️','ploaie'],65:['🌧️','ploaie puternică'],
+    66:['🌧️','ploaie înghețată'],67:['🌧️','ploaie înghețată puternică'],
+    71:['🌨️','ninsoare slabă'],73:['🌨️','ninsoare'],75:['❄️','ninsoare puternică'],77:['❄️','măzăriche'],
+    80:['🌦️','averse slabe'],81:['🌧️','averse'],82:['⛈️','averse violente'],
+    85:['🌨️','averse de ninsoare'],86:['❄️','averse de ninsoare puternice'],
+    95:['⛈️','furtună'],96:['⛈️','furtună cu grindină'],99:['⛈️','furtună severă cu grindină'],
+  };
+  return map[code] || ['🌡️','condiții necunoscute'];
+}
+function aqiBand(v){
+  if(v==null) return ['⚪','necunoscut'];
+  if(v<=20) return ['🟢','bun'];
+  if(v<=40) return ['🟡','acceptabil'];
+  if(v<=60) return ['🟠','moderat'];
+  if(v<=80) return ['🔴','slab'];
+  if(v<=100) return ['🟣','foarte slab'];
+  return ['⚫','extrem de slab'];
+}
+// „negăsit” doar când sursa a răspuns 404; la erori de rețea afișăm cauza reală
+function notFound(e, msg){ return /HTTP 404/.test(e.message) ? msg + ' — ' + e.message : e.message; }
+function wireGo(body, screen, fn){
+  $('[data-role=go]', body).addEventListener('click', fn);
+  $all('input.inp', body).forEach(inp => inp.addEventListener('keydown', e => {
+    if(e.key === 'Enter'){ e.preventDefault(); const b = $('[data-role=go]', body); if(b && !b.disabled) b.click(); }
+  }));
+  screen.addEventListener('click', e => { if(e.target.closest('[data-retry]')) fn(); });
+}
+
+/* ================= CATEGORIA: VREME & MEDIU ================= */
+
+widget({
+  id:'weather-now', cat:'vreme', icon:'🌡️', hero:true,
+  title:'Vremea acum',
+  desc:'Temperatură, vânt, umiditate — pentru orice oraș din lume (Open-Meteo).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="city" placeholder="oraș (ex: Cluj-Napoca)" value="București"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const city = $('[data-role=city]', body).value.trim() || 'București';
+      showLoading(card, city);
+      try{
+        const loc = await geocodeCity(city);
+        const w = await fetchJSON('https://api.open-meteo.com/v1/forecast?latitude='+loc.lat+'&longitude='+loc.lon+'&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&timezone=auto');
+        const c = w.current;
+        const wd = wmoDesc(c.weather_code);
+        showOk(card, '<div class="big">'+wd[0]+' '+fmtNum(c.temperature_2m,1)+'°C</div>'
+          + '<div class="row"><span class="label">'+esc(loc.label)+'</span><span>'+wd[1]+'</span></div>'
+          + '<div class="row"><span class="label">se simte ca</span><span>'+fmtNum(c.apparent_temperature,1)+'°C</span></div>'
+          + '<div class="row"><span class="label">umiditate</span><span>'+fmtNum(c.relative_humidity_2m,0)+'%</span></div>'
+          + '<div class="row"><span class="label">vânt</span><span>'+fmtNum(c.wind_speed_10m,1)+' km/h</span></div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+    heroAuto(go);
+  }
+});
+
+widget({
+  id:'air-quality', cat:'vreme', icon:'🫁',
+  title:'Calitatea aerului',
+  desc:'Indice european de calitate a aerului (EAQI) și particule fine, pentru orice oraș.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="city" placeholder="oraș" value="București"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const city = $('[data-role=city]', body).value.trim() || 'București';
+      showLoading(card, city);
+      try{
+        const loc = await geocodeCity(city);
+        const a = await fetchJSON('https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+loc.lat+'&longitude='+loc.lon+'&current=european_aqi,pm10,pm2_5,ozone');
+        const c = a.current;
+        const band = aqiBand(c.european_aqi);
+        showOk(card, '<div class="big">'+band[0]+' EAQI '+fmtNum(c.european_aqi,0)+'</div>'
+          + '<div class="row"><span class="label">'+esc(loc.label)+'</span><span>'+band[1]+'</span></div>'
+          + '<div class="row"><span class="label">PM2.5</span><span>'+fmtNum(c.pm2_5,1)+' µg/m³</span></div>'
+          + '<div class="row"><span class="label">PM10</span><span>'+fmtNum(c.pm10,1)+' µg/m³</span></div>'
+          + '<div class="row"><span class="label">ozon</span><span>'+fmtNum(c.ozone,1)+' µg/m³</span></div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'sunrise-sunset', cat:'vreme', icon:'🌅',
+  title:'Răsărit & apus',
+  desc:'Ora răsăritului și apusului, convertită în ora locală a dispozitivului tău.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="city" placeholder="oraș" value="București"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const city = $('[data-role=city]', body).value.trim() || 'București';
+      showLoading(card, city);
+      try{
+        const loc = await geocodeCity(city);
+        const s = await fetchJSON('https://api.sunrise-sunset.org/json?lat='+loc.lat+'&lng='+loc.lon+'&formatted=0');
+        const r = s.results;
+        const fmt = iso => new Date(iso).toLocaleTimeString('ro-RO', {hour:'2-digit', minute:'2-digit'});
+        showOk(card, '<div class="row"><span class="label">'+esc(loc.label)+'</span><span></span></div>'
+          + '<div class="row"><span class="label">🌅 răsărit</span><span class="mono">'+fmt(r.sunrise)+'</span></div>'
+          + '<div class="row"><span class="label">🌇 apus</span><span class="mono">'+fmt(r.sunset)+'</span></div>'
+          + '<div class="row"><span class="label">zi solară</span><span>'+ Math.floor(Math.round(r.day_length/60)/60) +'h '+ (Math.round(r.day_length/60)%60) +'m</span></div>'
+          + '<div style="color:var(--text-faint);font-size:.72rem;margin-top:4px;">ore convertite în fusul acestui dispozitiv</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: SPAȚIU ================= */
+
+widget({
+  id:'nasa-apod', cat:'spatiu', icon:'🔭', hero:true,
+  title:'Poza zilei — NASA',
+  desc:'Astronomy Picture of the Day, cu explicație. DEMO_KEY implicit (limită mică de cereri).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'NASA APOD');
+      try{
+        const d = await fetchJSON('https://api.nasa.gov/planetary/apod?api_key='+encodeURIComponent(nasaKey()));
+        const media = d.media_type === 'image'
+          ? '<img class="result-img" src="'+esc(safeUrl(d.url))+'" alt="'+esc(d.title)+'">'
+          : '<a href="'+esc(safeUrl(d.url))+'" target="_blank" rel="noopener noreferrer">▶ deschide media zilei</a>';
+        showOk(card, '<div class="row"><strong>'+esc(d.title)+'</strong><span class="mono label">'+esc(d.date)+'</span></div>'
+          + media
+          + (d.copyright ? '<div class="label" style="margin-top:6px;">© '+esc(String(d.copyright).trim())+'</div>' : '')
+          + '<p style="margin-top:8px;color:var(--text-muted);font-size:.78rem;">'+esc(d.explanation)+'</p>');
+      }catch(e){
+        showError(card, /429/.test(e.message) ? 'limită DEMO_KEY depășită — pune o cheie proprie gratuită din Setări ⚙' : e.message);
+      }
+    };
+    wireGo(body, screen, go);
+    heroAuto(go);
+  }
+});
+
+widget({
+  id:'iss-now', cat:'spatiu', icon:'🛰️', hero:true,
+  title:'ISS — poziția acum',
+  desc:'Latitudine, longitudine, altitudine și viteză live a Stației Spațiale Internaționale.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'ISS 25544');
+      try{
+        const d = await fetchJSON('https://api.wheretheiss.at/v1/satellites/25544');
+        showOk(card, '<div class="row"><span class="label">latitudine</span><span class="mono">'+fmtNum(d.latitude,3)+'°</span></div>'
+          + '<div class="row"><span class="label">longitudine</span><span class="mono">'+fmtNum(d.longitude,3)+'°</span></div>'
+          + '<div class="row"><span class="label">altitudine</span><span class="mono">'+fmtNum(d.altitude,1)+' km</span></div>'
+          + '<div class="row"><span class="label">viteză</span><span class="mono">'+fmtNum(d.velocity,0)+' km/h</span></div>'
+          + '<div class="row"><span class="label">vizibilitate</span><span>'+(d.visibility==='daylight'?'☀️ lumină solară':'🌑 eclipsă/întuneric')+'</span></div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+    heroAuto(go);
+  }
+});
+
+widget({
+  id:'astros', cat:'spatiu', icon:'👩‍🚀',
+  title:'Oameni în spațiu, acum',
+  desc:'Cine e la bord chiar acum, pe orice stație (Open Notify).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'astros.json');
+      try{
+        const d = await fetchJSON('https://api.open-notify.org/astros.json');
+        const list = d.people.map(p => '<div class="row"><span>'+esc(p.name)+'</span><span class="label">'+esc(p.craft)+'</span></div>').join('');
+        showOk(card, '<div class="big">'+esc(d.number)+'</div><div class="label" style="margin-bottom:6px;">persoane în spațiu</div>' + list);
+      }catch(e){ showError(card, 'sursa (Open Notify) are HTTPS nesigur și poate fi indisponibilă — ' + e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'spacex-launches', cat:'spatiu', icon:'🚀',
+  title:'Lansări SpaceX',
+  desc:'Ultima lansare confirmată și următoarea programată.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    async function withFallback(path){
+      try{ return await fetchJSON('https://api.spacexdata.com/v5/'+path); }
+      catch(e){ return await fetchJSON('https://api.spacexdata.com/v4/'+path); }
+    }
+    const go = async () => {
+      showLoading(card, 'spacexdata');
+      try{
+        const latest = await withFallback('launches/latest');
+        const upcoming = await withFallback('launches/upcoming');
+        const next = Array.isArray(upcoming) ? upcoming[0] : null;
+        const fmtDate = iso => iso ? new Date(iso).toLocaleDateString('ro-RO', {year:'numeric',month:'short',day:'numeric'}) : '—';
+        showOk(card, '<div class="label">ultima lansare</div>'
+          + '<div><strong>'+esc(latest.name)+'</strong> — '+fmtDate(latest.date_utc)+' '+(latest.success===true?'✅':latest.success===false?'❌':'⏳')+'</div>'
+          + '<div class="label" style="margin-top:8px;">următoarea</div>'
+          + (next ? '<div><strong>'+esc(next.name)+'</strong> — '+fmtDate(next.date_utc)+'</div>' : '<div>niciuna anunțată public</div>')
+          + '<div style="color:var(--text-faint);font-size:.72rem;margin-top:6px;">date comunitare (SpaceX-API); pot fi neactualizate — verifică data afișată</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'spacex-rockets', cat:'spatiu', icon:'🛸',
+  title:'Rachete SpaceX',
+  desc:'Specificații tehnice pentru fiecare rachetă din flotă.',
+  init(card, body, screen){
+    body.innerHTML = '<select class="inp" data-role="rocket" hidden aria-label="Rachetă"></select><button class="btn" data-role="go">Recepționează</button>';
+    const sel = $('[data-role=rocket]', body);
+    const goBtn = $('[data-role=go]', body);
+    let list = null;
+    // lista se cere abia la apăsarea butonului (nu la deschiderea paginii)
+    const load = async () => {
+      showLoading(card, 'rockets');
+      try{
+        list = await fetchJSON('https://api.spacexdata.com/v4/rockets');
+        if(!Array.isArray(list) || !list.length) throw new Error('listă goală');
+        sel.innerHTML = list.map(r => '<option value="'+esc(r.id)+'">'+esc(r.name)+'</option>').join('');
+        sel.hidden = false;
+        render();
+      }catch(e){ showError(card, e.message); }
+    };
+    goBtn.addEventListener('click', load);
+    sel.addEventListener('change', () => render());
+    screen.addEventListener('click', e => { if(e.target.closest('[data-retry]')) load(); });
+    function render(){
+      const r = (list || []).find(x => x.id === sel.value) || (list || [])[0];
+      if(!r) return;
+      try{
+        showOk(card, '<div class="row"><span class="label">înălțime</span><span>'+fmtNum(r.height && r.height.meters,1)+' m</span></div>'
+          + '<div class="row"><span class="label">masă</span><span>'+fmtNum(r.mass && r.mass.kg,0)+' kg</span></div>'
+          + '<div class="row"><span class="label">prima lansare</span><span>'+esc(r.first_flight)+'</span></div>'
+          + '<div class="row"><span class="label">rată succes</span><span>'+fmtNum(r.success_rate_pct,0)+'%</span></div>'
+          + '<div class="row"><span class="label">cost/lansare</span><span>$'+fmtNum(r.cost_per_launch/1e6,1)+'M</span></div>');
+      }catch(e){ showError(card, e.message); }
+    }
+  }
+});
+
+/* ================= CATEGORIA: ANIMALE ================= */
+
+widget({
+  id:'dog-random', cat:'animale', icon:'🐕',
+  title:'Câine — poză random',
+  desc:'O poză aleatorie de câine, cu opțiune de rasă specifică (Dog CEO API).',
+  init(card, body, screen){
+    body.innerHTML = '<select class="inp" data-role="breed" aria-label="Rasă"><option value="">orice rasă</option></select><button class="btn ghost small" data-role="breeds" title="Încarcă lista de rase">Rase…</button><button class="btn" data-role="go">Recepționează</button>';
+    const sel = $('[data-role=breed]', body);
+    const breedsBtn = $('[data-role=breeds]', body);
+    // lista de rase se cere doar la apăsarea butonului „Rase…” (nu la deschiderea paginii)
+    breedsBtn.addEventListener('click', async () => {
+      breedsBtn.disabled = true;
+      try{
+        const d = await fetchJSON('https://dog.ceo/api/breeds/list/all');
+        const breeds = Object.keys(d.message || {}).filter(b => /^[a-z-]+$/.test(b));
+        sel.innerHTML = '<option value="">orice rasă</option>' + breeds.map(b => '<option value="'+esc(b)+'">'+esc(b)+'</option>').join('');
+        breedsBtn.hidden = true;
+      }catch(e){ breedsBtn.disabled = false; showError(card, e.message); }
+    });
+    const go = async () => {
+      showLoading(card, 'dog.ceo');
+      try{
+        const breed = sel.value;
+        const url = breed ? 'https://dog.ceo/api/breed/'+encodeURIComponent(breed)+'/images/random' : 'https://dog.ceo/api/breeds/image/random';
+        const d = await fetchJSON(url);
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(d.message))+'" alt="câine">');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'cat-fact', cat:'animale', icon:'🐈',
+  title:'Pisică — fapt & poză',
+  desc:'Un fapt aleatoriu despre pisici, plus o imagine (catfact.ninja + cataas.com).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'catfact.ninja');
+      try{
+        const d = await fetchJSON('https://catfact.ninja/fact');
+        showOk(card, '<p>'+esc(d.fact)+'</p><img class="result-img" src="https://cataas.com/cat?t='+Date.now()+'" alt="pisică" loading="lazy">');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'fox-random', cat:'animale', icon:'🦊',
+  title:'Vulpe — poză random',
+  desc:'O poză aleatorie de vulpe (randomfox.ca).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'randomfox.ca');
+      try{
+        const d = await fetchJSON('https://randomfox.ca/floof/');
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(d.image))+'" alt="vulpe">');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: ARTĂ & CULTURĂ ================= */
+
+widget({
+  id:'art-institute', cat:'arta', icon:'🖼️',
+  title:'Operă de artă — Chicago',
+  desc:'O lucrare din domeniul public, din colecția Art Institute of Chicago.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'artic.edu');
+      try{
+        const page = Math.floor(Math.random()*40)+1;
+        const d = await fetchJSON('https://api.artic.edu/api/v1/artworks/search?query[term][is_public_domain]=true&fields=id,title,artist_display,date_display,image_id&limit=1&page='+page);
+        const a = d.data && d.data[0];
+        if(!a || !a.image_id) throw new Error('fără imagine disponibilă, reîncearcă');
+        showOk(card, '<img class="result-img" src="https://www.artic.edu/iiif/2/'+esc(a.image_id)+'/full/600,/0/default.jpg" alt="'+esc(a.title)+'">'
+          + '<div style="margin-top:6px;"><strong>'+esc(a.title)+'</strong></div>'
+          + '<div class="label">'+esc(a.artist_display||'autor necunoscut')+' · '+esc(a.date_display||'')+'</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'met-museum', cat:'arta', icon:'🏛️',
+  title:'Obiect — Met Museum',
+  desc:'Caută în colecția Metropolitan Museum of Art (New York).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="ex: sunflowers, samurai…" value="sunflowers"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'art';
+      showLoading(card, q);
+      try{
+        const s = await fetchJSON('https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q='+encodeURIComponent(q));
+        if(!s.objectIDs || !s.objectIDs.length) throw new Error('nimic găsit pentru „'+q+'”');
+        const id = s.objectIDs[Math.floor(Math.random()*Math.min(s.objectIDs.length,25))];
+        const o = await fetchJSON('https://collectionapi.metmuseum.org/public/collection/v1/objects/'+id);
+        showOk(card, (o.primaryImageSmall ? '<img class="result-img" src="'+esc(safeUrl(o.primaryImageSmall))+'" alt="'+esc(o.title)+'">' : '')
+          + '<div style="margin-top:6px;"><strong>'+esc(o.title||'fără titlu')+'</strong></div>'
+          + '<div class="label">'+esc(o.artistDisplayName||'autor necunoscut')+' · '+esc(o.objectDate||'')+'</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'open-library', cat:'arta', icon:'📚',
+  title:'Carte — Open Library',
+  desc:'Caută o carte după titlu sau autor; primești copertă și date bibliografice.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="titlu sau autor" value="Solaris"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'Solaris';
+      showLoading(card, q);
+      try{
+        const d = await fetchJSON('https://openlibrary.org/search.json?q='+encodeURIComponent(q)+'&limit=1');
+        const b = d.docs && d.docs[0];
+        if(!b) throw new Error('nimic găsit pentru „'+q+'”');
+        const cover = b.cover_i ? '<img class="result-img" src="https://covers.openlibrary.org/b/id/'+encodeURIComponent(b.cover_i)+'-M.jpg" alt="'+esc(b.title)+'">' : '';
+        showOk(card, cover + '<div style="margin-top:6px;"><strong>'+esc(b.title)+'</strong></div>'
+          + '<div class="label">'+esc((b.author_name||['autor necunoscut']).join(', '))+' · '+esc(b.first_publish_year||'')+'</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: DIVERTISMENT ================= */
+
+widget({
+  id:'ghibli-films', cat:'divertisment', icon:'🎐',
+  title:'Film Studio Ghibli',
+  desc:'Un film aleatoriu din filmografia Ghibli, cu rezumat.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'ghibliapi');
+      try{
+        const list = await fetchJSON('https://ghibliapi.vercel.app/films');
+        const f = list[Math.floor(Math.random()*list.length)];
+        showOk(card, (f.image ? '<img class="result-img" src="'+esc(safeUrl(f.image))+'" alt="'+esc(f.title)+'">' : '')
+          + '<div style="margin-top:6px;"><strong>'+esc(f.title)+'</strong> ('+esc(f.release_date)+')</div>'
+          + '<div class="label">regia '+esc(f.director)+' · scor RT '+esc(f.rt_score)+'</div>'
+          + '<p style="margin-top:6px;font-size:.78rem;color:var(--text-muted);">'+esc((f.description||'').slice(0,220))+(f.description&&f.description.length>220?'…':'')+'</p>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'tvmaze', cat:'divertisment', icon:'📺',
+  title:'Serial TV',
+  desc:'Caută orice serial și vezi rețea, program, rating (TVmaze).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="ex: Severance" value="Severance"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'Severance';
+      showLoading(card, q);
+      try{
+        const list = await fetchJSON('https://api.tvmaze.com/search/shows?q='+encodeURIComponent(q));
+        if(!list.length) throw new Error('nimic găsit pentru „'+q+'”');
+        const s = list[0].show;
+        const img = s.image && (s.image.medium || s.image.original);
+        showOk(card, (img?'<img class="result-img" src="'+esc(safeUrl(img))+'" alt="'+esc(s.name)+'">':'')
+          + '<div style="margin-top:6px;"><strong>'+esc(s.name)+'</strong></div>'
+          + '<div class="label">'+esc(s.status||'')+' · '+esc((s.genres||[]).join(', '))+' · rating '+esc((s.rating&&s.rating.average)||'—')+'</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'rick-morty', cat:'divertisment', icon:'🧪',
+  title:'Personaj Rick & Morty',
+  desc:'Un personaj aleatoriu din universul Rick and Morty.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'rickandmortyapi');
+      try{
+        const id = Math.floor(Math.random()*826)+1;
+        const c = await fetchJSON('https://rickandmortyapi.com/api/character/'+id);
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(c.image))+'" alt="'+esc(c.name)+'">'
+          + '<div style="margin-top:6px;"><strong>'+esc(c.name)+'</strong></div>'
+          + '<div class="label">'+esc(c.species)+' · '+esc(c.status)+' · '+esc((c.location&&c.location.name)||'')+'</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'pokemon', cat:'divertisment', icon:'🔴',
+  title:'Pokémon',
+  desc:'Caută un Pokémon după nume sau număr din Pokédex.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="nume sau nr." value="pikachu"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = ($('[data-role=q]', body).value.trim() || 'pikachu').toLowerCase();
+      showLoading(card, q);
+      try{
+        const p = await fetchJSON('https://pokeapi.co/api/v2/pokemon/'+encodeURIComponent(q));
+        const art = p.sprites && p.sprites.other && p.sprites.other['official-artwork'];
+        const img = (art && art.front_default) || (p.sprites && p.sprites.front_default);
+        showOk(card, (img?'<img class="result-img" src="'+esc(safeUrl(img))+'" alt="'+esc(p.name)+'" style="max-width:180px;">':'')
+          + '<div style="margin-top:6px;"><strong>#'+esc(p.id)+' '+esc(p.name)+'</strong></div>'
+          + '<div class="label">'+esc(p.types.map(t=>t.type.name).join(' / '))+' · '+esc(p.height/10)+'m · '+esc(p.weight/10)+'kg</div>');
+      }catch(e){ showError(card, notFound(e, 'nu există „'+q+'”')); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'deck-cards', cat:'divertisment', icon:'🃏',
+  title:'Trage o carte',
+  desc:'Amestecă un pachet nou și trage o carte (Deck of Cards API).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="shuffle">Amestecă pachet nou</button> <button class="btn ghost" data-role="draw" disabled>Trage o carte</button>';
+    let deckId = null;
+    const shuffleBtn = $('[data-role=shuffle]', body);
+    const drawBtn = $('[data-role=draw]', body);
+    shuffleBtn.addEventListener('click', async () => {
+      showLoading(card, 'shuffle');
+      try{
+        const d = await fetchJSON('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1');
+        deckId = d.deck_id;
+        drawBtn.disabled = false;
+        showOk(card, '<div class="label">pachet nou amestecat — '+esc(d.remaining)+' cărți rămase</div>');
+      }catch(e){ showError(card, e.message); }
+    });
+    drawBtn.addEventListener('click', async () => {
+      if(!deckId) return;
+      showLoading(card, 'draw');
+      try{
+        const d = await fetchJSON('https://deckofcardsapi.com/api/deck/'+encodeURIComponent(deckId)+'/draw/?count=1');
+        if(!d.cards || !d.cards.length){ showOk(card, '<div class="label">pachetul e gol — amestecă din nou</div>'); return; }
+        const c = d.cards[0];
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(c.image))+'" alt="'+esc(c.value)+' de '+esc(c.suit)+'" style="max-width:140px;">'
+          + '<div style="margin-top:6px;">'+esc(c.value)+' de '+esc(c.suit)+' · '+esc(d.remaining)+' rămase</div>');
+      }catch(e){ showError(card, e.message); }
+    });
+    screen.addEventListener('click', e => { if(e.target.closest('[data-retry]')) shuffleBtn.click(); });
+  }
+});
+
+/* ================= CATEGORIA: MUZICĂ ================= */
+
+widget({
+  id:'itunes-search', cat:'muzica', icon:'🎧',
+  title:'Căutare muzică',
+  desc:'Caută artiști sau piese; link direct spre preview de 30 de secunde (iTunes Search API).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="artist sau piesă" value="Queen"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'Queen';
+      showLoading(card, q);
+      try{
+        const d = await fetchJSON('https://itunes.apple.com/search?term='+encodeURIComponent(q)+'&media=music&limit=1');
+        const r = d.results && d.results[0];
+        if(!r) throw new Error('nimic găsit pentru „'+q+'”');
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(r.artworkUrl100))+'" alt="'+esc(r.trackName)+'" style="max-width:100px;">'
+          + '<div style="margin-top:6px;"><strong>'+esc(r.trackName)+'</strong></div>'
+          + '<div class="label">'+esc(r.artistName)+' · '+esc(r.collectionName||'')+'</div>'
+          + (r.previewUrl ? '<div style="margin-top:6px;"><a href="'+esc(safeUrl(r.previewUrl))+'" target="_blank" rel="noopener noreferrer">▶ ascultă preview (30s)</a></div>' : ''));
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: MÂNCARE & BĂUTURĂ ================= */
+
+widget({
+  id:'meal-random', cat:'mancare', icon:'🍜',
+  title:'Rețetă random',
+  desc:'O rețetă aleatorie, cu ingrediente și proveniență (TheMealDB).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'themealdb');
+      try{
+        const d = await fetchJSON('https://www.themealdb.com/api/json/v1/1/random.php');
+        const m = d.meals && d.meals[0];
+        if(!m) throw new Error('sursă indisponibilă');
+        const ingredients = [];
+        for(let i=1;i<=20;i++){
+          const ing = m['strIngredient'+i], meas = m['strMeasure'+i];
+          if(ing && ing.trim()) ingredients.push(((meas||'').trim()+' '+ing.trim()).trim());
+        }
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(m.strMealThumb))+'" alt="'+esc(m.strMeal)+'">'
+          + '<div style="margin-top:6px;"><strong>'+esc(m.strMeal)+'</strong></div>'
+          + '<div class="label">'+esc(m.strArea||'')+' · '+esc(m.strCategory||'')+'</div>'
+          + '<ul style="margin:8px 0 0 18px;padding:0;font-size:.78rem;color:var(--text-muted);">'+ingredients.slice(0,8).map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'cocktail-random', cat:'mancare', icon:'🍸',
+  title:'Cocktail random',
+  desc:'Un cocktail aleatoriu, cu rețeta completă (TheCocktailDB).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'thecocktaildb');
+      try{
+        const d = await fetchJSON('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+        const m = d.drinks && d.drinks[0];
+        if(!m) throw new Error('sursă indisponibilă');
+        const ingredients = [];
+        for(let i=1;i<=15;i++){
+          const ing = m['strIngredient'+i], meas = m['strMeasure'+i];
+          if(ing && ing.trim()) ingredients.push(((meas||'').trim()+' '+ing.trim()).trim());
+        }
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(m.strDrinkThumb))+'" alt="'+esc(m.strDrink)+'">'
+          + '<div style="margin-top:6px;"><strong>'+esc(m.strDrink)+'</strong></div>'
+          + '<div class="label">'+esc(m.strCategory||'')+' · '+esc(m.strGlass||'')+'</div>'
+          + '<ul style="margin:8px 0 0 18px;padding:0;font-size:.78rem;color:var(--text-muted);">'+ingredients.map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'openfoodfacts', cat:'mancare', icon:'🏷️',
+  title:'Produs după cod de bare',
+  desc:'Info nutrițională după codul EAN/UPC (Open Food Facts).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="cod de bare" value="3017620422003"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const code = $('[data-role=q]', body).value.trim() || '3017620422003';
+      showLoading(card, code);
+      try{
+        const d = await fetchJSON('https://world.openfoodfacts.org/api/v2/product/'+encodeURIComponent(code)+'.json');
+        if(d.status !== 1 || !d.product) throw new Error('produs negăsit pentru codul '+code);
+        const p = d.product;
+        const kcal = p.nutriments && p.nutriments['energy-kcal_100g'];
+        showOk(card, (p.image_small_url?'<img class="result-img" src="'+esc(safeUrl(p.image_small_url))+'" alt="'+esc(p.product_name||'')+'">':'')
+          + '<div style="margin-top:6px;"><strong>'+esc(p.product_name||'fără nume')+'</strong></div>'
+          + '<div class="label">'+esc(p.brands||'')+'</div>'
+          + '<div class="row"><span class="label">nutri-score</span><span>'+esc((p.nutriscore_grade||'—').toUpperCase())+'</span></div>'
+          + '<div class="row"><span class="label">energie/100g</span><span>'+(kcal!=null?fmtNum(kcal,0):'—')+' kcal</span></div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: FINANȚE & CRIPTO ================= */
+
+widget({
+  id:'currency-exchange', cat:'finante', icon:'💱',
+  title:'Curs valutar',
+  desc:'Conversie live între orice două valute, date BCE (Frankfurter API).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="amt" type="number" value="100" style="max-width:80px;">'
+      + '<input class="inp" data-role="from" value="RON" style="max-width:60px;text-transform:uppercase;">'
+      + '<span style="color:var(--text-faint)">→</span>'
+      + '<input class="inp" data-role="to" value="EUR" style="max-width:60px;text-transform:uppercase;">'
+      + '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const amtRaw = parseFloat($('[data-role=amt]', body).value);
+      const amt = Number.isFinite(amtRaw) ? amtRaw : 1;
+      const from = ($('[data-role=from]', body).value.trim() || 'RON').toUpperCase();
+      const to = ($('[data-role=to]', body).value.trim() || 'EUR').toUpperCase();
+      showLoading(card, from+'→'+to);
+      try{
+        if(from === to){ showOk(card, '<div class="big">'+fmtNum(amt,2)+' '+esc(to)+'</div><div class="label">aceeași valută (curs 1)</div>'); return; }
+        const d = await fetchJSON('https://api.frankfurter.dev/v1/latest?base='+encodeURIComponent(from)+'&symbols='+encodeURIComponent(to));
+        const rate = d.rates && d.rates[to];
+        if(rate == null) throw new Error('valută necunoscută');
+        showOk(card, '<div class="big">'+fmtNum(amt*rate,2)+' '+esc(to)+'</div>'
+          + '<div class="label">'+fmtNum(amt,2)+' '+esc(from)+' · curs '+fmtNum(rate,4)+' · '+esc(d.date)+'</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'crypto-price', cat:'finante', icon:'₿',
+  title:'Preț criptomonede',
+  desc:'Preț live și variație 24h pentru principalele criptomonede (CoinGecko).',
+  init(card, body, screen){
+    body.innerHTML = '<select class="inp" data-role="coin">'
+      + '<option value="bitcoin">Bitcoin</option><option value="ethereum">Ethereum</option>'
+      + '<option value="solana">Solana</option><option value="dogecoin">Dogecoin</option>'
+      + '<option value="cardano">Cardano</option><option value="ripple">XRP</option>'
+      + '</select><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const coin = $('[data-role=coin]', body).value;
+      showLoading(card, coin);
+      try{
+        const d = await fetchJSON('https://api.coingecko.com/api/v3/simple/price?ids='+encodeURIComponent(coin)+'&vs_currencies=usd,eur&include_24hr_change=true');
+        const v = d[coin];
+        if(!v) throw new Error('monedă necunoscută');
+        const chg = v.usd_24h_change || 0;
+        showOk(card, '<div class="big">$'+fmtNum(v.usd,2)+'</div>'
+          + '<div class="row"><span class="label">EUR</span><span>€'+fmtNum(v.eur,2)+'</span></div>'
+          + '<div class="row"><span class="label">24h</span><span style="color:'+(chg>=0?'var(--green)':'var(--red)')+'">'+(chg>=0?'▲':'▼')+' '+fmtNum(Math.abs(chg),2)+'%</span></div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'vat-eu', cat:'finante', icon:'🧾',
+  title:'Validare TVA UE',
+  desc:'Verifică un cod de înregistrare TVA intracomunitar (VATComply → VIES).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="ex: RO12345678" value="RO12345678"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const vat = $('[data-role=q]', body).value.trim().toUpperCase().replace(/\s/g,'');
+      showLoading(card, vat);
+      try{
+        const d = await fetchJSON('https://api.vatcomply.com/vat?vat_number='+encodeURIComponent(vat));
+        showOk(card, '<div class="row"><span class="label">valid</span><span>'+(d.valid?'✅ da':'❌ nu')+'</span></div>'
+          + '<div class="row"><span class="label">nume</span><span style="text-align:right;">'+esc(d.name||'—')+'</span></div>'
+          + '<div class="row"><span class="label">adresă</span><span style="text-align:right;">'+esc(d.address||'—')+'</span></div>'
+          + '<div class="row"><span class="label">țară</span><span>'+esc(d.country_code||'')+'</span></div>'
+          + '<div style="color:var(--text-faint);font-size:.72rem;margin-top:4px;">informativ — nu înlocuiește verificarea oficială VIES; codul tastat se trimite sursei</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: ȚĂRI & GEOGRAFIE ================= */
+
+widget({
+  id:'country-info', cat:'geo', icon:'🌐',
+  title:'Informații despre țară',
+  desc:'Capitală, populație, monedă, limbi — pentru orice țară (REST Countries).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="nume țară" value="Romania"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'Romania';
+      showLoading(card, q);
+      try{
+        const list = await fetchJSON('https://restcountries.com/v3.1/name/'+encodeURIComponent(q));
+        const c = list[0];
+        const langs = c.languages ? Object.values(c.languages).join(', ') : '—';
+        const currencies = c.currencies ? Object.values(c.currencies).map(x=>x.name).join(', ') : '—';
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(c.flags.svg||c.flags.png))+'" alt="steag" style="max-width:80px;">'
+          + '<div style="margin-top:6px;"><strong>'+esc(c.name.common)+'</strong></div>'
+          + '<div class="row"><span class="label">capitală</span><span>'+esc((c.capital||[])[0]||'—')+'</span></div>'
+          + '<div class="row"><span class="label">populație</span><span>'+fmtNum(c.population,0)+'</span></div>'
+          + '<div class="row"><span class="label">monedă</span><span style="text-align:right;">'+esc(currencies)+'</span></div>'
+          + '<div class="row"><span class="label">limbi</span><span style="text-align:right;">'+esc(langs)+'</span></div>');
+      }catch(e){ showError(card, notFound(e, 'țară negăsită')); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'public-holidays', cat:'geo', icon:'📅',
+  title:'Sărbători legale',
+  desc:'Sărbătorile legale pentru orice țară și an (Nager.Date).',
+  init(card, body, screen){
+    const year = new Date().getFullYear();
+    body.innerHTML = '<input class="inp" data-role="cc" placeholder="cod țară" value="RO" style="max-width:70px;text-transform:uppercase;">'
+      + '<input class="inp" data-role="yr" type="number" value="'+year+'" style="max-width:90px;">'
+      + '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const cc = ($('[data-role=cc]', body).value.trim() || 'RO').toUpperCase();
+      const yr = $('[data-role=yr]', body).value.trim() || year;
+      showLoading(card, cc+' '+yr);
+      try{
+        const list = await fetchJSON('https://date.nager.at/api/v3/publicholidays/'+encodeURIComponent(yr)+'/'+encodeURIComponent(cc));
+        if(!list.length) throw new Error('cod de țară necunoscut');
+        const n0 = new Date();
+        const todayStr = n0.getFullYear()+'-'+String(n0.getMonth()+1).padStart(2,'0')+'-'+String(n0.getDate()).padStart(2,'0');
+        const upcoming = list.filter(h => String(h.date) >= todayStr).slice(0,6);
+        const shown = upcoming.length ? upcoming : list.slice(0,6);
+        showOk(card, '<div class="label" style="margin-bottom:4px;">'+list.length+' sărbători în '+esc(yr)+' · '+esc(cc)+'</div>'
+          + shown.map(h => '<div class="row"><span>'+esc(h.localName)+'</span><span class="mono">'+esc(h.date)+'</span></div>').join(''));
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'geocode', cat:'geo', icon:'📍',
+  title:'Geocodare oraș',
+  desc:'Coordonate GPS pentru orice localitate din lume (Open-Meteo Geocoding).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="localitate" value="Capidava"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'Capidava';
+      showLoading(card, q);
+      try{
+        const loc = await geocodeCity(q);
+        showOk(card, '<div style="margin-bottom:4px;"><strong>'+esc(loc.label)+'</strong></div>'
+          + '<div class="row"><span class="label">latitudine</span><span class="mono">'+fmtNum(loc.lat,5)+'°</span></div>'
+          + '<div class="row"><span class="label">longitudine</span><span class="mono">'+fmtNum(loc.lon,5)+'°</span></div>'
+          + '<div class="row"><span class="label">geo:</span><span class="mono">'+fmtNum(loc.lat,5)+','+fmtNum(loc.lon,5)+'</span></div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: CUVINTE & CUNOAȘTERE ================= */
+
+widget({
+  id:'dictionary', cat:'cuvinte', icon:'📖',
+  title:'Dicționar englez',
+  desc:'Definiție, pronunție și exemple pentru orice cuvânt englezesc.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="cuvânt" value="serendipity"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const w = $('[data-role=q]', body).value.trim() || 'serendipity';
+      showLoading(card, w);
+      try{
+        const d = await fetchJSON('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(w));
+        const e0 = d[0];
+        const phonObj = (e0.phonetics||[]).find(p=>p.text) || {};
+        const phon = e0.phonetic || phonObj.text || '';
+        const meaning = e0.meanings && e0.meanings[0];
+        const def = meaning && meaning.definitions && meaning.definitions[0];
+        showOk(card, '<div><strong>'+esc(e0.word)+'</strong> <span class="label mono">'+esc(phon)+'</span></div>'
+          + '<div class="label" style="margin:4px 0;">'+esc((meaning&&meaning.partOfSpeech)||'')+'</div>'
+          + '<p style="font-size:.82rem;">'+esc((def&&def.definition)||'')+'</p>'
+          + (def&&def.example ? '<p style="font-size:.78rem;color:var(--text-faint);font-style:italic;">„'+esc(def.example)+'”</p>' : ''));
+      }catch(e){ showError(card, notFound(e, 'cuvânt negăsit')); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'wikipedia', cat:'cuvinte', icon:'🅦',
+  title:'Rezumat Wikipedia',
+  desc:'Rezumatul rapid al oricărui subiect, RO sau EN.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="subiect" value="Capidava">'
+      + '<select class="inp" data-role="lang" style="max-width:64px;"><option value="ro">RO</option><option value="en">EN</option></select>'
+      + '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'Capidava';
+      const lang = $('[data-role=lang]', body).value;
+      showLoading(card, q);
+      try{
+        const d = await fetchJSON('https://'+lang+'.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(q));
+        showOk(card, (d.thumbnail?'<img class="result-img" src="'+esc(safeUrl(d.thumbnail.source))+'" alt="'+esc(d.title)+'" style="max-width:160px;">':'')
+          + '<div style="margin-top:6px;"><strong>'+esc(d.title)+'</strong></div>'
+          + '<p style="font-size:.82rem;margin-top:4px;">'+esc(d.extract)+'</p>'
+          + (d.content_urls?'<a href="'+esc(safeUrl(d.content_urls.desktop.page))+'" target="_blank" rel="noopener noreferrer">deschide pagina →</a>':''));
+      }catch(e){ showError(card, notFound(e, 'subiect negăsit')); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'number-fact', cat:'cuvinte', icon:'🔢',
+  title:'Fapt despre un număr',
+  desc:'O curiozitate matematică sau istorică despre orice număr întreg.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" type="number" placeholder="număr" value="42"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const n = $('[data-role=q]', body).value.trim() || '42';
+      showLoading(card, n);
+      try{
+        const j = await fetchJSON('https://numbersapi.com/'+encodeURIComponent(n)+'?json');
+        showOk(card, '<div class="big">'+esc(n)+'</div><p style="font-size:.85rem;">'+esc(j.text)+'</p>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'trivia', cat:'cuvinte', icon:'❓',
+  title:'Întrebare trivia',
+  desc:'O întrebare aleatorie cu răspunsuri multiple (Open Trivia DB).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    function decodeHtml(s){ const t = document.createElement('textarea'); t.innerHTML = s; return t.value; }
+    const go = async () => {
+      showLoading(card, 'opentdb');
+      try{
+        const d = await fetchJSON('https://opentdb.com/api.php?amount=1&type=multiple');
+        const q = d.results && d.results[0];
+        if(!q) throw new Error('nicio întrebare disponibilă');
+        const correct = decodeHtml(q.correct_answer);
+        const answers = shuffle([...q.incorrect_answers, q.correct_answer].map(decodeHtml));
+        showOk(card, '<div class="label">'+esc(decodeHtml(q.category))+' · '+esc(q.difficulty)+'</div>'
+          + '<p style="font-weight:600;margin:4px 0 8px;">'+esc(decodeHtml(q.question))+'</p>'
+          + '<div style="display:flex;flex-direction:column;gap:4px;">'
+          + answers.map(a => '<button class="btn ghost small" data-ans="'+esc(a)+'" style="text-align:left;">'+esc(a)+'</button>').join('')
+          + '</div><div data-role="result" style="margin-top:6px;"></div>');
+        $all('[data-ans]', screen).forEach(btn => btn.addEventListener('click', () => {
+          const ok = btn.dataset.ans === correct;
+          $all('[data-ans]', screen).forEach(b => { b.disabled = true; });
+          $('[data-role=result]', screen).innerHTML = ok ? '<span style="color:var(--green)">✅ corect!</span>' : '<span class="err">✗ greșit — răspunsul corect: '+esc(correct)+'</span>';
+        }));
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: UMOR & INSPIRAȚIE ================= */
+
+widget({
+  id:'joke', cat:'umor', icon:'🤪',
+  title:'Glumă',
+  desc:'O glumă aleatorie, în engleză (JokeAPI, filtru „safe-mode”).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'jokeapi');
+      try{
+        const d = await fetchJSON('https://v2.jokeapi.dev/joke/Any?safe-mode');
+        const txt = d.type === 'single' ? d.joke : (d.setup + ' … ' + d.delivery);
+        showOk(card, '<p>'+esc(txt)+'</p>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'chuck-norris', cat:'umor', icon:'🥋',
+  title:'Fapt Chuck Norris',
+  desc:'Un „fapt” aleatoriu, absurd, despre Chuck Norris.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'chucknorris.io');
+      try{
+        // API-ul are și categoria „explicit”: reîncercăm de câteva ori ca s-o evităm
+        let d = null;
+        for(let i = 0; i < 4; i++){
+          d = await fetchJSON('https://api.chucknorris.io/jokes/random');
+          if(!(Array.isArray(d.categories) && d.categories.includes('explicit'))) break;
+        }
+        if(Array.isArray(d.categories) && d.categories.includes('explicit')) throw new Error('doar conținut nepotrivit primit, reîncearcă');
+        showOk(card, '<p>'+esc(d.value)+'</p><div style="color:var(--text-faint);font-size:.72rem;margin-top:6px;">glumă absurdă, fictivă — nu descrie fapte reale</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'advice', cat:'umor', icon:'💡',
+  title:'Sfat random',
+  desc:'Un sfat scurt, generic, pentru orice zi (Advice Slip).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'adviceslip');
+      try{
+        const d = await fetchJSON('https://api.adviceslip.com/advice?t='+Date.now());
+        showOk(card, '<p>„'+esc(d.slip.advice)+'”</p>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: SECURITATE ================= */
+
+widget({
+  id:'pwned-password', cat:'securitate', icon:'🔐',
+  title:'Parolă compromisă?',
+  desc:'Verifică o parolă în scurgeri de date cunoscute — fără să trimiți parola întreagă (k-anonimat SHA-1, Have I Been Pwned).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" type="password" placeholder="parolă de testat" autocomplete="off"><button class="btn" data-role="go">Verifică</button>';
+    const go = async () => {
+      const pw = $('[data-role=q]', body).value;
+      if(!pw){ showError(card, 'scrie o parolă mai întâi'); return; }
+      showLoading(card, 'k-anonimat SHA-1');
+      try{
+        const hash = (await sha1Hex(pw)).toUpperCase();
+        const prefix = hash.slice(0,5), suffix = hash.slice(5);
+        const text = await fetchText('https://api.pwnedpasswords.com/range/'+prefix);
+        const line = text.split('\n').find(l => l.split(':')[0].trim() === suffix);
+        const count = line ? parseInt(line.split(':')[1],10) : 0;
+        $('[data-role=q]', body).value = '';
+        showOk(card, count > 0
+          ? '<div class="big" style="color:var(--red)">⚠ găsită de '+fmtNum(count,0)+' ori</div><div class="label">apare în scurgeri publice — nu o folosi nicăieri și schimb-o.</div>'
+          : '<div class="big" style="color:var(--green)">✓ nu apare</div><div class="label">nevăzută în scurgerile indexate de HIBP — asta nu o face neapărat sigură.</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: SĂNĂTATE ================= */
+
+widget({
+  id:'fda-drug', cat:'sanatate', icon:'💊',
+  title:'Etichetă medicament (FDA)',
+  desc:'Scop și indicații oficiale pentru medicamente înregistrate în SUA (openFDA). Nu e sfat medical.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="denumire comercială" value="Tylenol"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const q = $('[data-role=q]', body).value.trim() || 'Tylenol';
+      showLoading(card, q);
+      try{
+        const d = await fetchJSON('https://api.fda.gov/drug/label.json?search=openfda.brand_name:"'+encodeURIComponent(q)+'"&limit=1');
+        const r = d.results && d.results[0];
+        if(!r) throw new Error('nimic găsit pentru „'+q+'”');
+        const purpose = (r.purpose || r.indications_and_usage || [''])[0];
+        const brand = (r.openfda.brand_name || [q])[0];
+        const maker = (r.openfda.manufacturer_name || [''])[0];
+        showOk(card, '<div><strong>'+esc(brand)+'</strong></div>'
+          + '<div class="label">'+esc(maker)+'</div>'
+          + '<p style="font-size:.78rem;margin-top:6px;">'+esc((purpose||'').slice(0,300))+'</p>'
+          + '<div style="color:var(--text-faint);font-size:.72rem;margin-top:4px;">sursă: FDA (SUA), text în engleză, doar pentru produse din SUA — informativ; nu substituie un medic sau farmacist și nu e recomandare de tratament</div>');
+      }catch(e){ showError(card, notFound(e, 'medicament negăsit')); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'covid-history', cat:'sanatate', icon:'📊',
+  title:'Istoric global COVID-19',
+  desc:'Cifre cumulative istorice la nivel mondial (disease.sh) — arhivă, nu urmărire live.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'disease.sh');
+      try{
+        const d = await fetchJSON('https://disease.sh/v3/covid-19/all');
+        showOk(card, '<div class="row"><span class="label">cazuri totale</span><span>'+fmtNum(d.cases,0)+'</span></div>'
+          + '<div class="row"><span class="label">decese</span><span>'+fmtNum(d.deaths,0)+'</span></div>'
+          + '<div class="row"><span class="label">recuperări</span><span>'+fmtNum(d.recovered,0)+'</span></div>'
+          + '<div style="color:var(--text-faint);font-size:.72rem;margin-top:4px;">cifre cumulative istorice; sursa poate fi neactualizată sau incompletă (ex. recuperările)</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: IDENTITATE & DATE TEST ================= */
+
+widget({
+  id:'name-predict', cat:'identitate', icon:'🧬',
+  title:'Predicție statistică din nume',
+  desc:'Vârstă, gen și naționalitate probabile, estimate statistic dintr-un prenume (Genderize / Agify / Nationalize).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="prenume" value="Alexandru"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const name = $('[data-role=q]', body).value.trim() || 'Alexandru';
+      showLoading(card, name);
+      try{
+        const [g,a,n] = await Promise.all([
+          fetchJSON('https://api.genderize.io/?name='+encodeURIComponent(name)),
+          fetchJSON('https://api.agify.io/?name='+encodeURIComponent(name)),
+          fetchJSON('https://api.nationalize.io/?name='+encodeURIComponent(name)),
+        ]);
+        const topNat = n.country && n.country[0];
+        showOk(card, '<div class="row"><span class="label">gen probabil</span><span>'+esc(g.gender||'—')+' ('+fmtNum((g.probability||0)*100,0)+'%)</span></div>'
+          + '<div class="row"><span class="label">vârstă estimată</span><span>'+esc(a.age!=null?a.age:'—')+' ani</span></div>'
+          + '<div class="row"><span class="label">țară probabilă</span><span>'+(topNat?esc(topNat.country_id)+' ('+fmtNum(topNat.probability*100,0)+'%)':'—')+'</span></div>'
+          + '<div style="color:var(--text-faint);font-size:.72rem;margin-top:4px;">estimare statistică, adesea greșită sau părtinitoare; nu o folosi pentru decizii despre persoane. Prenumele tastat se trimite la 3 servicii</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'random-user', cat:'identitate', icon:'🧑',
+  title:'Profil de test, generat',
+  desc:'Un profil complet fictiv — nume, avatar, adresă — util pentru teste de UI (RandomUser.me).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'randomuser.me');
+      try{
+        const d = await fetchJSON('https://randomuser.me/api/');
+        const u = d.results[0];
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(u.picture.medium))+'" alt="avatar" style="max-width:80px;border-radius:50%;">'
+          + '<div style="margin-top:6px;"><strong>'+esc(u.name.first)+' '+esc(u.name.last)+'</strong></div>'
+          + '<div class="label">'+esc(u.location.city)+', '+esc(u.location.country)+'</div>'
+          + '<div class="label mono">'+esc(u.email)+'</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* ================= CATEGORIA: DEZVOLTARE & UTILITARE ================= */
+
+widget({
+  id:'github-profile', cat:'dev', icon:'🐙',
+  title:'Profil GitHub',
+  desc:'Statistici publice pentru orice cont GitHub.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="utilizator" value="chiuta"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const u = $('[data-role=q]', body).value.trim() || 'chiuta';
+      showLoading(card, u);
+      try{
+        const d = await fetchJSON('https://api.github.com/users/'+encodeURIComponent(u));
+        showOk(card, '<img class="result-img" src="'+esc(safeUrl(d.avatar_url))+'" alt="'+esc(d.login)+'" style="max-width:70px;border-radius:50%;">'
+          + '<div style="margin-top:6px;"><strong>'+esc(d.name||d.login)+'</strong></div>'
+          + (d.bio?'<div class="label">'+esc(d.bio)+'</div>':'')
+          + '<div class="row"><span class="label">repo-uri publice</span><span>'+esc(d.public_repos)+'</span></div>'
+          + '<div class="row"><span class="label">urmăritori</span><span>'+esc(d.followers)+'</span></div>'
+          + '<a href="'+esc(safeUrl(d.html_url))+'" target="_blank" rel="noopener noreferrer">deschide profilul →</a>');
+      }catch(e){ showError(card, notFound(e, 'utilizator negăsit')); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'hackernews', cat:'dev', icon:'📰',
+  title:'Hacker News — top',
+  desc:'Primele titluri de pe Hacker News, live (Firebase API oficial).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'hacker-news');
+      try{
+        const ids = await fetchJSON('https://hacker-news.firebaseio.com/v0/topstories.json');
+        const top = ids.slice(0,6);
+        const items = await Promise.all(top.map(id => fetchJSON('https://hacker-news.firebaseio.com/v0/item/'+id+'.json')));
+        showOk(card, items.map(it => '<div class="row" style="align-items:flex-start;"><a href="'+esc(safeUrl(it.url||('https://news.ycombinator.com/item?id='+encodeURIComponent(it.id))))+'" target="_blank" rel="noopener noreferrer" style="flex:1;">'+esc(it.title)+'</a><span class="label" style="flex:none;margin-left:6px;">▲'+esc(it.score)+'</span></div>').join(''));
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'qr-code', cat:'dev', icon:'▦',
+  title:'Generator cod QR',
+  desc:'Transformă orice text sau link într-un cod QR, instant.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="text sau URL" value="https://centrulstring.ro"><button class="btn" data-role="go">Generează</button>';
+    const go = () => {
+      const q = $('[data-role=q]', body).value.trim() || 'https://centrulstring.ro';
+      showOk(card, '<img class="result-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(q)+'" alt="cod QR" style="max-width:220px;background:#fff;padding:8px;border-radius:6px;">');
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'vin-decode', cat:'dev', icon:'🚗',
+  title:'Decodare VIN vehicul',
+  desc:'Marcă, model, an, țară de fabricație — din seria de șasiu (NHTSA vPIC, SUA).',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="cod VIN" value="1FTMW1T88MFA00001" style="text-transform:uppercase;"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const vin = $('[data-role=q]', body).value.trim().toUpperCase();
+      if(!vin){ showError(card, 'scrie un VIN mai întâi'); return; }
+      showLoading(card, vin);
+      try{
+        const d = await fetchJSON('https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/'+encodeURIComponent(vin)+'?format=json');
+        const r = d.Results && d.Results[0];
+        if(!r || !r.Make) throw new Error('VIN nedecodabil');
+        showOk(card, '<div class="row"><span class="label">marcă</span><span>'+esc(r.Make||'—')+'</span></div>'
+          + '<div class="row"><span class="label">model</span><span>'+esc(r.Model||'—')+'</span></div>'
+          + '<div class="row"><span class="label">an</span><span>'+esc(r.ModelYear||'—')+'</span></div>'
+          + '<div class="row"><span class="label">tip caroserie</span><span style="text-align:right;">'+esc(r.BodyClass||'—')+'</span></div>'
+          + '<div class="row"><span class="label">țară fabricație</span><span>'+esc(r.PlantCountry||'—')+'</span></div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'universities', cat:'dev', icon:'🎓',
+  title:'Universități după țară',
+  desc:'Listă de universități înregistrate pentru orice țară — verificare rapidă a existenței instituției.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="țară" value="Romania"><button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      const c = $('[data-role=q]', body).value.trim() || 'Romania';
+      showLoading(card, c);
+      try{
+        const list = await fetchJSON('https://universities.hipolabs.com/search?country='+encodeURIComponent(c));
+        if(!list.length) throw new Error('nicio universitate găsită pentru „'+c+'”');
+        showOk(card, '<div class="label" style="margin-bottom:4px;">'+list.length+' rezultate (primele 8)</div>'
+          + list.slice(0,8).map(u => '<div class="row"><a href="'+esc(safeUrl(u.web_pages&&u.web_pages[0]))+'" target="_blank" rel="noopener noreferrer" style="flex:1;">'+esc(u.name)+'</a></div>').join(''));
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+widget({
+  id:'my-ip', cat:'dev', icon:'🌐',
+  title:'IP-ul tău public',
+  desc:'Adresa IP publică și locația aproximativă asociată (ipapi.co).',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Recepționează</button>';
+    const go = async () => {
+      showLoading(card, 'ipapi.co');
+      try{
+        const d = await fetchJSON('https://ipapi.co/json/');
+        if(d.error) throw new Error(d.reason || 'limită depășită');
+        showOk(card, '<div class="big mono">'+esc(d.ip)+'</div>'
+          + '<div class="row"><span class="label">oraș</span><span>'+esc(d.city||'—')+', '+esc(d.country_name||'')+'</span></div>'
+          + '<div class="row"><span class="label">furnizor</span><span style="text-align:right;">'+esc(d.org||'—')+'</span></div>'
+          + '<div style="color:var(--text-faint);font-size:.72rem;margin-top:4px;">estimare pe baza rutei de rețea — nu e localizare GPS</div>');
+      }catch(e){ showError(card, e.message); }
+    };
+    wireGo(body, screen, go);
+  }
+});
+
+/* -------------------- WIDGETS_PLACEHOLDER -------------------- */
+
+/* ============================================================
+   RANDARE APLICAȚIE
+   ============================================================ */
+function buildChipbar(){
+  const bar = $('#chipbar');
+  const counts = {};
+  WIDGETS.forEach(w => counts[w.cat] = (counts[w.cat]||0) + 1);
+  const total = WIDGETS.length;
+  const chips = [{id:'toate', label:'Toate', icon:'✦'}, ...CATEGORIES.filter(c => counts[c.id])];
+  bar.innerHTML = '';
+  chips.forEach(c => {
+    const btn = ce('button', {
+      class:'chip', 'aria-pressed': String(c.id === state.activeCat),
+      onclick: () => { state.activeCat = c.id; renderGrid(); buildChipbar(); }
+    });
+    btn.innerHTML = esc(c.icon) + ' ' + esc(c.label) + ' <span class="count">' + (c.id==='toate'? total : counts[c.id]) + '</span>';
+    bar.append(btn);
+  });
+}
+
+function matchesQuery(w, q){
+  if(!q) return true;
+  q = norm(q);
+  const cat = CATEGORIES.find(c=>c.id===w.cat);
+  return norm(w.title).includes(q) || norm(w.desc).includes(q) || (cat ? norm(cat.label).includes(q) : false);
+}
+
+function renderGrid(){
+  const grid = $('#mainGrid');
+  grid.innerHTML = '';
+  let list = WIDGETS.filter(w => matchesQuery(w, state.query));
+  if(state.activeCat !== 'toate') list = list.filter(w => w.cat === state.activeCat);
+  if(list.length === 0){
+    grid.append(ce('div', {class:'empty-state', html:'Niciun semnal găsit pentru „' + esc(state.query) + '”. Încearcă alt termen.'}));
+    return;
+  }
+  // grupăm pe categorie, în ordinea CATEGORIES, doar dacă suntem în „Toate" fără căutare activă pe categorie unică
+  const groupByCat = state.activeCat === 'toate';
+  if(groupByCat){
+    CATEGORIES.forEach(cat => {
+      const items = list.filter(w => w.cat === cat.id);
+      if(items.length === 0) return;
+      grid.append(ce('div', {class:'cat-heading', style:'grid-column:1/-1;', html: esc(cat.icon) + ' ' + esc(cat.label)}));
+      const wrap = ce('div', {class:'grid', style:'grid-column:1/-1;'});
+      items.sort((a,b) => (state.favs.has(b.id)?1:0) - (state.favs.has(a.id)?1:0));
+      items.forEach(w => wrap.append(buildCard(w)));
+      grid.append(wrap);
+    });
+  } else {
+    list.sort((a,b) => (state.favs.has(b.id)?1:0) - (state.favs.has(a.id)?1:0));
+    list.forEach(w => grid.append(buildCard(w)));
+  }
+}
+
+const CARD_CACHE = {};
+function buildCard(def){
+  // cardurile se construiesc o singură dată: filtrarea/căutarea nu mai reiau cererile și nu pierd rezultatele
+  if(CARD_CACHE[def.id]) return CARD_CACHE[def.id];
+  const card = ce('article', {class:'station' + (def.hero?' is-hero':''), 'data-id':def.id});
+  const head = ce('div', {class:'station-head'});
+  head.append(
+    ce('span', {class:'station-dot', 'data-state':'idle'}),
+    ce('span', {class:'station-icon', html:def.icon}),
+    ce('h3', {class:'station-title', html:esc(def.title)})
+  );
+  const fav = ce('button', {
+    class:'fav-btn', 'aria-pressed': String(state.favs.has(def.id)), title:'Favorit (apare primul în categorie)', 'aria-label':'Favorit: ' + def.title,
+    onclick: () => {
+      if(state.favs.has(def.id)) state.favs.delete(def.id); else state.favs.add(def.id);
+      lsSet(LS.favs, JSON.stringify([...state.favs]));
+      fav.setAttribute('aria-pressed', String(state.favs.has(def.id)));
+    }
+  });
+  fav.textContent = '★';
+  head.append(fav);
+  card.append(head);
+  card.append(ce('p', {class:'station-desc', html:esc(def.desc)}));
+  const body = ce('div', {class:'station-body'});
+  const screen = ce('div', {class:'station-screen', hidden:true});
+  card.append(body, screen);
+  screen.setAttribute('role', 'status');
+  screen.setAttribute('aria-live', 'polite');
+  try{
+    def.init(card, body, screen);
+  }catch(e){
+    console.error('Widget init failed:', def.id, e);
+    body.innerHTML = '<span class="err" style="font-size:.75rem;">Inițializare eșuată.</span>';
+  }
+  // etichete accesibile pentru câmpurile fără label
+  $all('input, select', body).forEach(el => {
+    if(!el.getAttribute('aria-label')) el.setAttribute('aria-label', el.getAttribute('placeholder') || def.title);
+  });
+  CARD_CACHE[def.id] = card;
+  return card;
+}
+
+/* ============================================================
+   WAVEFORM (element de semnătură — pulsează cu traficul real)
+   ============================================================ */
+function initWaveform(){
+  const canvas = $('#waveform');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function resize(){
+    const r = canvas.getBoundingClientRect();
+    canvas.width = Math.max(1, r.width * devicePixelRatio);
+    canvas.height = Math.max(1, r.height * devicePixelRatio);
+  }
+  window.addEventListener('resize', debounce(resize, 150));
+  resize();
+  let t = 0;
+  function draw(){
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+    const amp = reduceMotion ? h*0.08 : (ACTIVE>0 ? h*0.36 : h*0.14);
+    const freq = ACTIVE>0 ? 0.25 : 0.12;
+    ctx.beginPath();
+    for(let x=0;x<=w;x+=4){
+      const y = h/2 + Math.sin(x*freq*0.05 + t) * amp * Math.sin(x/w*Math.PI);
+      if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle = ACTIVE>0 ? '#46D1C6' : '#E8A23D';
+    ctx.lineWidth = 2*devicePixelRatio;
+    ctx.globalAlpha = 0.85;
+    ctx.stroke();
+    t += reduceMotion ? 0 : (ACTIVE>0 ? 0.14 : 0.05);
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+/* ============================================================
+   MODALE, TEMĂ, INIT GENERAL
+   ============================================================ */
+let lastFocus = null;
+function openModal(id){
+  lastFocus = document.activeElement;
+  const m = $(id); m.hidden = false;
+  const f = $('input, button, a[href]', m.querySelector('.modal'));
+  if(f) f.focus();
+}
+function closeModal(id){
+  $(id).hidden = true;
+  if(lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+}
+
+function initChrome(){
+  $all('[data-close-modal]').forEach(btn => btn.addEventListener('click', e => {
+    closeModal('#' + e.target.closest('.modal-backdrop').id);
+  }));
+  $all('.modal-backdrop').forEach(bd => bd.addEventListener('click', e => { if(e.target === bd) closeModal('#' + bd.id); }));
+  document.addEventListener('keydown', e => {
+    const open = $all('.modal-backdrop').find(m => !m.hidden);
+    if(!open) return;
+    if(e.key === 'Escape'){ closeModal('#' + open.id); return; }
+    if(e.key === 'Tab'){ // capcană simplă de focus în dialog
+      const f = $all('input, button, a[href]', open).filter(x => !x.disabled && x.offsetParent !== null);
+      if(!f.length) return;
+      const first = f[0], last = f[f.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+  $('#settingsBtn').addEventListener('click', () => {
+    $('#nasaKeyInput').value = lsGet(LS.nasaKey) || '';
+    $('#autoHeroInput').checked = lsGet(LS.autoHero) !== '0';
+    openModal('#settingsModal');
+  });
+  $('#aboutBtn').addEventListener('click', () => openModal('#aboutModal'));
+  $('#attrLink').addEventListener('click', e => { e.preventDefault(); openModal('#attrModal'); });
+  $('#saveKeysBtn').addEventListener('click', () => {
+    const ok1 = lsSet(LS.nasaKey, $('#nasaKeyInput').value.trim());
+    const ok2 = lsSet(LS.autoHero, $('#autoHeroInput').checked ? '1' : '0');
+    closeModal('#settingsModal');
+    if(!(ok1 && ok2)) alert('Setările nu au putut fi salvate (stocarea locală este blocată în acest browser).');
+  });
+  $('#clearKeysBtn').addEventListener('click', () => {
+    lsDel(LS.nasaKey); $('#nasaKeyInput').value = '';
+  });
+  $('#searchInput').addEventListener('input', debounce(e => {
+    state.query = e.target.value.trim(); renderGrid();
+  }, 180));
+
+  const theme = lsGet(LS.theme);
+  if(theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  $('#themeBtn').addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const next = cur === 'light' ? 'dark' : 'light';
+    if(next === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme','light');
+    lsSet(LS.theme, next);
+    const tc = document.querySelector('meta[name=theme-color]'); if(tc) tc.setAttribute('content', next === 'light' ? '#EEF1F4' : '#0B0F14');
+  });
+}
+
+function buildManifest(){
+  const byCat = {};
+  WIDGETS.forEach(w => { byCat[w.cat] = (byCat[w.cat]||0)+1; });
+  const lines = CATEGORIES.filter(c=>byCat[c.id]).map(c => c.icon+' '+c.label+': '+byCat[c.id]).join('  ·  ');
+  $('#manifest').textContent = WIDGETS.length + ' stații active în ' + CATEGORIES.filter(c=>byCat[c.id]).length + ' categorii — ' + lines;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initChrome();
+  buildChipbar();
+  renderGrid();
+  buildManifest();
+  initWaveform();
+});
+</script>
+</body>
+</html>
