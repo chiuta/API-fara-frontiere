@@ -1,6 +1,6 @@
-# API fără frontiere — stație de recepție · v1.0.1
+# API fără frontiere — stație de recepție · v1.0.2
 
-Un singur fișier HTML cu 47 de widgeturi peste API-uri publice (meteo, spațiu, artă, cărți, curs valutar, verificare parolă etc.), fără cont, fără telemetrie proprie, fără server propriu.
+Un singur fișier HTML cu 52 de widgeturi (47 peste API-uri publice — meteo, spațiu, artă, cărți, curs valutar, verificare parolă etc. — și 5 utilitare locale care merg offline), fără cont, fără telemetrie proprie, fără server propriu.
 
 **Live:** https://chiuta.github.io/API-fara-frontiere/
 
@@ -12,16 +12,18 @@ Un singur fișier HTML cu 47 de widgeturi peste API-uri publice (meteo, spațiu,
 
 O pagină-index de „stații”: fiecare card interoghează direct, din browserul tău, un API public gratuit și afișează rezultatul. Nu există server intermediar al autorului. Spre deosebire de aplicațiile offline din aceeași serie, aceasta **are nevoie de internet** pentru a afișa date: fișierul în sine nu conține datele, ci doar interfața.
 
-Cele 47 de widgeturi sunt grupate în 15 categorii: Vreme & Mediu, Spațiu, Animale, Artă & Cultură, Divertisment, Muzică, Mâncare & Băutură, Finanțe & Cripto, Țări & Geografie, Cuvinte & Cunoaștere, Umor & Inspirație, Securitate, Sănătate, Identitate & Date test, Dezvoltare & Utilitare.
+Cele 52 de widgeturi sunt grupate în 16 categorii: Vreme & Mediu, Spațiu, Animale, Artă & Cultură, Divertisment, Muzică, Mâncare & Băutură, Finanțe & Cripto, Țări & Geografie, Cuvinte & Cunoaștere, Umor & Inspirație, Securitate, Sănătate, Identitate & Date test, Dezvoltare & Utilitare, Local · fără rețea.
 
 ## Funcții
 
 Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut folosi rețeaua externă la verificare):
 
-- 47 de carduri, cu căutare (fără diacritice), filtrare pe categorie și favorite (★, păstrate local).
+- 52 de carduri (47 online + 5 locale), cu căutare (fără diacritice), filtrare pe categorie și favorite (★, păstrate local).
 - Fiecare cerere are timeout de 12 s; la eșec cardul afișează cauza (rețea indisponibilă, timp depășit, HTTP nnn) și un buton „Reîncearcă”. Butonul de cerere este blocat cât timp o cerere e în curs; Enter în câmpuri declanșează cererea.
 - Datele primite de la API-uri sunt escapate înainte de afișare; legăturile externe sunt acceptate doar dacă sunt `http(s)`.
 - „Parolă compromisă?”: calculează local SHA-1 și trimite către Have I Been Pwned doar primele 5 caractere ale amprentei (k-anonimat); parola nu pleacă din browser.
+- **Local · fără rețea** (nicio cerere, merg offline): generator de parole (`crypto.getRandomValues`, fără bias, entropie estimată), UUID v4, hash de text (SHA-256/384/512/SHA-1, Web Crypto — cere context sigur), timp Unix ↔ dată, Base64 UTF-8; buton „Copiază”.
+- **Offline:** bară de avertizare când nu ai conexiune (cu scurtătură spre cardurile locale); la eroare de rețea/timeout, cardul arată sub eroare ultimul rezultat reușit, păstrat local ca text (opțional, dezactivabil și ștergibil din Setări; nu se păstrează pentru „Parolă compromisă?”, „Adresa mea IP” și cardurile locale).
 - Cheie NASA opțională (Setări ⚙), implicit `DEMO_KEY`.
 - Temă întunecată/luminoasă, Setări, „Surse și atribuiri”.
 
@@ -36,7 +38,7 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 
 ## Confidențialitate și rețea
 
-- **Stocare locală (`localStorage`):** `aff_theme` (temă), `aff_favs` (favorite), `aff_nasa_key` (cheia NASA, în clar, dacă o salvezi), `aff_auto_hero` (încărcare automată). Nu se folosesc cookie-uri, `sessionStorage` sau IndexedDB. Dacă stocarea este blocată (mod privat), aplicația funcționează fără ea.
+- **Stocare locală (`localStorage`):** `aff_theme` (temă), `aff_favs` (favorite), `aff_nasa_key` (cheia NASA, în clar, dacă o salvezi), `aff_auto_hero` (încărcare automată), `aff_last` (ultimul rezultat al cardurilor, ca text, max. 600 de caractere per card) și `aff_keep_last` (opțiunea de a-l păstra). Nu se folosesc cookie-uri, `sessionStorage` sau IndexedDB. Dacă stocarea este blocată (mod privat), aplicația funcționează fără ea.
 - **La deschidere se contactează automat 3 surse** (dacă nu dezactivezi încărcarea automată din Setări): `geocoding-api.open-meteo.com` și `api.open-meteo.com` (orașul din cardul „Vremea acum”, implicit București), `api.nasa.gov` (cheia ta sau `DEMO_KEY`; plus imaginea de pe `apod.nasa.gov`) și `api.wheretheiss.at`. Cu încărcarea automată oprită, la deschidere nu se trimite nicio cerere (testat).
 - **Toate celelalte carduri contactează sursa doar după ce apeși butonul** din card. Ce tastezi (oraș, nume, cod TVA, VIN, cod de bare, text pentru QR etc.) este trimis sursei respective; text pentru codul QR merge la `api.qrserver.com`.
 - Fiecare sursă contactată îți vede adresa IP. Cererile sunt trimise fără cookie-uri și fără antet Referer.
@@ -58,6 +60,9 @@ Descarcă `index.html` și deschide-l în browser. Interfața pornește fără i
 
 ## Istoric / Changelog
 
+### 11 octombrie 2026 (a doua trecere) — versiunea 1.0.2
+- Categorie nouă „Local · fără rețea” cu 5 utilitare care funcționează fără internet (generator de parole, UUID v4, hash, timp Unix, Base64); bară offline; ultimul rezultat salvat apare sub erorile de rețea (opțional, ștergibil); 52 de widgeturi în 16 categorii; CSP: hash recalculat (fără gazde noi).
+
 ### 11 octombrie 2026
 - Versiune 1.0.1 (afișată în „Despre stație”).
 - Accesibilitate: titlul „API fără frontiere” este acum `<h1>`, iar titlurile cardurilor sunt `<h2>` (ordine corectă a titlurilor); axe-core raportează 0 încălcări la 1280 și 360 px.
@@ -76,4 +81,4 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
 ## English summary
 
-API fără frontiere is a single-file HTML dashboard of 47 widgets over free public APIs (weather, space, art, books, currency, password breach check, etc.), with no account and no telemetry of its own. Unlike the offline apps in this series it needs internet to show data. Three widgets (weather, NASA picture, ISS) load automatically on open unless disabled in Settings; every other widget contacts its source only when you press its button, and each source sees your IP address. Data was tested against mocked responses only; third-party API availability and terms are not verified. License not yet declared.
+API fără frontiere is a single-file HTML dashboard of 52 widgets (47 over free public APIs plus 5 local tools that work offline) (weather, space, art, books, currency, password breach check, etc.), with no account and no telemetry of its own. Unlike the offline apps in this series it needs internet to show data. Three widgets (weather, NASA picture, ISS) load automatically on open unless disabled in Settings; every other widget contacts its source only when you press its button, and each source sees your IP address. Data was tested against mocked responses only; third-party API availability and terms are not verified. License not yet declared.

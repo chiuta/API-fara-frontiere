@@ -10,11 +10,11 @@
 <meta name="referrer" content="no-referrer">
 <meta property="og:type" content="website">
 <meta property="og:title" content="API fără frontiere — stație de recepție">
-<meta property="og:description" content="Un singur fișier HTML, 47 de widgeturi peste API-uri publice, fără cont, fără telemetrie proprie, fără server propriu.">
+<meta property="og:description" content="Un singur fișier HTML, 52 de widgeturi (47 peste API-uri publice, 5 locale, fără rețea), fără cont, fără telemetrie proprie, fără server propriu.">
 <meta property="og:url" content="https://chiuta.github.io/API-fara-frontiere/">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'none';
-  script-src 'self' 'sha256-8thBgQd9dpRT592as+nVSZNGCT2ZY13p69806BHniPg=';
+  script-src 'self' 'sha256-6jrLFHDr1euAUWV/W7XPAtgQO3bN3qpM3LGAcDTRVe8=';
   style-src 'self' 'unsafe-inline';
   base-uri 'none';
   form-action 'none';
@@ -278,6 +278,12 @@ main{ max-width:1400px; margin:0 auto; padding:6px 16px 60px; }
 .station-screen .row{ display:flex; justify-content:space-between; gap:10px; padding:2px 0; }
 .station-screen .label{ color:var(--text-faint); }
 .station-screen .err{ color:var(--red); }
+.station-screen .stale{ margin-top:8px; border-top:1px dashed var(--border-soft); padding-top:6px; }
+.station-screen .stale pre{ white-space:pre-wrap; word-break:break-word; font-family:var(--font-mono); font-size:.74rem; color:var(--text-muted); margin:4px 0 0; }
+.station-screen .copy{ margin-top:8px; }
+.local-opt{ display:flex; gap:8px; align-items:center; font-size:.78rem; color:var(--text-muted); }
+.offbar{ background:var(--panel-2); border-bottom:1px solid var(--amber); color:var(--text); padding:8px 16px; font-size:.82rem; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.offbar[hidden]{ display:none; }
 .station-screen img.result-img{ max-width:100%; border-radius:5px; display:block; margin-top:6px; }
 .station-screen .img-fail{ color:var(--text-faint); font-size:.75rem; margin-top:6px; }
 .station-screen a{ word-break:break-all; }
@@ -354,6 +360,8 @@ footer a{ color:var(--text-muted); }
   <nav class="chipbar" id="chipbar" aria-label="Filtrează după categorie"></nav>
 </header>
 
+<div class="offbar" id="offlineBar" role="status" hidden><span>Ești offline: cardurile care interogă o sursă online nu pot răspunde (afișează, unde există, ultimul rezultat salvat). Cardurile din categoria „Local · fără rețea” funcționează fără internet.</span><button class="btn ghost small" id="showLocalBtn" type="button">Arată cardurile locale</button></div>
+
 <main id="mainGrid" aria-label="Stații"></main>
 
 <footer>
@@ -376,7 +384,12 @@ footer a{ color:var(--text-muted); }
       <input type="checkbox" id="autoHeroInput" style="margin-top:3px;">
       <span>Încarcă automat la deschidere cele 3 stații principale (vreme, poza NASA, ISS). Dacă o dezactivezi, nu se contactează nicio sursă până nu apeși un buton. Se aplică la următoarea deschidere.</span>
     </label>
+    <label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0 12px;font-size:.8rem;color:var(--text-muted);font-family:var(--font-sans);">
+      <input type="checkbox" id="keepLastInput" style="margin-top:3px;">
+      <span>Păstrează local, ca text, ultimul rezultat al fiecărui card (se afișează sub eroare când ești offline). Nu se păstrează pentru „Parolă compromisă?”, „Adresa mea IP” și cardurile locale.</span>
+    </label>
     <div class="modal-actions">
+      <button class="btn ghost small" id="clearLastBtn" type="button">Șterge rezultatele salvate</button>
       <button class="btn ghost small" id="clearKeysBtn">Șterge cheile</button>
       <button class="btn small" id="saveKeysBtn">Salvează</button>
     </div>
@@ -392,7 +405,7 @@ footer a{ color:var(--text-muted); }
     <p><strong>De ce nu „toate” API-urile din repo?</strong> Marea majoritate a intrărilor din lista public-apis cer chei plătite, autentificare OAuth server-side sau nu permit CORS (adică nu pot fi apelate direct dintr-un browser fără server intermediar). Aici sunt doar API-uri care, după documentația lor, nu cer cont (sau cer cel mult o cheie gratuită) și permit apeluri din browser. Disponibilitatea și condițiile lor pot însă să se schimbe oricând; unele pot fi întrerupte, limitate sau neactualizate.</p>
     <p><strong>Ce înseamnă „fără frontiere” aici:</strong> zero telemetrie de-a mea, zero reclame, zero cont. Cererile tale merg direct la sursă (care îți vede adresa IP), iar fișierul nu folosește cookie-uri sau analitice. Sursele terțe pot totuși pica, se pot schimba sau își pot limita traficul — asta nu mai stă în puterea acestui fișier.</p>
     <p><strong>Extindere:</strong> fiecare stație e o intrare într-un registry JS (<code>widget({...})</code>). Adaugi o intrare nouă + domeniile ei (API și imagini) în CSP din &lt;head&gt; și apare automat în interfață, cu căutare și filtrare incluse.</p>
-    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0.1 · 11.10.2026</p>
+    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0.2 · 11.10.2026</p>
   </div>
 </div>
 
@@ -417,6 +430,8 @@ const LS = {
   theme: 'aff_theme',
   favs: 'aff_favs',
   autoHero: 'aff_auto_hero',
+  last: 'aff_last',
+  keepLast: 'aff_keep_last',
 };
 // localStorage poate lipsi sau arunca (mod privat, cookie-uri blocate) — aplicația merge și fără el
 function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
@@ -576,13 +591,51 @@ function showLoading(card, label){
   setDot(card, 'loading');
   showScreen(card, '<div class="skeleton" style="width:70%"></div><div class="skeleton" style="width:45%"></div>' + (label ? '<div style="color:var(--text-faint);font-family:var(--font-mono);font-size:.72rem;margin-top:6px;">'+esc(label)+'</div>' : ''));
 }
+/* Ultimul rezultat reușit al fiecărui card se păstrează ca TEXT (nu HTML), local, ca să poată fi văzut și offline.
+   Nu se păstrează pentru cardurile locale, „Parolă compromisă?” și „Adresa mea IP”; se poate opri/șterge din Setări. */
+const NO_CACHE = {'pwned-password':1, 'my-ip':1};
+function cacheLast(card){
+  try{
+    const id = card.dataset.id || '';
+    if(!id || id.indexOf('local-') === 0 || NO_CACHE[id] || lsGet(LS.keepLast) === '0') return;
+    const txt = ($('.station-screen', card).innerText || '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 600);
+    if(!txt) return;
+    const m = JSON.parse(lsGet(LS.last) || '{}');
+    m[id] = {t: txt, ts: Date.now()};
+    lsSet(LS.last, JSON.stringify(m));
+  }catch(e){}
+}
+function lastOf(card){
+  try{
+    if(lsGet(LS.keepLast) === '0') return null;
+    const m = JSON.parse(lsGet(LS.last) || '{}'), c = m[card.dataset.id || ''];
+    return (c && typeof c.t === 'string' && typeof c.ts === 'number') ? c : null;
+  }catch(e){ return null; }
+}
+function ageText(ts){
+  const min = Math.max(0, Math.round((Date.now() - ts) / 60000));
+  if(min < 1) return 'sub un minut';
+  if(min < 60) return min + ' min';
+  const h = Math.round(min / 60); if(h < 48) return h + ' h';
+  return Math.round(h / 24) + ' zile';
+}
 function showError(card, msg){
   setDot(card, 'error');
-  showScreen(card, '<div class="err">Semnal pierdut — ' + esc(msg||'sursa nu răspunde acum') + '. <button class="btn ghost small" data-retry>Reîncearcă</button></div>');
+  let stale = '';
+  if(/offline|rețea|timp de așteptare|^HTTP 5/.test(msg || '')){
+    const c = lastOf(card);
+    if(c) stale = '<div class="stale"><div class="label">ultimul rezultat salvat, de acum ' + esc(ageText(c.ts)) + ':</div><pre>' + esc(c.t) + '</pre></div>';
+  }
+  showScreen(card, '<div class="err">Semnal pierdut — ' + esc(msg||'sursa nu răspunde acum') + '. <button class="btn ghost small" data-retry>Reîncearcă</button></div>' + stale);
+}
+function localErr(card, msg){
+  setDot(card, 'error');
+  showScreen(card, '<div class="err">' + esc(msg) + '</div>');
 }
 function showOk(card, html){
   setDot(card, 'ok');
   showScreen(card, html);
+  cacheLast(card);
 }
 
 /* ============================================================
@@ -604,6 +657,7 @@ const CATEGORIES = [
   {id:'sanatate', label:'Sănătate',             icon:'⚕'},
   {id:'identitate', label:'Identitate & Test Data', icon:'🧬'},
   {id:'dev',      label:'Dezvoltare & Utilitare', icon:'🛠'},
+  {id:'local',    label:'Local · fără rețea',   icon:'📴'},
 ];
 
 /* ============================================================
@@ -1803,6 +1857,134 @@ widget({
 /* ============================================================
    RANDARE APLICAȚIE
    ============================================================ */
+/* ================= CATEGORIA: LOCAL · FĂRĂ REȚEA (nicio cerere; totul se calculează în browser) ================= */
+function copyBtnWire(screen, getText){
+  screen.addEventListener('click', e => {
+    const b = e.target.closest('[data-copy]'); if(!b) return;
+    const txt = getText(); if(!txt) return;
+    const done = () => { const o = b.textContent; b.textContent = 'Copiat ✓'; setTimeout(() => { b.textContent = o; }, 1200); };
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => {});
+  });
+}
+function randInt(max){ // rejection sampling: fără bias modulo
+  const lim = Math.floor(4294967296 / max) * max, a = new Uint32Array(1);
+  do { crypto.getRandomValues(a); } while(a[0] >= lim);
+  return a[0] % max;
+}
+widget({
+  id:'local-password', cat:'local', icon:'🎲',
+  title:'Generator de parole',
+  desc:'Parolă aleatoare cu crypto.getRandomValues (fără bias), cu entropia estimată. Nu pleacă nimic din browser.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="len" type="number" min="8" max="128" value="20" aria-label="lungime (8–128)"><label class="local-opt"><input type="checkbox" data-role="sym" checked> include simboluri</label><button class="btn" data-role="go">Generează</button>';
+    let cur = '';
+    const go = () => {
+      if(!(window.crypto && crypto.getRandomValues)){ localErr(card, 'Generatorul criptografic nu este disponibil în acest browser.'); return; }
+      const len = Math.max(8, Math.min(128, parseInt($('[data-role=len]', body).value, 10) || 20));
+      $('[data-role=len]', body).value = len;
+      let set = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      if($('[data-role=sym]', body).checked) set += '!@#$%^&*()-_=+[]{};:,.?';
+      let out = ''; for(let i = 0; i < len; i++) out += set.charAt(randInt(set.length));
+      cur = out;
+      const bits = Math.round(len * Math.log2(set.length));
+      setDot(card, 'ok');
+      showScreen(card, '<div class="big" style="font-size:1.05rem;word-break:break-all;">' + esc(out) + '</div><div class="row"><span class="label">entropie estimată</span><span>≈ ' + bits + ' biți</span></div><button class="btn ghost small copy" data-copy type="button">Copiază</button>');
+    };
+    copyBtnWire(screen, () => cur);
+    wireGo(body, screen, go);
+  }
+});
+widget({
+  id:'local-uuid', cat:'local', icon:'🆔',
+  title:'UUID v4',
+  desc:'Identificatori UUID versiunea 4, generați local (crypto), câte 5 odată.',
+  init(card, body, screen){
+    body.innerHTML = '<button class="btn" data-role="go">Generează</button>';
+    let cur = '';
+    const uuid = () => {
+      if(crypto.randomUUID) return crypto.randomUUID();
+      const b = new Uint8Array(16); crypto.getRandomValues(b); b[6] = (b[6] & 15) | 64; b[8] = (b[8] & 63) | 128;
+      const h = Array.from(b, x => x.toString(16).padStart(2, '0')).join('');
+      return h.slice(0,8) + '-' + h.slice(8,12) + '-' + h.slice(12,16) + '-' + h.slice(16,20) + '-' + h.slice(20);
+    };
+    const go = () => {
+      if(!(window.crypto && crypto.getRandomValues)){ localErr(card, 'Generatorul criptografic nu este disponibil în acest browser.'); return; }
+      const list = []; for(let i = 0; i < 5; i++) list.push(uuid());
+      cur = list.join('\n');
+      setDot(card, 'ok');
+      showScreen(card, '<div class="mono" style="word-break:break-all;">' + list.map(esc).join('<br>') + '</div><button class="btn ghost small copy" data-copy type="button">Copiază</button>');
+    };
+    copyBtnWire(screen, () => cur);
+    wireGo(body, screen, go);
+  }
+});
+widget({
+  id:'local-hash', cat:'local', icon:'#️⃣',
+  title:'Amprentă de text (hash)',
+  desc:'SHA-256, SHA-384, SHA-512 sau SHA-1 pentru un text, calculat local cu Web Crypto.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="text de transformat" autocomplete="off"><select class="inp" data-role="alg" aria-label="algoritm"><option>SHA-256</option><option>SHA-384</option><option>SHA-512</option><option>SHA-1</option></select><button class="btn" data-role="go">Calculează</button>';
+    let cur = '';
+    const go = async () => {
+      const alg = $('[data-role=alg]', body).value, txt = $('[data-role=q]', body).value;
+      if(!(window.crypto && crypto.subtle)){ localErr(card, 'Web Crypto (crypto.subtle) cere un context sigur (HTTPS sau localhost) și nu este disponibil aici.'); return; }
+      try{
+        const d = await crypto.subtle.digest(alg, new TextEncoder().encode(txt));
+        cur = Array.from(new Uint8Array(d), x => x.toString(16).padStart(2, '0')).join('');
+        setDot(card, 'ok');
+        showScreen(card, '<div class="row"><span class="label">' + esc(alg) + '</span><span>' + (new TextEncoder().encode(txt).length) + ' octeți</span></div><div class="mono" style="word-break:break-all;">' + esc(cur) + '</div><button class="btn ghost small copy" data-copy type="button">Copiază</button>');
+      }catch(e){ localErr(card, 'Calculul a eșuat: ' + e.message); }
+    };
+    copyBtnWire(screen, () => cur);
+    wireGo(body, screen, go);
+  }
+});
+widget({
+  id:'local-unix', cat:'local', icon:'⏱️',
+  title:'Timp Unix ↔ dată',
+  desc:'Convertește un timestamp Unix (secunde sau milisecunde) sau o dată ISO în UTC și ora locală. Gol = acum.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="ex: 1760000000 sau 2026-10-11T12:00:00Z" autocomplete="off"><button class="btn" data-role="go">Convertește</button>';
+    const go = () => {
+      const raw = $('[data-role=q]', body).value.trim();
+      let d;
+      if(!raw) d = new Date();
+      else if(/^-?\d{1,16}(\.\d+)?$/.test(raw)){ const n = Number(raw); d = new Date(Math.abs(n) >= 1e11 ? n : n * 1000); }
+      else d = new Date(raw);
+      if(isNaN(d.getTime())){ localErr(card, 'Valoare neînțeleasă. Folosește un număr (secunde/milisecunde) sau o dată ISO, ex. 2026-10-11T12:00:00Z.'); return; }
+      const ms = d.getTime();
+      setDot(card, 'ok');
+      showScreen(card, '<div class="row"><span class="label">UTC</span><span class="mono">' + esc(d.toISOString()) + '</span></div><div class="row"><span class="label">local</span><span class="mono">' + esc(d.toString().replace(/ \(.*\)$/, '')) + '</span></div><div class="row"><span class="label">secunde</span><span class="mono">' + Math.floor(ms / 1000) + '</span></div><div class="row"><span class="label">milisecunde</span><span class="mono">' + ms + '</span></div>');
+    };
+    wireGo(body, screen, go);
+  }
+});
+widget({
+  id:'local-base64', cat:'local', icon:'🔤',
+  title:'Base64 (UTF-8)',
+  desc:'Codifică sau decodifică text în Base64, cu suport pentru diacritice și emoji.',
+  init(card, body, screen){
+    body.innerHTML = '<input class="inp" data-role="q" placeholder="text sau Base64" autocomplete="off"><select class="inp" data-role="mode" aria-label="mod"><option value="enc">Codifică</option><option value="dec">Decodifică</option></select><button class="btn" data-role="go">Convertește</button>';
+    let cur = '';
+    const go = () => {
+      const txt = $('[data-role=q]', body).value, mode = $('[data-role=mode]', body).value;
+      try{
+        if(mode === 'enc'){
+          const bytes = new TextEncoder().encode(txt); let bin = ''; bytes.forEach(b => { bin += String.fromCharCode(b); });
+          cur = btoa(bin);
+        } else {
+          const bin = atob(txt.replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/'));
+          cur = new TextDecoder('utf-8', {fatal:true}).decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
+        }
+        setDot(card, 'ok');
+        showScreen(card, '<div class="mono" style="word-break:break-all;white-space:pre-wrap;">' + esc(cur) + '</div><button class="btn ghost small copy" data-copy type="button">Copiază</button>');
+      }catch(e){ localErr(card, mode === 'dec' ? 'Nu este Base64 valid (sau nu conține text UTF-8).' : 'Codificarea a eșuat.'); }
+    };
+    copyBtnWire(screen, () => cur);
+    wireGo(body, screen, go);
+  }
+});
+
 function buildChipbar(){
   const bar = $('#chipbar');
   const counts = {};
@@ -1966,16 +2148,23 @@ function initChrome(){
   $('#settingsBtn').addEventListener('click', () => {
     $('#nasaKeyInput').value = lsGet(LS.nasaKey) || '';
     $('#autoHeroInput').checked = lsGet(LS.autoHero) !== '0';
+    $('#keepLastInput').checked = lsGet(LS.keepLast) !== '0';
     openModal('#settingsModal');
   });
+  const offBar = $('#offlineBar');
+  const syncOnline = () => { offBar.hidden = navigator.onLine !== false; };
+  window.addEventListener('online', syncOnline); window.addEventListener('offline', syncOnline); syncOnline();
+  $('#showLocalBtn').addEventListener('click', () => { state.activeCat = 'local'; renderGrid(); buildChipbar(); $('#mainGrid').scrollIntoView(); });
   $('#aboutBtn').addEventListener('click', () => openModal('#aboutModal'));
   $('#attrLink').addEventListener('click', e => { e.preventDefault(); openModal('#attrModal'); });
   $('#saveKeysBtn').addEventListener('click', () => {
     const ok1 = lsSet(LS.nasaKey, $('#nasaKeyInput').value.trim());
     const ok2 = lsSet(LS.autoHero, $('#autoHeroInput').checked ? '1' : '0');
+    lsSet(LS.keepLast, $('#keepLastInput').checked ? '1' : '0'); if(!$('#keepLastInput').checked) lsDel(LS.last);
     closeModal('#settingsModal');
     if(!(ok1 && ok2)) alert('Setările nu au putut fi salvate (stocarea locală este blocată în acest browser).');
   });
+  $('#clearLastBtn').addEventListener('click', () => { lsDel(LS.last); $('#clearLastBtn').textContent = 'Șters ✓'; });
   $('#clearKeysBtn').addEventListener('click', () => {
     lsDel(LS.nasaKey); $('#nasaKeyInput').value = '';
   });
