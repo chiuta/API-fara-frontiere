@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://chiuta.github.io/API-fara-frontiere/">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'none';
-  script-src 'self' 'sha256-6jrLFHDr1euAUWV/W7XPAtgQO3bN3qpM3LGAcDTRVe8=';
+  script-src 'self' 'sha256-usGtrU5YweWcyuMcSeeUN779J2SV8t6UIb0xGXr6Xw0=';
   style-src 'self' 'unsafe-inline';
   base-uri 'none';
   form-action 'none';
@@ -335,6 +335,16 @@ footer a{ color:var(--text-muted); }
   .skeleton{ animation:none; }
   *{ scroll-behavior:auto !important; }
 }
+
+/* tipărire: doar stațiile, alb pe negru, fără comenzi */
+@media print{
+  html, body{ background:#fff !important; color:#000 !important; }
+  .topbar, .offbar, .chipbar, footer .manifest, button, input, select, textarea, .skeleton{ display:none !important; }
+  #mainGrid{ display:block !important; }
+  .station{ break-inside:avoid; margin:0 0 10px; border:1px solid #888 !important; background:#fff !important; box-shadow:none !important; }
+  .station *{ color:#000 !important; background:transparent !important; }
+  a{ text-decoration:underline; }
+}
 </style>
 </head>
 <body>
@@ -405,7 +415,7 @@ footer a{ color:var(--text-muted); }
     <p><strong>De ce nu „toate” API-urile din repo?</strong> Marea majoritate a intrărilor din lista public-apis cer chei plătite, autentificare OAuth server-side sau nu permit CORS (adică nu pot fi apelate direct dintr-un browser fără server intermediar). Aici sunt doar API-uri care, după documentația lor, nu cer cont (sau cer cel mult o cheie gratuită) și permit apeluri din browser. Disponibilitatea și condițiile lor pot însă să se schimbe oricând; unele pot fi întrerupte, limitate sau neactualizate.</p>
     <p><strong>Ce înseamnă „fără frontiere” aici:</strong> zero telemetrie de-a mea, zero reclame, zero cont. Cererile tale merg direct la sursă (care îți vede adresa IP), iar fișierul nu folosește cookie-uri sau analitice. Sursele terțe pot totuși pica, se pot schimba sau își pot limita traficul — asta nu mai stă în puterea acestui fișier.</p>
     <p><strong>Extindere:</strong> fiecare stație e o intrare într-un registry JS (<code>widget({...})</code>). Adaugi o intrare nouă + domeniile ei (API și imagini) în CSP din &lt;head&gt; și apare automat în interfață, cu căutare și filtrare incluse.</p>
-    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0.2 · 11.10.2026</p>
+    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0.3 · 11.10.2026</p>
   </div>
 </div>
 
@@ -668,7 +678,15 @@ const WIDGETS = [];
 function widget(def){ WIDGETS.push(def); }
 
 // Încărcarea automată (doar cele 3 stații „hero”) poate fi dezactivată din Setări
-function heroAuto(go){ if(lsGet(LS.autoHero) !== '0') go(); }
+/* Încărcarea automată nu pornește cât timp browserul raportează „offline” (fără erori roșii inutile);
+   cererile amânate rulează o singură dată, la reconectare. */
+const heroQueue = [];
+function heroAuto(go){
+  if(lsGet(LS.autoHero) === '0') return;
+  if(navigator.onLine === false){ heroQueue.push(go); return; }
+  go();
+}
+window.addEventListener('online', function(){ heroQueue.splice(0).forEach(function(g){ try{ g(); }catch(e){} }); });
 
 /* ---------- ajutoare comune: geocodare & coduri meteo ---------- */
 async function geocodeCity(name){

@@ -1,4 +1,4 @@
-# API fără frontiere — stație de recepție · v1.0.2
+# API fără frontiere — stație de recepție · v1.0.3
 
 Un singur fișier HTML cu 52 de widgeturi (47 peste API-uri publice — meteo, spațiu, artă, cărți, curs valutar, verificare parolă etc. — și 5 utilitare locale care merg offline), fără cont, fără telemetrie proprie, fără server propriu.
 
@@ -59,6 +59,9 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 Descarcă `index.html` și deschide-l în browser. Interfața pornește fără internet, dar cardurile afișează date doar cu conexiune la internet.
 
 ## Istoric / Changelog
+
+### 11 octombrie 2026 (a treia trecere) — versiunea 1.0.3
+- Încărcarea automată a celor 3 stații nu mai pornește cât timp browserul raportează „offline” (fără erori roșii inutile); cererile amânate rulează o singură dată la reconectare. Stil de tipărire (doar stațiile, fără comenzi). CSP: hash recalculat.
 
 ### 11 octombrie 2026 (a doua trecere) — versiunea 1.0.2
 - Categorie nouă „Local · fără rețea” cu 5 utilitare care funcționează fără internet (generator de parole, UUID v4, hash, timp Unix, Base64); bară offline; ultimul rezultat salvat apare sub erorile de rețea (opțional, ștergibil); 52 de widgeturi în 16 categorii; CSP: hash recalculat (fără gazde noi).
