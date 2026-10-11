@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://chiuta.github.io/API-fara-frontiere/">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'none';
-  script-src 'self' 'unsafe-inline';
+  script-src 'self' 'sha256-8thBgQd9dpRT592as+nVSZNGCT2ZY13p69806BHniPg=';
   style-src 'self' 'unsafe-inline';
   base-uri 'none';
   form-action 'none';
@@ -160,6 +160,7 @@ a{ color:var(--amber-text); }
   font-size:1.05rem; text-transform:uppercase; color:var(--text);
 }
 .brand-mark small{ color:var(--amber-text); }
+h1.brand-mark{ margin:0; }
 .brand-sub{
   font-family:var(--font-mono); font-size:.72rem; color:var(--text-faint);
   letter-spacing:.03em; display:none;
@@ -336,7 +337,7 @@ footer a{ color:var(--text-muted); }
 <header class="topbar">
   <div class="topbar-row">
     <div class="brand">
-      <span class="brand-mark">API <small>fără frontiere</small></span>
+      <h1 class="brand-mark">API <small>fără frontiere</small></h1>
       <span class="brand-sub">// stație de recepție</span>
     </div>
     <div class="wave-wrap" aria-hidden="true"><canvas id="waveform"></canvas></div>
@@ -391,7 +392,7 @@ footer a{ color:var(--text-muted); }
     <p><strong>De ce nu „toate” API-urile din repo?</strong> Marea majoritate a intrărilor din lista public-apis cer chei plătite, autentificare OAuth server-side sau nu permit CORS (adică nu pot fi apelate direct dintr-un browser fără server intermediar). Aici sunt doar API-uri care, după documentația lor, nu cer cont (sau cer cel mult o cheie gratuită) și permit apeluri din browser. Disponibilitatea și condițiile lor pot însă să se schimbe oricând; unele pot fi întrerupte, limitate sau neactualizate.</p>
     <p><strong>Ce înseamnă „fără frontiere” aici:</strong> zero telemetrie de-a mea, zero reclame, zero cont. Cererile tale merg direct la sursă (care îți vede adresa IP), iar fișierul nu folosește cookie-uri sau analitice. Sursele terțe pot totuși pica, se pot schimba sau își pot limita traficul — asta nu mai stă în puterea acestui fișier.</p>
     <p><strong>Extindere:</strong> fiecare stație e o intrare într-un registry JS (<code>widget({...})</code>). Adaugi o intrare nouă + domeniile ei (API și imagini) în CSP din &lt;head&gt; și apare automat în interfață, cu căutare și filtrare incluse.</p>
-    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0</p>
+    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0.1 · 11.10.2026</p>
   </div>
 </div>
 
@@ -400,6 +401,7 @@ footer a{ color:var(--text-muted); }
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="attrTitle">
     <button class="modal-close" data-close-modal aria-label="Închide">✕</button>
     <h2 id="attrTitle">Surse și atribuiri</h2>
+    <p><strong>Stare la 11 octombrie 2026:</strong> disponibilitatea, CORS-ul, formatul și limitele fiecărui API nu au putut fi reverificate la această dată (fără acces la rețea la verificare); stațiile marcate ca fragile (Open Notify, SpaceX-API, NumbersAPI, disease.sh, ipapi.co, CoinGecko) pot fi indisponibile sau neactualizate. Dacă un card afișează „Semnal pierdut”, sursa poate fi căzută.</p>
     <p>Datele afișate aparțin furnizorilor lor și sunt supuse condițiilor acestora; citește-le înainte de orice utilizare dincolo de simpla consultare. Lista nu este exhaustivă, iar licențele indicate sunt cele declarate public de furnizori, nu au fost verificate de autor la zi.</p>
     <p>Open-Meteo (meteo, calitatea aerului, geocodare; CC BY 4.0, gratuit pentru uz necomercial) · NASA APOD (imaginile pot avea drepturi de autor ale creatorilor — cardul afișează creditul când e furnizat) · wheretheiss.at · Open Notify · SpaceX-API (proiect comunitar, date posibil neactualizate) · Dog CEO · catfact.ninja · cataas.com · randomfox.ca · Art Institute of Chicago (domeniu public) · The Met Open Access · Open Library · Studio Ghibli API · TVmaze (CC BY-SA 4.0) · Rick and Morty API · PokéAPI · Deck of Cards API · iTunes Search API (Apple) · TheMealDB și TheCocktailDB (cheie de test publică) · Open Food Facts (ODbL / CC BY-SA) · Frankfurter (date BCE) · CoinGecko · VATComply / VIES · REST Countries · Nager.Date · dictionaryapi.dev · Wikipedia (CC BY-SA) · NumbersAPI · Open Trivia DB (CC BY-SA 4.0) · JokeAPI · chucknorris.io · Advice Slip · Have I Been Pwned — Pwned Passwords (CC BY 4.0) · openFDA · disease.sh · Genderize / Agify / Nationalize · RandomUser.me · GitHub API · Hacker News API · QR Server · NHTSA vPIC · Hipo Universities · ipapi.co.</p>
   </div>
@@ -1861,7 +1863,7 @@ function buildCard(def){
   head.append(
     ce('span', {class:'station-dot', 'data-state':'idle'}),
     ce('span', {class:'station-icon', html:def.icon}),
-    ce('h3', {class:'station-title', html:esc(def.title)})
+    ce('h2', {class:'station-title', html:esc(def.title)})
   );
   const fav = ce('button', {
     class:'fav-btn', 'aria-pressed': String(state.favs.has(def.id)), title:'Favorit (apare primul în categorie)', 'aria-label':'Favorit: ' + def.title,

@@ -1,8 +1,10 @@
-# API fără frontiere — stație de recepție
+# API fără frontiere — stație de recepție · v1.0.1
 
 Un singur fișier HTML cu 47 de widgeturi peste API-uri publice (meteo, spațiu, artă, cărți, curs valutar, verificare parolă etc.), fără cont, fără telemetrie proprie, fără server propriu.
 
 **Live:** https://chiuta.github.io/API-fara-frontiere/
+
+**Ultima actualizare:** 11 octombrie 2026
 
 ![Captura de ecran](screenshot.png)
 
@@ -38,7 +40,7 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 - **La deschidere se contactează automat 3 surse** (dacă nu dezactivezi încărcarea automată din Setări): `geocoding-api.open-meteo.com` și `api.open-meteo.com` (orașul din cardul „Vremea acum”, implicit București), `api.nasa.gov` (cheia ta sau `DEMO_KEY`; plus imaginea de pe `apod.nasa.gov`) și `api.wheretheiss.at`. Cu încărcarea automată oprită, la deschidere nu se trimite nicio cerere (testat).
 - **Toate celelalte carduri contactează sursa doar după ce apeși butonul** din card. Ce tastezi (oraș, nume, cod TVA, VIN, cod de bare, text pentru QR etc.) este trimis sursei respective; text pentru codul QR merge la `api.qrserver.com`.
 - Fiecare sursă contactată îți vede adresa IP. Cererile sunt trimise fără cookie-uri și fără antet Referer.
-- Pagina are un `Content-Security-Policy` (meta) cu listă de permisiuni pe domenii: `connect-src` conține exact gazdele apelate de cod (verificat prin inventar). Lista de imagini (`img-src`) include și gazde în care imaginile sunt indicate de răspunsurile API-urilor (de ex. `image.tmdb.org`, `*.archive.org`, `raw.githubusercontent.com`); acestea nu au putut fi confirmate fără rețea.
+- Pagina are un `Content-Security-Policy` (meta); scriptul propriu este permis prin hash SHA-256 (fără `'unsafe-inline'` în `script-src`), iar `connect-src` este o listă de domenii: `connect-src` conține exact gazdele apelate de cod (verificat prin inventar). Lista de imagini (`img-src`) include și gazde în care imaginile sunt indicate de răspunsurile API-urilor (de ex. `image.tmdb.org`, `*.archive.org`, `raw.githubusercontent.com`); acestea nu au putut fi confirmate fără rețea.
 - Gazde API: open-meteo (3 subdomenii), sunrise-sunset.org, nasa.gov, wheretheiss.at, open-notify.org, spacexdata.com, dog.ceo, catfact.ninja, randomfox.ca, artic.edu, metmuseum.org, openlibrary.org, ghibliapi.vercel.app, tvmaze.com, rickandmortyapi.com, pokeapi.co, deckofcardsapi.com, itunes.apple.com, themealdb.com, thecocktaildb.com, openfoodfacts.org, frankfurter.dev, coingecko.com, vatcomply.com, restcountries.com, date.nager.at, dictionaryapi.dev, ro/en.wikipedia.org, numbersapi.com, opentdb.com, jokeapi.dev, chucknorris.io, adviceslip.com, pwnedpasswords.com, api.fda.gov, disease.sh, genderize.io, agify.io, nationalize.io, randomuser.me, api.github.com, hacker-news.firebaseio.com, vpic.nhtsa.dot.gov, universities.hipolabs.com, ipapi.co.
 - Permisiuni de browser: niciuna.
 
@@ -53,6 +55,16 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 ## Rulare locală / offline
 
 Descarcă `index.html` și deschide-l în browser. Interfața pornește fără internet, dar cardurile afișează date doar cu conexiune la internet.
+
+## Istoric / Changelog
+
+### 11 octombrie 2026
+- Versiune 1.0.1 (afișată în „Despre stație”).
+- Accesibilitate: titlul „API fără frontiere” este acum `<h1>`, iar titlurile cardurilor sunt `<h2>` (ordine corectă a titlurilor); axe-core raportează 0 încălcări la 1280 și 360 px.
+- CSP: `script-src` folosește hash SHA-256 în loc de `'unsafe-inline'`.
+- Fereastra „Surse și atribuiri” notează explicit că disponibilitatea/formatul API-urilor nu au putut fi reverificate la 11 octombrie 2026 (fără acces la rețea); widgetul „Parolă compromisă?” a fost retestat cu răspuns simulat (funcționează).
+
+**Surse verificate la 11.10.2026:** niciuna: statusul API-urilor terțe (NumbersAPI, disease.sh, SpaceX-API, ipapi.co etc.) nu a putut fi confirmat de pe surse primare la 11.10.2026; lista rămâne cu avertismentul existent.
 
 ## Licență
 
