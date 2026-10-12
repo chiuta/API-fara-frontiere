@@ -2,6 +2,8 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
+<meta name="application-version" content="1.0.4">
+<meta name="last-updated" content="2026-10-12">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>API fără frontiere — stație de recepție</title>
 <meta name="description" content="Un singur fișier HTML, zeci de semnale din lumea largă: API-uri publice, fără cont, fără telemetrie, fără server propriu.">
@@ -415,7 +417,7 @@ footer a{ color:var(--text-muted); }
     <p><strong>De ce nu „toate” API-urile din repo?</strong> Marea majoritate a intrărilor din lista public-apis cer chei plătite, autentificare OAuth server-side sau nu permit CORS (adică nu pot fi apelate direct dintr-un browser fără server intermediar). Aici sunt doar API-uri care, după documentația lor, nu cer cont (sau cer cel mult o cheie gratuită) și permit apeluri din browser. Disponibilitatea și condițiile lor pot însă să se schimbe oricând; unele pot fi întrerupte, limitate sau neactualizate.</p>
     <p><strong>Ce înseamnă „fără frontiere” aici:</strong> zero telemetrie de-a mea, zero reclame, zero cont. Cererile tale merg direct la sursă (care îți vede adresa IP), iar fișierul nu folosește cookie-uri sau analitice. Sursele terțe pot totuși pica, se pot schimba sau își pot limita traficul — asta nu mai stă în puterea acestui fișier.</p>
     <p><strong>Extindere:</strong> fiecare stație e o intrare într-un registry JS (<code>widget({...})</code>). Adaugi o intrare nouă + domeniile ei (API și imagini) în CSP din &lt;head&gt; și apare automat în interfață, cu căutare și filtrare incluse.</p>
-    <p id="versionLine" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v1.0.3 · 11.10.2026</p>
+    <p id="app-version" class="mono" style="font-family:var(--font-mono); color:var(--text-faint);">v 1.0.4 · 2026-10-12</p>
   </div>
 </div>
 
