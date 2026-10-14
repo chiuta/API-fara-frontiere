@@ -1,0 +1,475 @@
+{
+  "schema": 1,
+  "slug": "api-fara-frontiere",
+  "name": "API fără frontiere — stație de recepție",
+  "version": "1.1.0",
+  "updated": "2026-10-14",
+  "description": "Un singur fișier HTML, zeci de semnale din lumea largă: API-uri publice, fără cont, fără telemetrie, fără server propriu.",
+  "egress": [
+    {
+      "host": "*.archive.org",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "*.mzstatic.com",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "air-quality-api.open-meteo.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.adviceslip.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.agify.io",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.artic.edu",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.chucknorris.io",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.coingecko.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.dictionaryapi.dev",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.fda.gov",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.frankfurter.dev",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.genderize.io",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.github.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.nasa.gov",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.nationalize.io",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.open-meteo.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.open-notify.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.pwnedpasswords.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.qrserver.com",
+      "via": [
+        "csp:img-src",
+        "img"
+      ]
+    },
+    {
+      "host": "api.spacexdata.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.sunrise-sunset.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.tvmaze.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.vatcomply.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.wheretheiss.at",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "apod.nasa.gov",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "archive.org",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "avatars.githubusercontent.com",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "cataas.com",
+      "via": [
+        "csp:img-src",
+        "img"
+      ]
+    },
+    {
+      "host": "catfact.ninja",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "collectionapi.metmuseum.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "covers.openlibrary.org",
+      "via": [
+        "csp:img-src",
+        "img"
+      ]
+    },
+    {
+      "host": "date.nager.at",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "deckofcardsapi.com",
+      "via": [
+        "csp:connect-src",
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "disease.sh",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "dog.ceo",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "en.wikipedia.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "flagcdn.com",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "geocoding-api.open-meteo.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "ghibliapi.vercel.app",
+      "via": [
+        "csp:connect-src",
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "hacker-news.firebaseio.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "image.tmdb.org",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "images-assets.nasa.gov",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "images.dog.ceo",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "images.metmuseum.org",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "images.openfoodfacts.org",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "ipapi.co",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "itunes.apple.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "numbersapi.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "openlibrary.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "opentdb.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "pokeapi.co",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "randomfox.ca",
+      "via": [
+        "csp:connect-src",
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "randomuser.me",
+      "via": [
+        "csp:connect-src",
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "raw.githubusercontent.com",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "restcountries.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "rickandmortyapi.com",
+      "via": [
+        "csp:connect-src",
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "ro.wikipedia.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "static.openfoodfacts.org",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "static.tvmaze.com",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "universities.hipolabs.com",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "upload.wikimedia.org",
+      "via": [
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "v2.jokeapi.dev",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "vpic.nhtsa.dot.gov",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "world.openfoodfacts.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "www.artic.edu",
+      "via": [
+        "csp:img-src",
+        "img"
+      ]
+    },
+    {
+      "host": "www.thecocktaildb.com",
+      "via": [
+        "csp:connect-src",
+        "csp:img-src"
+      ]
+    },
+    {
+      "host": "www.themealdb.com",
+      "via": [
+        "csp:connect-src",
+        "csp:img-src"
+      ]
+    }
+  ],
+  "permissions": [
+    "clipboard",
+    "serviceWorker",
+    "localStorage",
+    "Web Crypto"
+  ],
+  "storageKeys": [],
+  "sizeBytes": 218138,
+  "sha256": "9f4593935687979ee7a16d16f0c042f349f4b02e26e00b040228bdb2d103e762",
+  "csp": {
+    "present": true,
+    "directives": {
+      "default-src": "'none'",
+      "script-src": "'self' sha256×3",
+      "style-src": "'self' 'unsafe-inline'",
+      "base-uri": "'none'",
+      "form-action": "'none'",
+      "object-src": "'none'",
+      "manifest-src": "'self'",
+      "img-src": "'self' data: https://cataas.com https://images.dog.ceo https://www.artic.edu https://covers.openlibrary.org https://images.openfoodfacts.org https://static.openfoodfacts.org https://raw.githubusercontent.com https://avatars.githubusercontent.com https://api.qrserver.com https://ghibliapi.vercel.app https://image.tmdb.org https://randomfox.ca https://archive.org https://*.archive.org https://rickandmortyapi.com https://*.mzstatic.com https://static.tvmaze.com https://upload.wikimedia.org https://apod.nasa.gov https://images-assets.nasa.gov https://flagcdn.com https://randomuser.me https://www.themealdb.com https://www.thecocktaildb.com https://deckofcardsapi.com https://images.metmuseum.org",
+      "connect-src": "'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com https://air-quality-api.open-meteo.com https://api.sunrise-sunset.org https://api.nasa.gov https://api.wheretheiss.at https://api.open-notify.org https://api.spacexdata.com https://dog.ceo https://catfact.ninja https://randomfox.ca https://api.artic.edu https://collectionapi.metmuseum.org https://openlibrary.org https://ghibliapi.vercel.app https://api.tvmaze.com https://rickandmortyapi.com https://pokeapi.co https://deckofcardsapi.com https://itunes.apple.com https://www.themealdb.com https://www.thecocktaildb.com https://world.openfoodfacts.org https://api.frankfurter.dev https://api.coingecko.com https://api.vatcomply.com https://restcountries.com https://date.nager.at https://api.dictionaryapi.dev https://ro.wikipedia.org https://en.wikipedia.org https://numbersapi.com https://opentdb.com https://v2.jokeapi.dev https://api.chucknorris.io https://api.adviceslip.com https://api.pwnedpasswords.com https://api.fda.gov https://disease.sh https://api.genderize.io https://api.agify.io https://api.nationalize.io https://randomuser.me https://api.github.com https://hacker-news.firebaseio.com https://vpic.nhtsa.dot.gov https://universities.hipolabs.com https://ipapi.co",
+      "worker-src": "'self'"
+    },
+    "scriptInline": "hash",
+    "connect": "'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com https://air-quality-api.open-meteo.com https://api.sunrise-sunset.org https://api.nasa.gov https://api.wheretheiss.at https://api.open-notify.org https://api.spacexdata.com https://dog.ceo https://catfact.ninja https://randomfox.ca https://api.artic.edu https://collectionapi.metmuseum.org https://openlibrary.org https://ghibliapi.vercel.app https://api.tvmaze.com https://rickandmortyapi.com https://pokeapi.co https://deckofcardsapi.com https://itunes.apple.com https://www.themealdb.com https://www.thecocktaildb.com https://world.openfoodfacts.org https://api.frankfurter.dev https://api.coingecko.com https://api.vatcomply.com https://restcountries.com https://date.nager.at https://api.dictionaryapi.dev https://ro.wikipedia.org https://en.wikipedia.org https://numbersapi.com https://opentdb.com https://v2.jokeapi.dev https://api.chucknorris.io https://api.adviceslip.com https://api.pwnedpasswords.com https://api.fda.gov https://disease.sh https://api.genderize.io https://api.agify.io https://api.nationalize.io https://randomuser.me https://api.github.com https://hacker-news.firebaseio.com https://vpic.nhtsa.dot.gov https://universities.hipolabs.com https://ipapi.co"
+  },
+  "features": {
+    "export": true,
+    "import": true,
+    "i18n": [
+      "ro",
+      "en"
+    ],
+    "pwa": {
+      "manifest": true,
+      "serviceWorker": true
+    },
+    "modules": [
+      "core",
+      "label",
+      "bundle"
+    ]
+  },
+  "kit": {
+    "version": "1.0.0",
+    "modules": [
+      "core",
+      "label",
+      "bundle"
+    ]
+  },
+  "selfSerializing": false
+}

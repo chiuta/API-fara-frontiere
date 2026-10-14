@@ -1,6 +1,6 @@
 # API fără frontiere — stație de recepție · v1.0.4
 
-**Versiune:** 1.0.4 · **Ultima actualizare:** 12 octombrie 2026
+**Versiune:** 1.1.0 · **Ultima actualizare:** 14 octombrie 2026
 
 Un singur fișier HTML cu 52 de widgeturi (47 peste API-uri publice — meteo, spațiu, artă, cărți, curs valutar, verificare parolă etc. — și 5 utilitare locale care merg offline), fără cont, fără telemetrie proprie, fără server propriu.
 
@@ -59,6 +59,9 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 Descarcă `index.html` și deschide-l în browser. Interfața pornește fără internet, dar cardurile afișează date doar cu conexiune la internet.
 
 ## Istoric / Changelog
+
+### 1.1.0 — 2026-10-14
+- Copie de rezervă și etichetare date (fff-kit).
 
 ### 12 octombrie 2026 — versiunea 1.0.4
 - 1.0.4 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
