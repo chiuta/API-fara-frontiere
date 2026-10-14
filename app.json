@@ -427,8 +427,8 @@
     "Web Crypto"
   ],
   "storageKeys": [],
-  "sizeBytes": 218138,
-  "sha256": "9f4593935687979ee7a16d16f0c042f349f4b02e26e00b040228bdb2d103e762",
+  "sizeBytes": 218136,
+  "sha256": "a1fdf71563dffcf22ac45a7ff008401737451e30e26c827a2b8b6a15e5afcc6d",
   "csp": {
     "present": true,
     "directives": {
