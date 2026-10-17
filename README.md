@@ -82,7 +82,7 @@ Descarcă `index.html` și deschide-l în browser. Interfața pornește fără i
 
 ## Licență
 
-Licența nu este încă declarată.
+MIT — vezi fișierul LICENSE.
 
 ## Autor
 
@@ -90,4 +90,4 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
 ## English summary
 
-API fără frontiere is a single-file HTML dashboard of 52 widgets (47 over free public APIs plus 5 local tools that work offline) (weather, space, art, books, currency, password breach check, etc.), with no account and no telemetry of its own. Unlike the offline apps in this series it needs internet to show data. Three widgets (weather, NASA picture, ISS) load automatically on open unless disabled in Settings; every other widget contacts its source only when you press its button, and each source sees your IP address. Data was tested against mocked responses only; third-party API availability and terms are not verified. License not yet declared.
+API fără frontiere is a single-file HTML dashboard of 52 widgets (47 over free public APIs plus 5 local tools that work offline) (weather, space, art, books, currency, password breach check, etc.), with no account and no telemetry of its own. Unlike the offline apps in this series it needs internet to show data. Three widgets (weather, NASA picture, ISS) load automatically on open unless disabled in Settings; every other widget contacts its source only when you press its button, and each source sees your IP address. Data was tested against mocked responses only; third-party API availability and terms are not verified. Licence: MIT (see LICENSE).
