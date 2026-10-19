@@ -2,7 +2,9 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.1.0 · **Utolsó frissítés:** 2026-10-14
+**Verzió:** 1.2.0 · **Utolsó frissítés:** 2026-10-19
+
+A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Egyetlen HTML-fájl 52 widgettel (47 nyilvános API-ra épül — időjárás, világűr, művészet, könyvek, árfolyam, jelszóellenőrzés stb. — és 5 helyi segédprogram, amely offline is működik), fiók, saját telemetria és saját szerver nélkül.
 

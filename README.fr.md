@@ -2,7 +2,9 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.1.0 · **Dernière mise à jour :** 2026-10-14
+**Version :** 1.2.0 · **Dernière mise à jour :** 2026-10-19
+
+Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Un seul fichier HTML avec 52 widgets (47 sur des API publiques — météo, espace, art, livres, taux de change, vérification de mot de passe, etc. — et 5 utilitaires locaux qui fonctionnent hors ligne), sans compte, sans télémétrie propre, sans serveur propre.
 
