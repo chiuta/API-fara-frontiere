@@ -10,7 +10,7 @@ Un único archivo HTML con 52 widgets (47 sobre API públicas — tiempo, espaci
 
 **Aplicación en línea:** https://chiuta.github.io/API-fara-frontiere/
 
-![Captura de pantalla](screenshot.png)
+![Captura de pantalla](screenshot.es.png)
 
 ## Qué es
 

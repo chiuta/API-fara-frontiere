@@ -10,7 +10,7 @@ Egyetlen HTML-fájl 52 widgettel (47 nyilvános API-ra épül — időjárás, v
 
 **Online alkalmazás:** https://chiuta.github.io/API-fara-frontiere/
 
-![Képernyőkép](screenshot.png)
+![Képernyőkép](screenshot.hu.png)
 
 ## Mi ez
 

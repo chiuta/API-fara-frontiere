@@ -10,7 +10,7 @@ Eine einzige HTML-Datei mit 52 Widgets (47 über öffentliche APIs — Wetter, W
 
 **Live-App:** https://chiuta.github.io/API-fara-frontiere/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.de.png)
 
 ## Was es ist
 

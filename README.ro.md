@@ -10,7 +10,7 @@ Un singur fișier HTML cu 52 de widgeturi (47 peste API-uri publice — meteo, s
 
 **Live:** https://chiuta.github.io/API-fara-frontiere/
 
-![Captura de ecran](screenshot.png)
+![Captura de ecran](screenshot.ro.png)
 
 ## Ce este
 

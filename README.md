@@ -10,7 +10,7 @@ A single HTML file with 52 widgets (47 over public APIs — weather, space, art,
 
 **Live app:** https://chiuta.github.io/API-fara-frontiere/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.en.png)
 
 ## What it is
 

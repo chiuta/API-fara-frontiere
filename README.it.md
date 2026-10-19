@@ -10,7 +10,7 @@ Un unico file HTML con 52 widget (47 su API pubbliche — meteo, spazio, arte, l
 
 **App online:** https://chiuta.github.io/API-fara-frontiere/
 
-![Schermata](screenshot.png)
+![Schermata](screenshot.it.png)
 
 ## Che cos'è
 

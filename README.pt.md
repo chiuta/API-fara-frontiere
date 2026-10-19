@@ -10,7 +10,7 @@ Um único ficheiro HTML com 52 widgets (47 sobre APIs públicas — meteorologia
 
 **Aplicação online:** https://chiuta.github.io/API-fara-frontiere/
 
-![Captura de ecrã](screenshot.png)
+![Captura de ecrã](screenshot.pt.png)
 
 ## O que é
 
