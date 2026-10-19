@@ -1,4 +1,4 @@
-# API fără frontiere — stazione di ricezione · v1.0.4
+# API fără frontiere — stazione di ricezione · v1.1.0
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
