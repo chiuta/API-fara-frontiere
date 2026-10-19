@@ -1,93 +1,95 @@
-# API fără frontiere — stație de recepție · v1.0.4
+# API fără frontiere — receiving station · v1.0.4
 
-**Versiune:** 1.1.0 · **Ultima actualizare:** 14 octombrie 2026
+**English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-Un singur fișier HTML cu 52 de widgeturi (47 peste API-uri publice — meteo, spațiu, artă, cărți, curs valutar, verificare parolă etc. — și 5 utilitare locale care merg offline), fără cont, fără telemetrie proprie, fără server propriu.
+**Version:** 1.1.0 · **Last updated:** 2026-10-14
 
-**Live:** https://chiuta.github.io/API-fara-frontiere/
+A single HTML file with 52 widgets (47 over public APIs — weather, space, art, books, exchange rates, password check, etc. — and 5 local utilities that work offline), with no account, no telemetry of its own, and no server of its own.
 
-![Captura de ecran](screenshot.png)
+**Live app:** https://chiuta.github.io/API-fara-frontiere/
 
-## Ce este
+![Screenshot](screenshot.png)
 
-O pagină-index de „stații”: fiecare card interoghează direct, din browserul tău, un API public gratuit și afișează rezultatul. Nu există server intermediar al autorului. Spre deosebire de aplicațiile offline din aceeași serie, aceasta **are nevoie de internet** pentru a afișa date: fișierul în sine nu conține datele, ci doar interfața.
+## What it is
 
-Cele 52 de widgeturi sunt grupate în 16 categorii: Vreme & Mediu, Spațiu, Animale, Artă & Cultură, Divertisment, Muzică, Mâncare & Băutură, Finanțe & Cripto, Țări & Geografie, Cuvinte & Cunoaștere, Umor & Inspirație, Securitate, Sănătate, Identitate & Date test, Dezvoltare & Utilitare, Local · fără rețea.
+An index page of "stations": each card queries a free public API directly from your browser and displays the result. There is no intermediary server run by the author. Unlike the offline apps in the same series, this one **needs internet** to display data: the file itself does not contain the data, only the interface.
 
-## Funcții
+The 52 widgets are grouped into 16 categories: Weather & Environment, Space, Animals, Art & Culture, Entertainment, Music, Food & Drink, Finance & Crypto, Countries & Geography, Words & Knowledge, Humour & Inspiration, Security, Health, Identity & Test Data, Development & Utilities, Local · no network.
 
-Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut folosi rețeaua externă la verificare):
+## Features
 
-- 52 de carduri (47 online + 5 locale), cu căutare (fără diacritice), filtrare pe categorie și favorite (★, păstrate local).
-- Fiecare cerere are timeout de 12 s; la eșec cardul afișează cauza (rețea indisponibilă, timp depășit, HTTP nnn) și un buton „Reîncearcă”. Butonul de cerere este blocat cât timp o cerere e în curs; Enter în câmpuri declanșează cererea.
-- Datele primite de la API-uri sunt escapate înainte de afișare; legăturile externe sunt acceptate doar dacă sunt `http(s)`.
-- „Parolă compromisă?”: calculează local SHA-1 și trimite către Have I Been Pwned doar primele 5 caractere ale amprentei (k-anonimat); parola nu pleacă din browser.
-- **Local · fără rețea** (nicio cerere, merg offline): generator de parole (`crypto.getRandomValues`, fără bias, entropie estimată), UUID v4, hash de text (SHA-256/384/512/SHA-1, Web Crypto — cere context sigur), timp Unix ↔ dată, Base64 UTF-8; buton „Copiază”.
-- **Offline:** bară de avertizare când nu ai conexiune (cu scurtătură spre cardurile locale); la eroare de rețea/timeout, cardul arată sub eroare ultimul rezultat reușit, păstrat local ca text (opțional, dezactivabil și ștergibil din Setări; nu se păstrează pentru „Parolă compromisă?”, „Adresa mea IP” și cardurile locale).
-- Cheie NASA opțională (Setări ⚙), implicit `DEMO_KEY`.
-- Temă întunecată/luminoasă, Setări, „Surse și atribuiri”.
+Verified in the code and in automated tests with mocked responses (I could not use the external network during verification):
 
-## Manual de utilizare
+- 52 cards (47 online + 5 local), with search (diacritics-insensitive), filtering by category and favourites (★, kept locally).
+- Every request has a 12 s timeout; on failure the card displays the cause (network unavailable, timed out, HTTP nnn) and a "Retry" button. The request button is disabled while a request is in progress; Enter in the fields triggers the request.
+- Data received from the APIs is escaped before display; external links are accepted only if they are `http(s)`.
+- "Compromised password?": computes SHA-1 locally and sends only the first 5 characters of the hash to Have I Been Pwned (k-anonymity); the password never leaves the browser.
+- **Local · no network** (no requests, work offline): password generator (`crypto.getRandomValues`, bias-free, estimated entropy), UUID v4, text hash (SHA-256/384/512, SHA-1, Web Crypto — requires a secure context), Unix time ↔ date, Base64 UTF-8; "Copy" button.
+- **Offline:** a warning bar when you have no connection (with a shortcut to the local cards); on a network error/timeout, the card shows below the error the last successful result, kept locally as text (optional, can be disabled and deleted from Settings; it is not kept for "Compromised password?", "My IP address" and the local cards).
+- Optional NASA key (Settings ⚙), `DEMO_KEY` by default.
+- Dark/light theme, Settings, "Sources and attributions".
 
-1. Deschide pagina. Cele 3 stații principale (Vremea acum, Poza zilei NASA, ISS) se încarcă singure; poți opri asta din Setări ⚙ (se aplică la următoarea deschidere).
-2. Caută un card în câmpul de sus sau alege o categorie din bara de filtre.
-3. Completează câmpul cardului (oraș, nume, cod etc.), dacă există, și apasă **Recepționează** (sau Enter).
-4. Dacă apare „Semnal pierdut”, apasă **Reîncearcă** sau încearcă mai târziu: sursele terțe pot fi indisponibile sau pot limita traficul.
-5. Marchează cardurile preferate cu ★ ca să apară primele în categoria lor.
-6. În Setări ⚙ poți salva o cheie NASA proprie (gratuită, de la api.nasa.gov) și poți opri încărcarea automată; „Surse și atribuiri” listează furnizorii.
+## User guide
 
-## Confidențialitate și rețea
+1. Open the page. The 3 main stations (Weather now, NASA Picture of the Day, ISS) load by themselves; you can turn this off in Settings ⚙ (it applies on the next opening).
+2. Look for a card in the top field or choose a category from the filter bar.
+3. Fill in the card's field (city, name, code, etc.), if there is one, and press **Receive** (or Enter).
+4. If "Signal lost" appears, press **Retry** or try later: third-party sources may be unavailable or may rate-limit.
+5. Mark your favourite cards with ★ so they appear first in their category.
+6. In Settings ⚙ you can save your own NASA key (free, from api.nasa.gov) and turn off automatic loading; "Sources and attributions" lists the providers.
 
-- **Stocare locală (`localStorage`):** `aff_theme` (temă), `aff_favs` (favorite), `aff_nasa_key` (cheia NASA, în clar, dacă o salvezi), `aff_auto_hero` (încărcare automată), `aff_last` (ultimul rezultat al cardurilor, ca text, max. 600 de caractere per card) și `aff_keep_last` (opțiunea de a-l păstra). Nu se folosesc cookie-uri, `sessionStorage` sau IndexedDB. Dacă stocarea este blocată (mod privat), aplicația funcționează fără ea.
-- **La deschidere se contactează automat 3 surse** (dacă nu dezactivezi încărcarea automată din Setări): `geocoding-api.open-meteo.com` și `api.open-meteo.com` (orașul din cardul „Vremea acum”, implicit București), `api.nasa.gov` (cheia ta sau `DEMO_KEY`; plus imaginea de pe `apod.nasa.gov`) și `api.wheretheiss.at`. Cu încărcarea automată oprită, la deschidere nu se trimite nicio cerere (testat).
-- **Toate celelalte carduri contactează sursa doar după ce apeși butonul** din card. Ce tastezi (oraș, nume, cod TVA, VIN, cod de bare, text pentru QR etc.) este trimis sursei respective; text pentru codul QR merge la `api.qrserver.com`.
-- Fiecare sursă contactată îți vede adresa IP. Cererile sunt trimise fără cookie-uri și fără antet Referer.
-- Pagina are un `Content-Security-Policy` (meta); scriptul propriu este permis prin hash SHA-256 (fără `'unsafe-inline'` în `script-src`), iar `connect-src` este o listă de domenii: `connect-src` conține exact gazdele apelate de cod (verificat prin inventar). Lista de imagini (`img-src`) include și gazde în care imaginile sunt indicate de răspunsurile API-urilor (de ex. `image.tmdb.org`, `*.archive.org`, `raw.githubusercontent.com`); acestea nu au putut fi confirmate fără rețea.
-- Gazde API: open-meteo (3 subdomenii), sunrise-sunset.org, nasa.gov, wheretheiss.at, open-notify.org, spacexdata.com, dog.ceo, catfact.ninja, randomfox.ca, artic.edu, metmuseum.org, openlibrary.org, ghibliapi.vercel.app, tvmaze.com, rickandmortyapi.com, pokeapi.co, deckofcardsapi.com, itunes.apple.com, themealdb.com, thecocktaildb.com, openfoodfacts.org, frankfurter.dev, coingecko.com, vatcomply.com, restcountries.com, date.nager.at, dictionaryapi.dev, ro/en.wikipedia.org, numbersapi.com, opentdb.com, jokeapi.dev, chucknorris.io, adviceslip.com, pwnedpasswords.com, api.fda.gov, disease.sh, genderize.io, agify.io, nationalize.io, randomuser.me, api.github.com, hacker-news.firebaseio.com, vpic.nhtsa.dot.gov, universities.hipolabs.com, ipapi.co.
-- Permisiuni de browser: niciuna.
+## Privacy and network
 
-## Limite și avertismente
+- **Local storage (`localStorage`):** `aff_theme` (theme), `aff_favs` (favourites), `aff_nasa_key` (the NASA key, in clear text, if you save it), `aff_auto_hero` (automatic loading), `aff_last` (the last result of the cards, as text, max. 600 characters per card) and `aff_keep_last` (the option to keep it). No cookies, `sessionStorage` or IndexedDB are used. If storage is blocked (private mode), the app works without it.
+- **On opening, 3 sources are contacted automatically** (unless you turn off automatic loading in Settings): `geocoding-api.open-meteo.com` and `api.open-meteo.com` (the city in the "Weather now" card, Bucharest by default), `api.nasa.gov` (your key or `DEMO_KEY`; plus the image from `apod.nasa.gov`) and `api.wheretheiss.at`. With automatic loading turned off, no request is sent on opening (tested).
+- **All the other cards contact their source only after you press the button** in the card. What you type (city, name, VAT number, VIN, barcode, text for the QR code, etc.) is sent to that source; text for the QR code goes to `api.qrserver.com`.
+- Every source contacted sees your IP address. Requests are sent without cookies and without a Referer header.
+- The page has a `Content-Security-Policy` (meta); the app's own script is allowed via a SHA-256 hash (no `'unsafe-inline'` in `script-src`), and `connect-src` is a list of domains: `connect-src` contains exactly the hosts called by the code (verified by inventory). The image list (`img-src`) also includes hosts where images are indicated by the API responses (e.g. `image.tmdb.org`, `*.archive.org`, `raw.githubusercontent.com`); these could not be confirmed without network access.
+- API hosts: open-meteo (3 subdomains), sunrise-sunset.org, nasa.gov, wheretheiss.at, open-notify.org, spacexdata.com, dog.ceo, catfact.ninja, randomfox.ca, artic.edu, metmuseum.org, openlibrary.org, ghibliapi.vercel.app, tvmaze.com, rickandmortyapi.com, pokeapi.co, deckofcardsapi.com, itunes.apple.com, themealdb.com, thecocktaildb.com, openfoodfacts.org, frankfurter.dev, coingecko.com, vatcomply.com, restcountries.com, date.nager.at, dictionaryapi.dev, ro/en.wikipedia.org, numbersapi.com, opentdb.com, jokeapi.dev, chucknorris.io, adviceslip.com, pwnedpasswords.com, api.fda.gov, disease.sh, genderize.io, agify.io, nationalize.io, randomuser.me, api.github.com, hacker-news.firebaseio.com, vpic.nhtsa.dot.gov, universities.hipolabs.com, ipapi.co.
+- Browser permissions: none.
 
-- Aplicația nu are control asupra API-urilor: pot pica, își pot schimba formatul, limita cererile sau pot returna date vechi. Nu am putut verifica din mediul de testare disponibilitatea, CORS-ul, cheile sau limitele actuale ale niciunuia dintre ele; condițiile fiecărui furnizor trebuie consultate direct la sursă. Cunoscut ca fragil/neverificat: Open Notify (doar HTTP/HTTPS nesigur), SpaceX-API (date comunitare, posibil neactualizate), NumbersAPI, disease.sh (arhivă), CoinGecko și ipapi.co (limite pentru acces fără cheie), TheMealDB/TheCocktailDB (cheie publică de test).
-- Datele din widgeturi sunt informative. **Etichetă medicament (FDA):** text în engleză, doar pentru produse din SUA; nu e sfat medical, nu înlocuiește medicul sau farmacistul. **Curs valutar, criptomonede, TVA:** nu sunt sfat financiar sau confirmare oficială. **Predicție din prenume:** estimare statistică, adesea greșită; nu o folosi pentru decizii despre persoane.
-- Imaginile de la NASA, muzei, TVmaze etc. pot avea drepturi de autor sau licențe proprii; cardul NASA afișează creditul când este furnizat. Vezi „Surse și atribuiri” în aplicație.
-- Widgetul „Fapt Chuck Norris” afișează glume absurde preluate dintr-un API terț (se evită categoria „explicit”, filtrarea nu e garantată).
-- Verificat cu răspunsuri simulate, nu cu serverele reale.
+## Limits and warnings
 
-## Rulare locală / offline
+- The app has no control over the APIs: they may go down, change their format, rate-limit or return stale data. I could not verify from the test environment the availability, CORS, keys or current limits of any of them; each provider's terms must be consulted directly at the source. Known to be fragile/unverified: Open Notify (HTTP only, insecure), SpaceX-API (community data, possibly out of date), NumbersAPI, disease.sh (archive), CoinGecko and ipapi.co (limits for keyless access), TheMealDB/TheCocktailDB (public test key).
+- The data in the widgets is informational. **Drug label (FDA):** text in English, only for US products; it is not medical advice and does not replace the doctor or pharmacist. **Exchange rate, cryptocurrencies, VAT:** not financial advice or official confirmation. **Prediction from a first name:** a statistical estimate, often wrong; do not use it for decisions about people.
+- Images from NASA, museums, TVmaze, etc. may be subject to copyright or their own licences; the NASA card displays the credit when provided. See "Sources and attributions" in the app.
+- The "Chuck Norris Fact" widget displays absurd jokes taken from a third-party API (the "explicit" category is avoided, filtering is not guaranteed).
+- Verified with mocked responses, not with the real servers.
 
-Descarcă `index.html` și deschide-l în browser. Interfața pornește fără internet, dar cardurile afișează date doar cu conexiune la internet.
+## Running locally / offline
 
-## Istoric / Changelog
+Download `index.html` and open it in a browser. The interface starts without internet, but the cards display data only with an internet connection.
+
+## History / Changelog
 
 ### 1.1.0 — 2026-10-14
-- Copie de rezervă și etichetare date (fff-kit).
+- Backup and data labelling (fff-kit).
 
-### 12 octombrie 2026 — versiunea 1.0.4
-- 1.0.4 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
+### 12 October 2026 — version 1.0.4
+- 1.0.4 — 2026-10-12: the version and the date of the last update are displayed in the app
 
-### 11 octombrie 2026 (a treia trecere) — versiunea 1.0.3
-- Încărcarea automată a celor 3 stații nu mai pornește cât timp browserul raportează „offline” (fără erori roșii inutile); cererile amânate rulează o singură dată la reconectare. Stil de tipărire (doar stațiile, fără comenzi). CSP: hash recalculat.
+### 11 October 2026 (third pass) — version 1.0.3
+- Automatic loading of the 3 stations no longer starts while the browser reports "offline" (no needless red errors); deferred requests run once on reconnection. Print style (only the stations, no controls). CSP: hash recalculated.
 
-### 11 octombrie 2026 (a doua trecere) — versiunea 1.0.2
-- Categorie nouă „Local · fără rețea” cu 5 utilitare care funcționează fără internet (generator de parole, UUID v4, hash, timp Unix, Base64); bară offline; ultimul rezultat salvat apare sub erorile de rețea (opțional, ștergibil); 52 de widgeturi în 16 categorii; CSP: hash recalculat (fără gazde noi).
+### 11 October 2026 (second pass) — version 1.0.2
+- New category "Local · no network" with 5 utilities that work without internet (password generator, UUID v4, hash, Unix time, Base64); offline bar; the last saved result appears below network errors (optional, deletable); 52 widgets in 16 categories; CSP: hash recalculated (no new hosts).
 
-### 11 octombrie 2026
-- Versiune 1.0.1 (afișată în „Despre stație”).
-- Accesibilitate: titlul „API fără frontiere” este acum `<h1>`, iar titlurile cardurilor sunt `<h2>` (ordine corectă a titlurilor); axe-core raportează 0 încălcări la 1280 și 360 px.
-- CSP: `script-src` folosește hash SHA-256 în loc de `'unsafe-inline'`.
-- Fereastra „Surse și atribuiri” notează explicit că disponibilitatea/formatul API-urilor nu au putut fi reverificate la 11 octombrie 2026 (fără acces la rețea); widgetul „Parolă compromisă?” a fost retestat cu răspuns simulat (funcționează).
+### 11 October 2026
+- Version 1.0.1 (displayed in "About the station").
+- Accessibility: the title "API fără frontiere" is now an `<h1>`, and the card titles are `<h2>` (correct heading order); axe-core reports 0 violations at 1280 and 360 px.
+- CSP: `script-src` uses a SHA-256 hash instead of `'unsafe-inline'`.
+- The "Sources and attributions" window explicitly notes that the availability/format of the APIs could not be re-verified on 11 October 2026 (no network access); the "Compromised password?" widget was retested with a mocked response (it works).
 
-**Surse verificate la 11.10.2026:** niciuna: statusul API-urilor terțe (NumbersAPI, disease.sh, SpaceX-API, ipapi.co etc.) nu a putut fi confirmat de pe surse primare la 11.10.2026; lista rămâne cu avertismentul existent.
+**Sources verified on 11.10.2026:** none: the status of third-party APIs (NumbersAPI, disease.sh, SpaceX-API, ipapi.co, etc.) could not be confirmed from primary sources on 11.10.2026; the list keeps the existing warning.
 
-## Licență
+## License
 
-MIT — vezi fișierul LICENSE.
+MIT — see the LICENSE file.
 
-## Autor
+## Author
 
 Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
-## English summary
+## Summary
 
 API fără frontiere is a single-file HTML dashboard of 52 widgets (47 over free public APIs plus 5 local tools that work offline) (weather, space, art, books, currency, password breach check, etc.), with no account and no telemetry of its own. Unlike the offline apps in this series it needs internet to show data. Three widgets (weather, NASA picture, ISS) load automatically on open unless disabled in Settings; every other widget contacts its source only when you press its button, and each source sees your IP address. Data was tested against mocked responses only; third-party API availability and terms are not verified. Licence: MIT (see LICENSE).
