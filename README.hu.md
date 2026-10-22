@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.2.0 · **Utolsó frissítés:** 2026-10-19
+**Verzió:** 1.2.1 · **Utolsó frissítés:** 2026-10-22
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -63,6 +63,9 @@ A kódban és automatizált tesztekben, szimulált válaszokkal ellenőrizve (az
 Töltsd le az `index.html` fájlt, és nyisd meg a böngészőben. A felület internet nélkül elindul, de a kártyák csak internetkapcsolattal jelenítenek meg adatokat.
 
 ## Előzmények / Changelog
+
+### 1.2.1 — 2026-10-22
+- Az oldal címe (document.title) mostantól a felület nyelvét követi, nem marad meg a román utótag.
 
 ### 1.1.0 — 2026-10-14
 - Biztonsági mentés és adatcímkézés (fff-kit).

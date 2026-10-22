@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.2.0 · **Ultima actualizare:** 2026-10-19
+**Versiune:** 1.2.1 · **Ultima actualizare:** 2026-10-22
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -63,6 +63,9 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 Descarcă `index.html` și deschide-l în browser. Interfața pornește fără internet, dar cardurile afișează date doar cu conexiune la internet.
 
 ## Istoric / Changelog
+
+### 1.2.1 — 2026-10-22
+- Titlul paginii (document.title) urmează acum limba interfeței, nu mai păstrează sufixul românesc.
 
 ### 1.1.0 — 2026-10-14
 - Copie de rezervă și etichetare date (fff-kit).

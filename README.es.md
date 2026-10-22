@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.0 · **Última actualización:** 2026-10-19
+**Versión:** 1.2.1 · **Última actualización:** 2026-10-22
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -63,6 +63,9 @@ Verificadas en el código y en pruebas automáticas con respuestas simuladas (no
 Descarga `index.html` y ábrelo en el navegador. La interfaz arranca sin internet, pero las tarjetas solo muestran datos con conexión a internet.
 
 ## Historial / Changelog
+
+### 1.2.1 — 2026-10-22
+- El título de la página (document.title) ahora sigue el idioma de la interfaz en lugar de conservar el sufijo rumano.
 
 ### 1.1.0 — 2026-10-14
 - Copia de seguridad y etiquetado de datos (fff-kit).
