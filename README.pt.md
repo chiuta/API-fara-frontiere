@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 1.2.2 · **Última atualização:** 2026-10-22
+**Versão:** 1.2.3 · **Última atualização:** 2026-10-22
 
 Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -63,6 +63,9 @@ Verificadas no código e em testes automáticos com respostas simuladas (não pu
 Transfira `index.html` e abra-o no navegador. A interface arranca sem internet, mas os cartões só apresentam dados com ligação à internet.
 
 ## Histórico / Changelog
+
+### 1.2.3 — 2026-10-22
+- fff-kit 1.1.2: PBKDF2 600 000 iterações, proteção anti-clickjacking
 
 ### 1.2.1 — 2026-10-22
 - O título da página (document.title) acompanha agora o idioma da interface, em vez de manter o sufixo romeno.
