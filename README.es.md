@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.3 · **Última actualización:** 2026-10-22
+**Versión:** 1.2.4 · **Última actualización:** 2026-10-22
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -63,6 +63,9 @@ Verificadas en el código y en pruebas automáticas con respuestas simuladas (no
 Descarga `index.html` y ábrelo en el navegador. La interfaz arranca sin internet, pero las tarjetas solo muestran datos con conexión a internet.
 
 ## Historial / Changelog
+
+### 1.2.4 — 2026-10-22
+- fff-kit 1.1.4: objetivos táctiles y tamaño mínimo de texto
 
 ### 1.2.3 — 2026-10-22
 - fff-kit 1.1.2: PBKDF2 600 000 iteraciones, protección anti-clickjacking

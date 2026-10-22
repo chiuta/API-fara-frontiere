@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 1.2.3 · **Zuletzt aktualisiert:** 2026-10-22
+**Version:** 1.2.4 · **Zuletzt aktualisiert:** 2026-10-22
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -63,6 +63,9 @@ Im Code und in automatisierten Tests mit simulierten Antworten geprüft (bei der
 Lade `index.html` herunter und öffne sie im Browser. Die Oberfläche startet ohne Internet, aber die Karten zeigen Daten nur mit Internetverbindung an.
 
 ## Verlauf / Changelog
+
+### 1.2.4 — 2026-10-22
+- fff-kit 1.1.4: Touch-Ziele und Mindestschriftgröße
 
 ### 1.2.3 — 2026-10-22
 - fff-kit 1.1.2: PBKDF2 mit 600.000 Iterationen, Schutz vor Clickjacking
