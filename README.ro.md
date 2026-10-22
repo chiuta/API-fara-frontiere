@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.2.1 · **Ultima actualizare:** 2026-10-22
+**Versiune:** 1.2.2 · **Ultima actualizare:** 2026-10-22
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -71,6 +71,8 @@ Descarcă `index.html` și deschide-l în browser. Interfața pornește fără i
 - Copie de rezervă și etichetare date (fff-kit).
 
 ### 12 octombrie 2026 — versiunea 1.0.4
+- 1.2.2 — 2026-10-22: Banner de consimțământ înainte ca stațiile din prima pagină (NASA APOD, ISS, vremea) să contacteze terți (până la acceptare nu se face nicio cerere); NASA APOD în cache pe zi; indiciul DEMO_KEY apare doar când se folosește DEMO_KEY; alert() nativ înlocuit cu notificare în pagină; text ≥ 12 px, ținte mai mari și fără depășire orizontală la 360 px.
+
 - 1.0.4 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
 
 ### 11 octombrie 2026 (a treia trecere) — versiunea 1.0.3

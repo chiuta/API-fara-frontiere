@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.2.1 · **Last updated:** 2026-10-22
+**Version:** 1.2.2 · **Last updated:** 2026-10-22
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -71,6 +71,8 @@ Download `index.html` and open it in a browser. The interface starts without int
 - Backup and data labelling (fff-kit).
 
 ### 12 October 2026 — version 1.0.4
+- 1.2.2 — 2026-10-22: Consent banner before the front-page stations (NASA APOD, ISS, weather) contact third parties (until accepted, nothing is requested); NASA APOD cached per day; DEMO_KEY hint only when DEMO_KEY is in use; native alert() replaced by an in-page notice; text ≥ 12 px, larger targets and no horizontal overflow at 360 px.
+
 - 1.0.4 — 2026-10-12: the version and the date of the last update are displayed in the app
 
 ### 11 October 2026 (third pass) — version 1.0.3

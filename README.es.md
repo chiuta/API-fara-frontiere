@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.1 · **Última actualización:** 2026-10-22
+**Versión:** 1.2.2 · **Última actualización:** 2026-10-22
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -71,6 +71,8 @@ Descarga `index.html` y ábrelo en el navegador. La interfaz arranca sin interne
 - Copia de seguridad y etiquetado de datos (fff-kit).
 
 ### 12 de octubre de 2026 — versión 1.0.4
+- 1.2.2 — 2026-10-22: Banner de consentimiento antes de que las estaciones de la página principal (NASA APOD, ISS, tiempo) contacten con terceros (hasta aceptar no se hace ninguna petición); NASA APOD en caché por día; la pista de DEMO_KEY solo aparece si se usa DEMO_KEY; alert() nativo sustituido por un aviso en la página; texto ≥ 12 px, objetivos mayores y sin desbordamiento horizontal a 360 px.
+
 - 1.0.4 — 2026-10-12: la versión y la fecha de la última actualización se muestran en la aplicación
 
 ### 11 de octubre de 2026 (tercera pasada) — versión 1.0.3

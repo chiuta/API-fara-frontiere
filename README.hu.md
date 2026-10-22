@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.2.1 · **Utolsó frissítés:** 2026-10-22
+**Verzió:** 1.2.2 · **Utolsó frissítés:** 2026-10-22
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -71,6 +71,8 @@ Töltsd le az `index.html` fájlt, és nyisd meg a böngészőben. A felület in
 - Biztonsági mentés és adatcímkézés (fff-kit).
 
 ### 2026. október 12. — 1.0.4 verzió
+- 1.2.2 — 2026-10-22: Hozzájárulási sáv, mielőtt a kezdőlap állomásai (NASA APOD, ISS, időjárás) harmadik felet keresnének meg (elfogadásig nem indul kérés); a NASA APOD naponta gyorsítótárazva; a DEMO_KEY-tipp csak DEMO_KEY használatakor jelenik meg; a natív alert() oldalon belüli értesítésre cserélve; szöveg ≥ 12 px, nagyobb érintési célok és nincs vízszintes túlcsordulás 360 px-en.
+
 - 1.0.4 — 2026-10-12: a verzió és az utolsó frissítés dátuma megjelenik az alkalmazásban
 
 ### 2026. október 11. (harmadik menet) — 1.0.3 verzió

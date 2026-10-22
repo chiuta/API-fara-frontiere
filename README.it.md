@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 1.2.1 · **Ultimo aggiornamento:** 2026-10-22
+**Versione:** 1.2.2 · **Ultimo aggiornamento:** 2026-10-22
 
 Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -71,6 +71,8 @@ Scarica `index.html` e aprilo nel browser. L'interfaccia si avvia senza internet
 - Copia di riserva ed etichettatura dei dati (fff-kit).
 
 ### 12 ottobre 2026 — versione 1.0.4
+- 1.2.2 — 2026-10-22: Banner di consenso prima che le stazioni della prima pagina (NASA APOD, ISS, meteo) contattino terzi (finché non si accetta non parte alcuna richiesta); NASA APOD in cache per giorno; il suggerimento DEMO_KEY compare solo se si usa DEMO_KEY; alert() nativo sostituito da una notifica nella pagina; testo ≥ 12 px, target più grandi e nessun overflow orizzontale a 360 px.
+
 - 1.0.4 — 2026-10-12: la versione e la data dell'ultimo aggiornamento sono mostrate nell'app
 
 ### 11 ottobre 2026 (terzo passaggio) — versione 1.0.3

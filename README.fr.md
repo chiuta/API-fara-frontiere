@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.2.1 · **Dernière mise à jour :** 2026-10-22
+**Version :** 1.2.2 · **Dernière mise à jour :** 2026-10-22
 
 Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -71,6 +71,8 @@ Téléchargez `index.html` et ouvrez-le dans un navigateur. L'interface démarre
 - Sauvegarde et étiquetage des données (fff-kit).
 
 ### 12 octobre 2026 — version 1.0.4
+- 1.2.2 — 2026-10-22 : Bannière de consentement avant que les stations de la page d'accueil (NASA APOD, ISS, météo) ne contactent des tiers (aucune requête avant acceptation) ; NASA APOD mis en cache par jour ; l'indice DEMO_KEY n'apparaît que si DEMO_KEY est utilisée ; alert() natif remplacé par une notification dans la page ; texte ≥ 12 px, cibles plus grandes et sans débordement horizontal à 360 px.
+
 - 1.0.4 — 2026-10-12 : la version et la date de la dernière mise à jour sont affichées dans l'application
 
 ### 11 octobre 2026 (troisième passage) — version 1.0.3

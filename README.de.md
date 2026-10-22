@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 1.2.1 · **Zuletzt aktualisiert:** 2026-10-22
+**Version:** 1.2.2 · **Zuletzt aktualisiert:** 2026-10-22
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -71,6 +71,8 @@ Lade `index.html` herunter und öffne sie im Browser. Die Oberfläche startet oh
 - Datensicherung und Datenkennzeichnung (fff-kit).
 
 ### 12. Oktober 2026 — Version 1.0.4
+- 1.2.2 — 2026-10-22: Einwilligungsbanner, bevor die Stationen der Startseite (NASA APOD, ISS, Wetter) Dritte kontaktieren (bis zur Zustimmung wird nichts angefragt); NASA APOD pro Tag zwischengespeichert; der DEMO_KEY-Hinweis erscheint nur, wenn DEMO_KEY verwendet wird; natives alert() durch eine Seitenmeldung ersetzt; Text ≥ 12 px, größere Ziele und kein horizontaler Überlauf bei 360 px.
+
 - 1.0.4 — 2026-10-12: Die Version und das Datum der letzten Aktualisierung werden in der App angezeigt
 
 ### 11. Oktober 2026 (dritter Durchgang) — Version 1.0.3
