@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.2.5 · **Last updated:** 2026-10-23
+**Version:** 1.2.6 · **Last updated:** 2026-10-23
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -63,6 +63,12 @@ Verified in the code and in automated tests with mocked responses (I could not u
 Download `index.html` and open it in a browser. The interface starts without internet, but the cards display data only with an internet connection.
 
 ## History / Changelog
+
+### 1.2.6 — 2026-10-23
+- Fix: a deleted Hacker News item (returned as `null`) made the whole list fail; it is now skipped
+- Hardening: geocoding coordinates must be numbers before they go into the next request URL
+- Touch targets: 44 px on touch screens for buttons, fields, chips and ☆
+- New: `tests/r10-audit.test.mjs`
 
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4: touch targets and minimum text size
