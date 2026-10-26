@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.2.6 · **Dernière mise à jour :** 2026-10-26
+**Version :** 2.0.0 · **Dernière mise à jour :** 2026-10-26
 
 Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ Les 52 widgets sont regroupés en 16 catégories : Météo & Environnement, Espa
 
 Vérifiées dans le code et par des tests automatisés avec des réponses simulées (je n'ai pas pu utiliser le réseau externe lors de la vérification) :
 
+- **Nouveau en 2.0.0 — Laboratoire de requêtes (bouton ⚗) :** collections GET locales, environnements à variables, assertions sur la réponse, exécution en chaîne, comparaison avec l'exécution précédente, import/export JSON et cURL ; uniquement les hôtes déjà autorisés par la CSP.
 - 52 cartes (47 en ligne + 5 locales), avec recherche (insensible aux diacritiques), filtrage par catégorie et favoris (★, conservés localement).
 - Chaque requête a un délai d'attente de 12 s ; en cas d'échec, la carte affiche la cause (réseau indisponible, délai dépassé, HTTP nnn) et un bouton « Réessayer ». Le bouton de requête est bloqué pendant qu'une requête est en cours ; Entrée dans les champs déclenche la requête.
 - Les données reçues des API sont échappées avant l'affichage ; les liens externes ne sont acceptés que s'ils sont en `http(s)`.

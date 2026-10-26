@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 1.2.6 · **Zuletzt aktualisiert:** 2026-10-26
+**Version:** 2.0.0 · **Zuletzt aktualisiert:** 2026-10-26
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ Die 52 Widgets sind in 16 Kategorien gruppiert: Wetter & Umwelt, Weltraum, Tiere
 
 Im Code und in automatisierten Tests mit simulierten Antworten geprüft (bei der Prüfung konnte ich das externe Netzwerk nicht nutzen):
 
+- **Neu in 2.0.0 — Anfragen-Labor (Schaltfläche ⚗):** lokale GET-Sammlungen, Umgebungen mit Variablen, Antwort-Assertions, verkettete Läufe, Vergleich mit dem vorherigen Lauf, JSON- und cURL-Import/Export; nur Hosts, die die CSP bereits erlaubt.
 - 52 Karten (47 online + 5 lokal), mit Suche (ohne Beachtung von Diakritika), Filterung nach Kategorie und Favoriten (★, lokal gespeichert).
 - Jede Anfrage hat ein Zeitlimit von 12 s; bei einem Fehler zeigt die Karte die Ursache an (Netzwerk nicht verfügbar, Zeitüberschreitung, HTTP nnn) und eine Schaltfläche „Erneut versuchen“. Die Anfrage-Schaltfläche ist gesperrt, solange eine Anfrage läuft; Eingabe in den Feldern löst die Anfrage aus.
 - Von den APIs empfangene Daten werden vor der Anzeige maskiert (escaped); externe Links werden nur akzeptiert, wenn sie `http(s)` sind.

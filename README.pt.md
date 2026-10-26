@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 1.2.6 · **Última atualização:** 2026-10-26
+**Versão:** 2.0.0 · **Última atualização:** 2026-10-26
 
 Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ Os 52 widgets estão agrupados em 16 categorias: Meteorologia & Ambiente, Espaç
 
 Verificadas no código e em testes automáticos com respostas simuladas (não pude usar a rede externa durante a verificação):
 
+- **Novo na 2.0.0 — Laboratório de pedidos (botão ⚗):** coleções GET locais, ambientes com variáveis, asserções sobre a resposta, execução em cadeia, comparação com a execução anterior, importação/exportação JSON e cURL; só hosts já permitidos pela CSP.
 - 52 cartões (47 online + 5 locais), com pesquisa (sem distinção de sinais diacríticos), filtragem por categoria e favoritos (★, guardados localmente).
 - Cada pedido tem um tempo limite de 12 s; em caso de falha o cartão apresenta a causa (rede indisponível, tempo esgotado, HTTP nnn) e um botão «Tentar novamente». O botão do pedido fica bloqueado enquanto um pedido está em curso; Enter nos campos aciona o pedido.
 - Os dados recebidos das APIs são escapados antes de apresentados; as ligações externas só são aceites se forem `http(s)`.

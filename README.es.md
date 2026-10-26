@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.6 · **Última actualización:** 2026-10-26
+**Versión:** 2.0.0 · **Última actualización:** 2026-10-26
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ Los 52 widgets se agrupan en 16 categorías: Tiempo & Medio ambiente, Espacio, A
 
 Verificadas en el código y en pruebas automáticas con respuestas simuladas (no pude usar la red externa durante la verificación):
 
+- **Novedad 2.0.0 — Laboratorio de peticiones (botón ⚗):** colecciones GET locales, entornos con variables, aserciones sobre la respuesta, ejecución en cadena, comparación con la ejecución anterior, importación/exportación JSON y cURL; solo hosts ya permitidos por la CSP.
 - 52 tarjetas (47 en línea + 5 locales), con búsqueda (sin distinguir signos diacríticos), filtrado por categoría y favoritos (★, conservados en local).
 - Cada solicitud tiene un tiempo de espera de 12 s; en caso de fallo la tarjeta muestra la causa (red no disponible, tiempo agotado, HTTP nnn) y un botón «Reintentar». El botón de solicitud queda bloqueado mientras hay una solicitud en curso; Intro en los campos lanza la solicitud.
 - Los datos recibidos de las API se escapan antes de mostrarse; los enlaces externos solo se aceptan si son `http(s)`.

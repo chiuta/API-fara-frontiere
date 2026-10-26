@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.2.6 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ Cele 52 de widgeturi sunt grupate în 16 categorii: Vreme & Mediu, Spațiu, Anim
 
 Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut folosi rețeaua externă la verificare):
 
+- **Nou în 2.0.0 — Laborator de cereri (butonul ⚗ din antet):** colecții de cereri GET salvate local (`aff_lab`), medii cu variabile `{{nume}}`, aserțiuni pe răspuns (status, timp, căi JSON, tipuri, comparații, conține), valori extrase care alimentează cererea următoare la rularea în lanț, comparare cu rularea anterioară, import/export JSON și import/export cURL (doar GET). Cererile pot merge doar către gazdele deja permise de CSP (nicio gazdă nouă); nu se trimit antete sau corp. Import OpenAPI: omis în această versiune.
 - 52 de carduri (47 online + 5 locale), cu căutare (fără diacritice), filtrare pe categorie și favorite (★, păstrate local).
 - Fiecare cerere are timeout de 12 s; la eșec cardul afișează cauza (rețea indisponibilă, timp depășit, HTTP nnn) și un buton „Reîncearcă”. Butonul de cerere este blocat cât timp o cerere e în curs; Enter în câmpuri declanșează cererea.
 - Datele primite de la API-uri sunt escapate înainte de afișare; legăturile externe sunt acceptate doar dacă sunt `http(s)`.

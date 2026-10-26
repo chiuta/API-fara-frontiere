@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.2.6 · **Last updated:** 2026-10-26
+**Version:** 2.0.0 · **Last updated:** 2026-10-26
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ The 52 widgets are grouped into 16 categories: Weather & Environment, Space, Ani
 
 Verified in the code and in automated tests with mocked responses (I could not use the external network during verification):
 
+- **New in 2.0.0 — Request lab (⚗ button in the header):** locally saved collections of GET requests, environments with `{{name}}` variables, response assertions (status, time, JSON paths, types, comparisons, contains), chained runs where extracted values feed the next request, comparison with the previous run, JSON and cURL (GET only) import/export. Requests can only go to hosts already allowed by the CSP (no new hosts); no headers or bodies are sent. OpenAPI import is not included in this version.
 - 52 cards (47 online + 5 local), with search (diacritics-insensitive), filtering by category and favourites (★, kept locally).
 - Every request has a 12 s timeout; on failure the card displays the cause (network unavailable, timed out, HTTP nnn) and a "Retry" button. The request button is disabled while a request is in progress; Enter in the fields triggers the request.
 - Data received from the APIs is escaped before display; external links are accepted only if they are `http(s)`.

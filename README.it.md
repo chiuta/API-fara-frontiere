@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 1.2.6 · **Ultimo aggiornamento:** 2026-10-26
+**Versione:** 2.0.0 · **Ultimo aggiornamento:** 2026-10-26
 
 Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ I 52 widget sono raggruppati in 16 categorie: Meteo & Ambiente, Spazio, Animali,
 
 Verificate nel codice e in test automatici con risposte simulate (durante la verifica non ho potuto usare la rete esterna):
 
+- **Novità 2.0.0 — Laboratorio di richieste (pulsante ⚗):** raccolte GET locali, ambienti con variabili, asserzioni sulla risposta, esecuzione a catena, confronto con l'esecuzione precedente, import/export JSON e cURL; solo host già consentiti dalla CSP.
 - 52 schede (47 online + 5 locali), con ricerca (senza distinzione dei segni diacritici), filtro per categoria e preferiti (★, conservati in locale).
 - Ogni richiesta ha un timeout di 12 s; in caso di errore la scheda mostra la causa (rete non disponibile, tempo scaduto, HTTP nnn) e un pulsante «Riprova». Il pulsante di richiesta è bloccato finché una richiesta è in corso; Invio nei campi avvia la richiesta.
 - I dati ricevuti dalle API vengono sottoposti a escape prima della visualizzazione; i collegamenti esterni sono accettati solo se `http(s)`.

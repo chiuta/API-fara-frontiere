@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.2.6 · **Utolsó frissítés:** 2026-10-26
+**Verzió:** 2.0.0 · **Utolsó frissítés:** 2026-10-26
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -22,6 +22,7 @@ Az 52 widget 16 kategóriába van csoportosítva: Időjárás & Környezet, Vil�
 
 A kódban és automatizált tesztekben, szimulált válaszokkal ellenőrizve (az ellenőrzés során nem tudtam használni a külső hálózatot):
 
+- **Újdonság a 2.0.0-ban — Kéréslabor (⚗ gomb):** helyi GET-gyűjtemények, változós környezetek, válasz-ellenőrzések, láncolt futtatás, összehasonlítás az előző futtatással, JSON- és cURL-import/export; csak a CSP által már engedélyezett gazdák.
 - 52 kártya (47 online + 5 helyi), kereséssel (ékezetfüggetlen), kategória szerinti szűréssel és kedvencekkel (★, helyben tárolva).
 - Minden kérésnek 12 s időkorlátja van; hiba esetén a kártya megjeleníti az okot (a hálózat nem érhető el, időtúllépés, HTTP nnn) és egy „Újrapróbálás” gombot. A kérés gombja le van tiltva, amíg egy kérés folyamatban van; a mezőkben az Enter elindítja a kérést.
 - Az API-któl kapott adatokat megjelenítés előtt escape-elik; a külső hivatkozásokat csak akkor fogadja el, ha `http(s)` típusúak.
