@@ -1,8 +1,12 @@
-# API fără frontiere — receiving station · v1.1.0
+# API fără frontiere — receiving station · v2.0.1
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.0.0 · **Last updated:** 2026-10-26
+**Version:** 2.0.1 · **Last updated:** 2026-10-27
+
+**Status:** stable (2.0.1). 52 widgets; availability of the third-party APIs is not guaranteed and was not checked against real servers.
+
+**Offline:** partial. The interface, the 5 local tools and the Request lab open offline after the first visit (service worker); the 47 API cards need a network connection and contact their source only after you press the button (the 3 main stations only after you agree).
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -34,7 +38,7 @@ Verified in the code and in automated tests with mocked responses (I could not u
 
 ## User guide
 
-1. Open the page. The 3 main stations (Weather now, NASA Picture of the Day, ISS) load by themselves; you can turn this off in Settings ⚙ (it applies on the next opening).
+1. Open the page. On the first visit nothing is contacted: a bar asks whether the 3 main stations (Weather now, NASA Picture of the Day, ISS) may load by themselves. Your answer is remembered and can be changed in Settings ⚙; if you refuse, those cards load only when you press their button.
 2. Look for a card in the top field or choose a category from the filter bar.
 3. Fill in the card's field (city, name, code, etc.), if there is one, and press **Receive** (or Enter).
 4. If "Signal lost" appears, press **Retry** or try later: third-party sources may be unavailable or may rate-limit.
@@ -44,7 +48,7 @@ Verified in the code and in automated tests with mocked responses (I could not u
 ## Privacy and network
 
 - **Local storage (`localStorage`):** `aff_theme` (theme), `aff_favs` (favourites), `aff_nasa_key` (the NASA key, in clear text, if you save it), `aff_auto_hero` (automatic loading), `aff_last` (the last result of the cards, as text, max. 600 characters per card) and `aff_keep_last` (the option to keep it). No cookies, `sessionStorage` or IndexedDB are used. If storage is blocked (private mode), the app works without it.
-- **On opening, 3 sources are contacted automatically** (unless you turn off automatic loading in Settings): `geocoding-api.open-meteo.com` and `api.open-meteo.com` (the city in the "Weather now" card, Bucharest by default), `api.nasa.gov` (your key or `DEMO_KEY`; plus the image from `apod.nasa.gov`) and `api.wheretheiss.at`. With automatic loading turned off, no request is sent on opening (tested).
+- **On opening, no source is contacted until you agree.** A consent bar asks whether the 3 main stations may start by themselves; only after "Yes, automatically" (or if you saved that choice in Settings) these sources are contacted on each opening: `geocoding-api.open-meteo.com` and `api.open-meteo.com` (the city in the "Weather now" card, Bucharest by default), `api.nasa.gov` (your key or `DEMO_KEY`; plus the image from `apod.nasa.gov`) and `api.wheretheiss.at`. Before you answer, and after "No", no request is sent on opening (tested in `tests/consent.test.mjs`, network blocked).
 - **All the other cards contact their source only after you press the button** in the card. What you type (city, name, VAT number, VIN, barcode, text for the QR code, etc.) is sent to that source; text for the QR code goes to `api.qrserver.com`.
 - Every source contacted sees your IP address. Requests are sent without cookies and without a Referer header.
 - The page has a `Content-Security-Policy` (meta); the app's own script is allowed via a SHA-256 hash (no `'unsafe-inline'` in `script-src`), and `connect-src` is a list of domains: `connect-src` contains exactly the hosts called by the code (verified by inventory). The image list (`img-src`) also includes hosts where images are indicated by the API responses (e.g. `image.tmdb.org`, `*.archive.org`, `raw.githubusercontent.com`); these could not be confirmed without network access.
@@ -57,7 +61,7 @@ Verified in the code and in automated tests with mocked responses (I could not u
 - The data in the widgets is informational. **Drug label (FDA):** text in English, only for US products; it is not medical advice and does not replace the doctor or pharmacist. **Exchange rate, cryptocurrencies, VAT:** not financial advice or official confirmation. **Prediction from a first name:** a statistical estimate, often wrong; do not use it for decisions about people.
 - Images from NASA, museums, TVmaze, etc. may be subject to copyright or their own licences; the NASA card displays the credit when provided. See "Sources and attributions" in the app.
 - The "Chuck Norris Fact" widget displays absurd jokes taken from a third-party API (the "explicit" category is avoided, filtering is not guaranteed).
-- Verified with mocked responses, not with the real servers.
+- Verified with mocked responses and with the network blocked, not with the real servers. This version was not tested against any real API server and makes no claim about their availability.
 
 ## Running locally / offline
 
@@ -65,6 +69,7 @@ Download `index.html` and open it in a browser. The interface starts without int
 
 ## History / Changelog
 
+- 2.0.1 — 2026-10-27: documentation aligned with the code (consent before the 3 main stations load, already implemented), new `tests/consent.test.mjs`, Status / Offline lines. Details in CHANGELOG.md.
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4: touch targets and minimum text size
 
