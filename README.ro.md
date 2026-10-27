@@ -1,8 +1,12 @@
-# API fără frontiere — stație de recepție · v1.1.0
+# API fără frontiere — stație de recepție · v2.0.1
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.0.1 · **Ultima actualizare:** 2026-10-27
+
+**Stare:** stabilă (2.0.1). 52 de widgeturi; disponibilitatea API-urilor terțe nu este garantată și nu a fost verificată cu servere reale.
+
+**Offline:** parțial. Interfața, cele 5 unelte locale și Laboratorul de cereri se deschid offline după prima vizită (service worker); cele 47 de carduri API cer rețea și contactează sursa doar după ce apeși butonul (cele 3 stații principale, doar după acord).
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -34,7 +38,7 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 
 ## Manual de utilizare
 
-1. Deschide pagina. Cele 3 stații principale (Vremea acum, Poza zilei NASA, ISS) se încarcă singure; poți opri asta din Setări ⚙ (se aplică la următoarea deschidere).
+1. Deschide pagina. La prima vizită nu se contactează nimic: o bară întreabă dacă cele 3 stații principale (Vremea acum, Poza zilei NASA, ISS) pot porni singure. Răspunsul se reține și se poate schimba din Setări ⚙; dacă refuzi, acele carduri se încarcă doar când apeși butonul lor.
 2. Caută un card în câmpul de sus sau alege o categorie din bara de filtre.
 3. Completează câmpul cardului (oraș, nume, cod etc.), dacă există, și apasă **Recepționează** (sau Enter).
 4. Dacă apare „Semnal pierdut”, apasă **Reîncearcă** sau încearcă mai târziu: sursele terțe pot fi indisponibile sau pot limita traficul.
@@ -44,7 +48,7 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 ## Confidențialitate și rețea
 
 - **Stocare locală (`localStorage`):** `aff_theme` (temă), `aff_favs` (favorite), `aff_nasa_key` (cheia NASA, în clar, dacă o salvezi), `aff_auto_hero` (încărcare automată), `aff_last` (ultimul rezultat al cardurilor, ca text, max. 600 de caractere per card) și `aff_keep_last` (opțiunea de a-l păstra). Nu se folosesc cookie-uri, `sessionStorage` sau IndexedDB. Dacă stocarea este blocată (mod privat), aplicația funcționează fără ea.
-- **La deschidere se contactează automat 3 surse** (dacă nu dezactivezi încărcarea automată din Setări): `geocoding-api.open-meteo.com` și `api.open-meteo.com` (orașul din cardul „Vremea acum”, implicit București), `api.nasa.gov` (cheia ta sau `DEMO_KEY`; plus imaginea de pe `apod.nasa.gov`) și `api.wheretheiss.at`. Cu încărcarea automată oprită, la deschidere nu se trimite nicio cerere (testat).
+- **La deschidere nu se contactează nicio sursă până nu accepți.** O bară de acord întreabă dacă cele 3 stații principale pot porni singure; doar după „Da, automat” (sau dacă ai salvat alegerea în Setări) se contactează la fiecare deschidere: `geocoding-api.open-meteo.com` și `api.open-meteo.com` (orașul din cardul „Vremea acum”, implicit București), `api.nasa.gov` (cheia ta sau `DEMO_KEY`; plus imaginea de pe `apod.nasa.gov`) și `api.wheretheiss.at`. Înainte de răspuns și după „Nu”, la deschidere nu se trimite nicio cerere (testat în `tests/consent.test.mjs`, rețea blocată).
 - **Toate celelalte carduri contactează sursa doar după ce apeși butonul** din card. Ce tastezi (oraș, nume, cod TVA, VIN, cod de bare, text pentru QR etc.) este trimis sursei respective; text pentru codul QR merge la `api.qrserver.com`.
 - Fiecare sursă contactată îți vede adresa IP. Cererile sunt trimise fără cookie-uri și fără antet Referer.
 - Pagina are un `Content-Security-Policy` (meta); scriptul propriu este permis prin hash SHA-256 (fără `'unsafe-inline'` în `script-src`), iar `connect-src` este o listă de domenii: `connect-src` conține exact gazdele apelate de cod (verificat prin inventar). Lista de imagini (`img-src`) include și gazde în care imaginile sunt indicate de răspunsurile API-urilor (de ex. `image.tmdb.org`, `*.archive.org`, `raw.githubusercontent.com`); acestea nu au putut fi confirmate fără rețea.
@@ -57,7 +61,7 @@ Verificate în cod și în teste automate cu răspunsuri simulate (nu am putut f
 - Datele din widgeturi sunt informative. **Etichetă medicament (FDA):** text în engleză, doar pentru produse din SUA; nu e sfat medical, nu înlocuiește medicul sau farmacistul. **Curs valutar, criptomonede, TVA:** nu sunt sfat financiar sau confirmare oficială. **Predicție din prenume:** estimare statistică, adesea greșită; nu o folosi pentru decizii despre persoane.
 - Imaginile de la NASA, muzei, TVmaze etc. pot avea drepturi de autor sau licențe proprii; cardul NASA afișează creditul când este furnizat. Vezi „Surse și atribuiri” în aplicație.
 - Widgetul „Fapt Chuck Norris” afișează glume absurde preluate dintr-un API terț (se evită categoria „explicit”, filtrarea nu e garantată).
-- Verificat cu răspunsuri simulate, nu cu serverele reale.
+- Verificat cu răspunsuri simulate și cu rețeaua blocată, nu cu serverele reale. Această versiune nu a fost testată cu niciun server real de API și nu afirmă nimic despre disponibilitatea lor.
 
 ## Rulare locală / offline
 
@@ -65,6 +69,7 @@ Descarcă `index.html` și deschide-l în browser. Interfața pornește fără i
 
 ## Istoric / Changelog
 
+- 2.0.1 — 2026-10-27: documentația aliniată la cod (acord înainte de încărcarea celor 3 stații principale, deja implementat), `tests/consent.test.mjs` nou, linii Stare / Offline. Detalii în CHANGELOG.md.
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4: ținte tactile și text minim
 
