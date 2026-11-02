@@ -337,6 +337,7 @@ if (AXE) {
   const r = await axeRun(page);
   check("axe laborator (cu rezultate): 0 încălcări", r.length === 0, r);
   await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+  await page.waitForTimeout(500);   // tranziția .15s a chip-urilor: altfel axe măsoară culori intermediare
   const r2 = await axeRun(page);
   check("axe laborator (tema deschisă): 0 încălcări", r2.length === 0, r2);
   await browser.close();
