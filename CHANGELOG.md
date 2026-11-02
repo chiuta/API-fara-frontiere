@@ -1,5 +1,15 @@
 # Jurnal de modificări
 
+## 2.0.2 — 2026-11-02
+
+Actualizare a surselor la 2026-11-02.
+
+### Modificat
+- SpaceX-API: depozitul `r-spacex/SpaceX-API` a fost arhivat de proprietar la 6 iunie 2026 (GitHub, citit direct); mențiunea a fost adăugată în nota cardurilor SpaceX și în lista „Surse și atribuiri”, în cele 8 limbi.
+
+### Neschimbat
+- Restul API-urilor nu au putut fi confirmate ca schimbate; blocul „Stare la 11 octombrie 2026” rămâne cu data lui (nu a fost reverificat integral). Frankfurter: v1 e marcat depreciat, dar rămâne disponibil „pe termen nedefinit” (frankfurter.dev); codul nu a fost schimbat.
+
 ## 2.0.1 — 2026-10-27
 
 Recenzie 2026-10-27. Doar documentație și teste; codul aplicației nu a fost schimbat funcțional.
