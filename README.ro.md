@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.0.5 · **Ultima actualizare:** 2026-11-08
+**Versiune:** 2.0.6 · **Ultima actualizare:** 2026-11-10
 
 **Stare:** stabilă (2.0.1). 52 de widgeturi; disponibilitatea API-urilor terțe nu este garantată și nu a fost verificată cu servere reale.
 
