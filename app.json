@@ -2,8 +2,8 @@
   "schema": 1,
   "slug": "api-fara-frontiere",
   "name": "API fără frontiere — stație de recepție",
-  "version": "2.0.6",
-  "updated": "2026-11-10",
+  "version": "2.0.7",
+  "updated": "2026-11-11",
   "description": "Un singur fișier HTML, zeci de semnale din lumea largă: API-uri publice, fără cont, fără telemetrie, fără server propriu.",
   "egress": [
     {
@@ -427,8 +427,8 @@
     "Web Crypto"
   ],
   "storageKeys": [],
-  "sizeBytes": 698738,
-  "sha256": "44263c1cdfa02b2c7f8de96b0c417d457a267009a2602b016d0ff4f1a19db160",
+  "sizeBytes": 699965,
+  "sha256": "f71218deaf07d14095176d3f6aafc54e43c3936e0bcd5b07dbd38cf250eada70",
   "csp": {
     "present": true,
     "directives": {
