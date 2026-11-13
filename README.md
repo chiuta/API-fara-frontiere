@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.0.8 · **Last updated:** 2026-11-10
+**Version:** 2.0.9 · **Last updated:** 2026-11-13
 
 **Status:** stable (2.0.1). 52 widgets; availability of the third-party APIs is not guaranteed and was not checked against real servers.
 
