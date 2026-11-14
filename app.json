@@ -424,16 +424,17 @@
     "clipboard",
     "serviceWorker",
     "localStorage",
-    "Web Crypto"
+    "Web Crypto",
+    "WebGL"
   ],
   "storageKeys": [],
-  "sizeBytes": 716425,
-  "sha256": "9fc2c053d59d35f0c0ba741bdab531d7bd8d7f1d7960e3222e8e555fbccefcb2",
+  "sizeBytes": 768064,
+  "sha256": "80102ed0dcdd1dbaf6daea8b95d286e5aba60ddec74135fb45d6e381a72c28f5",
   "csp": {
     "present": true,
     "directives": {
       "default-src": "'none'",
-      "script-src": "'self' sha256×3",
+      "script-src": "'self' sha256×4",
       "style-src": "'self' 'unsafe-inline'",
       "base-uri": "'none'",
       "form-action": "'none'",
